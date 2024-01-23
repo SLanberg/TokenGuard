@@ -1,17 +1,56 @@
 <script lang="ts">
-	import whaleImage from '$lib/images/whale.png';
-	import eye_white from '$lib/images/eye_white.png';
+	import { enhance } from '$app/forms';
 
-	import { handleSignUpAction } from './sign-up';
+	import whaleImage from '$lib/images/whale.png';
+	import copyIconWhite from '$lib/images/copyWhite.svg';
+	import copyIconBlack from '$lib/images/copyBlack.svg';
+
+	import eye_white from '$lib/images/eye_white.png';
 
 	export let form;
 	let thisForm: HTMLFormElement;
 
-	let show = false
+	import { handleContinue } from './profile-summary';
+
+	let revealPassword = false;
+	let showPopUp = true;
+
+	function togglePopUp() {
+		showPopUp = !showPopUp
+	}
 </script>
 
+
+{#if showPopUp}
+	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[325px] rounded-[10px]">
+		<div class="px-10">
+			<h1 class="text-center text-black font-bold text-3xl mt-5">WARNING</h1>
+			<br>
+			<p class="text-black text-center">Make sure you will copy the data to your notepad or write it down before continuing.</p>
+			<br>
+			<p id="copy-text" class="text-black text-center">You can copy all the required data by pressing to the copy icon:</p><div class="absolute right-[70px] bottom-[100px]"><img src="{copyIconBlack}" alt="copyIcon"></div>
+
+			<div class="flex justify-center">
+				<button on:click={togglePopUp} class="mt-10 bg-[#43444A]
+                            transition
+                            ease-in-out
+                            duration-500
+                            hover:bg-[#55565b]
+                            text-[#BFC5D9]
+                            font-bold
+                            py-2
+                            px-4
+                            rounded-[10px]">
+					Dismiss
+				</button>
+			</div>
+		</div>
+	</div>
+{/if}
+
+
 <svelte:head>
-	<title>Sign Up | Whale</title>
+	<title>Data | Whale</title>
 </svelte:head>
 
 <div class="flex h-screen">
@@ -19,6 +58,7 @@
 		<div class="m-auto">
 			<div id="form-div">
 				<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
+
 				<div class="m-auto w-fit">
 					<div class="form-item">
 						<div>
@@ -27,6 +67,7 @@
 							>
 							<br />
 							<input
+									readonly
 									class="mb-2.5
                                 block
                                 w-[300px]
@@ -54,6 +95,7 @@
 							>
 							<br />
 							<input
+									readonly
 									class="mb-2.5
                                 block
                                 w-[300px]
@@ -69,22 +111,23 @@
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
 									value={form?.password ?? ''}
 									id="password"
-									type={show ? "text" : "password"}
+									type="password"
 									name="password"
 									required
 							/>
-							<button on:click|preventDefault={() => show = !show} class="relative float-right -mt-[41px] mr-2"
+							<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[41px] mr-2"
 							><img src={eye_white} alt="see password" /></button
 							>
 						</div>
 
 						<div>
 							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
-							>Confirm Password</label
+							>Token</label
 							>
 							<br />
 							<input
-									class="mb-5
+									readonly
+									class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -99,16 +142,41 @@
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
 									value={form?.password ?? ''}
 									id="password"
-									type={show ? "text" : "password"}
+									type={revealPassword ? "text" : "password"}
 									name="password"
 									required
 							/>
-							<button on:click|preventDefault={() => show = !show} class="relative float-right -mt-[51px] mr-2"
-							><img src={eye_white} alt="see password" /></button
-							>
 						</div>
 
-						<button on:click|preventDefault={() => show = !show}
+						<div>
+							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+							>Created At</label
+							>
+							<br />
+							<input
+									readonly
+									class="mb-10
+                                block
+                                w-[300px]
+                                rounded-[10px]
+                                border
+                                border-gray-600
+                                bg-[#13161E]
+                                p-2.5
+                                text-sm
+                                text-white
+                                placeholder-gray-400
+                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
+									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
+									value={form?.password ?? ''}
+									id="password"
+									type="password"
+									name="password"
+									required
+							/>
+						</div>
+
+						<button
 								class="mb-10
                             w-[300px]
                             rounded-[10px]
@@ -121,19 +189,21 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
-								on:click={handleSignUpAction}
+								on:click={handleContinue}
 						>
-							Sign Up
+							Continue
 						</button>
 					</div>
 				</div>
+
+				<div class="float-right m-5"><img src={copyIconWhite} alt="copyIcon" /></div>
+
+
 			</div>
 		</div>
 	</div>
 </div>
 
-
-
-
 <style>
+
 </style>

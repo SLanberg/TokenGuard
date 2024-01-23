@@ -7,7 +7,7 @@
 	export let form;
 	let thisForm: HTMLFormElement;
 
-	let show = false
+	let revealPassword = false
 </script>
 
 <svelte:head>
@@ -69,11 +69,11 @@
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
 									value={form?.password ?? ''}
 									id="password"
-									type={show ? "text" : "password"}
+									type={revealPassword ? "text" : "password"}
 									name="password"
 									required
 							/>
-							<button on:click|preventDefault={() => show = !show} class="relative float-right -mt-[41px] mr-2"
+							<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[41px] mr-2"
 							><img src={eye_white} alt="see password" /></button
 							>
 						</div>
@@ -99,16 +99,16 @@
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
 									value={form?.password ?? ''}
 									id="password"
-									type={show ? "text" : "password"}
+									type={revealPassword ? "text" : "password"}
 									name="password"
 									required
 							/>
-							<button on:click|preventDefault={() => show = !show} class="relative float-right -mt-[51px] mr-2"
+							<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[51px] mr-2"
 							><img src={eye_white} alt="see password" /></button
 							>
 						</div>
 
-						<button on:click|preventDefault={() => show = !show}
+						<button
 								class="mb-10
                             w-[300px]
                             rounded-[10px]

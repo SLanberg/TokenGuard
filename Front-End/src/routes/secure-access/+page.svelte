@@ -1,7 +1,7 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import { handleTokenCheckSubmit } from './token-check';
+	import { handleTokenCheckSubmit } from './secure-access';
 </script>
 
 <div class="flex h-screen">
@@ -34,7 +34,9 @@
                                 text-sm
                                 text-white
                                 placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
+                                outline-none
+                                focus:border-[#5a70ec]
+                                focus:ring-[#5a70ec]"
 							id="password"
 							type="password"
 							name="password"

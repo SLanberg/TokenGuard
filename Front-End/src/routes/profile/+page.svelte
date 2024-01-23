@@ -51,7 +51,6 @@
 							type="password"
 							name="password"
 							required
-							on:click={handleProfileContinue}
 					/>
 
 					<button
