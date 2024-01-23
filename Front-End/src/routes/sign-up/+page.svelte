@@ -2,6 +2,7 @@
     import {enhance} from '$app/forms'
 
     import whaleImage from '../../static/whale.png';
+    import eye_white from "../../static/eye_white.png";
     export let form;
 
     let thisForm:HTMLFormElement;
@@ -29,7 +30,7 @@
                                 text-white
                                 focus:ring-[#5a70ec]
                                 focus:border-[#5a70ec]
-                                outline-none mb-5 w-[300px]" class:fieldError={form?.telegramIdUsed} value={form?.telegramID ?? ""} id="telegramID" type="text" name="telegramID" required />
+                                outline-none mb-2.5 w-[300px]" class:fieldError={form?.telegramIdUsed} value={form?.telegramID ?? ""} id="telegramID" type="text" name="telegramID" required />
                             </div>
 
                             <div>
@@ -46,8 +47,10 @@
                                 text-white
                                 focus:ring-[#5a70ec]
                                 focus:border-[#5a70ec]
-                                outline-none mb-5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                                outline-none mb-2.5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                                <button class="relative float-right -mt-[41px] mr-2"><img src={eye_white} alt="see password"></button>
                             </div>
+
 
                             <div>
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password">Confirm Password</label>
@@ -64,7 +67,9 @@
                                 focus:ring-[#5a70ec]
                                 focus:border-[#5a70ec]
                                 outline-none mb-5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                                <button class="relative float-right -mt-[51px] mr-2"><img src={eye_white} alt="see password"></button>
                             </div>
+
 
                             <button class="bg-[#43444A]
                             transition
