@@ -5,11 +5,11 @@
 <slot />
 
 <style>
-	:global(body) {
+	:global(html) {
 		background: linear-gradient(to bottom, #1f232f, #151a26);
 		color: #ffffff;
 		font-family: Inter, ui-serif;
-	}
+    }
 
 	:global(a) {
 		text-decoration: none;
@@ -20,6 +20,6 @@
 		font-family: 'Inter';
 		font-style: normal;
 		/*font-weight: 100;*/
-		src: url('../static/fonts/Inter-Regular.ttf');
+		src: url('/fonts/Inter-Regular.ttf');
 	}
 </style>

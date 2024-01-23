@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-
-	import whaleImage from '../../static/whale.png';
+	import whaleImage from '$lib/images/whale.png';
+	
 	export let form;
-
 	let thisForm: HTMLFormElement;
+
+	import { handleProfileContinue } from './profile';
 </script>
 
 <svelte:head>
@@ -22,7 +23,7 @@
 				src={whaleImage}
 				alt="Whale"
 			/>
-			<form id="form-section" bind:this={thisForm} use:enhance method="post" action="?/signup">
+			<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
 				<div class="m-auto w-fit">
 					<div class="form-item">
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Secret Key"
@@ -50,6 +51,7 @@
 							type="password"
 							name="password"
 							required
+							on:click={handleProfileContinue}
 						/>
 
 						<button
@@ -65,6 +67,7 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
+							on:click={handleProfileContinue}
 						>
 							Log Out
 						</button>

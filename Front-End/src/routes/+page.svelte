@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
-	import whaleImage from '../../src/static/whale.png';
-
-	import sadWhaleImage from '../../src/static/sad_whale.png';
-	import eye_blue from '../../src/static/eye_blue.png';
-
-	import eye_white from '../../src/static/eye_white.png';
+	import whaleImage from '$lib/images/whale.png';
+	import sadWhaleImage from '$lib/images/sad_whale.png';
+	import eye_blue from '$lib/images/eye_blue.png';
+	import eye_white from '$lib/images/eye_white.png';
 
 	export let form;
 
@@ -16,6 +14,7 @@
 <svelte:head>
 	<title>Foyer | Whale</title>
 </svelte:head>
+
 
 <div class="flex h-screen">
 	<!--    <div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[325px] rounded-[10px]">-->
@@ -46,7 +45,7 @@
 		<div class="m-auto">
 			<div id="form-div">
 				<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-				<form id="form-section" bind:this={thisForm} use:enhance method="post" action="?/signup">
+				<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
 					<div class="m-auto w-fit">
 						<div class="form-item">
 							<div>

@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import whaleImage from '$lib/images/whale.png';
 
-	import whaleImage from '../../static/whale.png';
-	export let form;
-
+	export let form: HTMLFormElement;
 	let thisForm: HTMLFormElement;
+
+	import { handleTokenCheckSubmit } from './token-check';
 </script>
 
 <div class="flex h-screen">
@@ -18,7 +19,7 @@
 				src={whaleImage}
 				alt="Whale"
 			/>
-			<form id="form-section" bind:this={thisForm} use:enhance method="post" action="?/signup">
+			<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
 				<div class="m-auto w-fit">
 					<div class="form-item">
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Access Token"
@@ -59,6 +60,7 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
+							on:click={handleTokenCheckSubmit}
 						>
 							Submit
 						</button>

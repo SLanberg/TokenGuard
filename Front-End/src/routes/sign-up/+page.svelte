@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import whaleImage from '$lib/images/whale.png';
+	import eye_white from '$lib/images/eye_white.png';
 
-	import whaleImage from '../../static/whale.png';
-	import eye_white from '../../static/eye_white.png';
 	export let form;
-
 	let thisForm: HTMLFormElement;
+
+	import { handleSignUpAction } from './sign-up';
 </script>
 
 <svelte:head>
@@ -17,7 +18,7 @@
 		<div class="m-auto">
 			<div id="form-div">
 				<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-				<form id="form-section" bind:this={thisForm} use:enhance method="post" action="?/signup">
+				<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
 					<div class="m-auto w-fit">
 						<div class="form-item">
 							<div>
@@ -120,6 +121,7 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
+								on:click={handleSignUpAction}
 							>
 								Sign Up
 							</button>
@@ -130,6 +132,9 @@
 		</div>
 	</div>
 </div>
+
+
+
 
 <style>
 </style>
