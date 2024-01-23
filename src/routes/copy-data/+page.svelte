@@ -18,7 +18,8 @@
                             <div>
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID">TelegramID</label>
                                 <br/>
-                                <input class="rounded-[10px]
+                                <input readonly
+                                       class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -29,13 +30,14 @@
                                 text-white
                                 focus:ring-[#5a70ec]
                                 focus:border-[#5a70ec]
-                                outline-none mb-5 w-[300px]" class:fieldError={form?.telegramIdUsed} value={form?.telegramID ?? ""} id="telegramID" type="text" name="telegramID" required />
+                                outline-none mb-2.5 w-[300px]" class:fieldError={form?.telegramIdUsed} value={form?.telegramID ?? ""} id="telegramID" type="text" name="telegramID" required />
                             </div>
 
                             <div>
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password">Password</label>
                                 <br/>
-                                <input class="rounded-[10px]
+                                <input readonly
+                                       class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -46,13 +48,14 @@
                                 text-white
                                 focus:ring-[#5a70ec]
                                 focus:border-[#5a70ec]
-                                outline-none mb-5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                                outline-none mb-2.5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
                             </div>
 
                             <div>
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password">Confirm Password</label>
                                 <br/>
-                                <input class="rounded-[10px]
+                                <input readonly
+                                       class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -63,10 +66,47 @@
                                 text-white
                                 focus:ring-[#5a70ec]
                                 focus:border-[#5a70ec]
-                                outline-none mb-5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                                outline-none mb-2.5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                            </div>
+
+                            <div>
+                                <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password">Token</label>
+                                <br/>
+                                <input readonly
+                                        class="rounded-[10px]
+                                border
+                                text-sm
+                                block
+                                p-2.5
+                                bg-[#13161E]
+                                border-gray-600
+                                placeholder-gray-400
+                                text-white
+                                focus:ring-[#5a70ec]
+                                focus:border-[#5a70ec]
+                                outline-none mb-2.5 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
+                            </div>
+
+                            <div>
+                                <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password">Created At</label>
+                                <br/>
+                                <input readonly
+                                        class="rounded-[10px]
+                                border
+                                text-sm
+                                block
+                                p-2.5
+                                bg-[#13161E]
+                                border-gray-600
+                                placeholder-gray-400
+                                text-white
+                                focus:ring-[#5a70ec]
+                                focus:border-[#5a70ec]
+                                outline-none mb-10 w-[300px]" class:fieldError={form?.weakPassword, form?.passNotMatch} value={form?.password ?? ""} id="password" type="password" name="password" required />
                             </div>
 
                             <button class="bg-[#43444A]
+
                             transition
                             ease-in-out
                             duration-500
