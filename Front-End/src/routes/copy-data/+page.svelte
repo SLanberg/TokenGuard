@@ -19,7 +19,7 @@
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID">TelegramID</label>
                                 <br/>
                                 <input readonly
-                                       class="rounded-[10px]
+                                class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -37,7 +37,7 @@
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password">Password</label>
                                 <br/>
                                 <input readonly
-                                       class="rounded-[10px]
+                                class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -55,7 +55,7 @@
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password">Confirm Password</label>
                                 <br/>
                                 <input readonly
-                                       class="rounded-[10px]
+                                class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -91,7 +91,7 @@
                                 <label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password">Created At</label>
                                 <br/>
                                 <input readonly
-                                        class="rounded-[10px]
+                                class="rounded-[10px]
                                 border
                                 text-sm
                                 block
@@ -106,7 +106,6 @@
                             </div>
 
                             <button class="bg-[#43444A]
-
                             transition
                             ease-in-out
                             duration-500
