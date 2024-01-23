@@ -23,15 +23,15 @@
 				src={whaleImage}
 				alt="Whale"
 			/>
-			<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
-				<div class="m-auto w-fit">
-					<div class="form-item">
-						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Secret Key"
-							>Secret Key</label
-						>
-						<br />
 
-						<input
+			<div class="m-auto w-fit">
+				<div class="form-item">
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Secret Key"
+					>Secret Key</label
+					>
+					<br />
+
+					<input
 							readonly
 							class="mb-5
                                 block
@@ -52,9 +52,9 @@
 							name="password"
 							required
 							on:click={handleProfileContinue}
-						/>
+					/>
 
-						<button
+					<button
 							class="mb-10
                             w-[300px]
                             rounded-[10px]
@@ -68,12 +68,11 @@
                             ease-in-out
                             hover:bg-[#55565b]"
 							on:click={handleProfileContinue}
-						>
-							Log Out
-						</button>
-					</div>
+					>
+						Log Out
+					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

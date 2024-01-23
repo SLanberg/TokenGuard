@@ -2,13 +2,13 @@
 	import { enhance } from '$app/forms';
 
 	import whaleImage from '$lib/images/whale.png';
-	import sadWhaleImage from '$lib/images/sad_whale.png';
-	import eye_blue from '$lib/images/eye_blue.png';
 	import eye_white from '$lib/images/eye_white.png';
 
 	export let form;
 
 	let thisForm: HTMLFormElement;
+
+	let show = false
 </script>
 
 <svelte:head>
@@ -96,12 +96,12 @@
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
 									value={form?.password ?? ''}
 									id="password"
-									type="password"
+									type={show ? "text" : "password"}
 									name="password"
 									required
 								/>
 
-								<button class="relative float-right -mt-[51px] mr-2"
+								<button on:click|preventDefault={() => show = !show} class="relative float-right -mt-[51px] mr-2"
 									><img src={eye_white} alt="see password" /></button
 								>
 							</div>

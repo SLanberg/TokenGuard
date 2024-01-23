@@ -9,6 +9,8 @@
 	let thisForm: HTMLFormElement;
 
 	import { handleContinue } from './copy-data';
+
+	let show = false;
 </script>
 
 <!--<div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[325px] rounded-[10px]">-->
@@ -45,15 +47,15 @@
 		<div class="m-auto">
 			<div id="form-div">
 				<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-				<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
-					<div class="m-auto w-fit">
-						<div class="form-item">
-							<div>
-								<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
-									>TelegramID</label
-								>
-								<br />
-								<input
+
+				<div class="m-auto w-fit">
+					<div class="form-item">
+						<div>
+							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
+							>TelegramID</label
+							>
+							<br />
+							<input
 									readonly
 									class="mb-2.5
                                 block
@@ -73,15 +75,15 @@
 									type="text"
 									name="telegramID"
 									required
-								/>
-							</div>
+							/>
+						</div>
 
-							<div>
-								<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
-									>Password</label
-								>
-								<br />
-								<input
+						<div>
+							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
+							>Password</label
+							>
+							<br />
+							<input
 									readonly
 									class="mb-2.5
                                 block
@@ -101,18 +103,18 @@
 									type="password"
 									name="password"
 									required
-								/>
-								<button class="relative float-right -mt-[41px] mr-2"
-									><img src={eye_white} alt="see password" /></button
-								>
-							</div>
+							/>
+							<button on:click|preventDefault={() => show = !show} class="relative float-right -mt-[41px] mr-2"
+							><img src={eye_white} alt="see password" /></button
+							>
+						</div>
 
-							<div>
-								<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
-									>Token</label
-								>
-								<br />
-								<input
+						<div>
+							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+							>Token</label
+							>
+							<br />
+							<input
 									readonly
 									class="mb-2.5
                                 block
@@ -129,18 +131,18 @@
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
 									value={form?.password ?? ''}
 									id="password"
-									type="password"
+									type={show ? "text" : "password"}
 									name="password"
 									required
-								/>
-							</div>
+							/>
+						</div>
 
-							<div>
-								<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
-									>Created At</label
-								>
-								<br />
-								<input
+						<div>
+							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+							>Created At</label
+							>
+							<br />
+							<input
 									readonly
 									class="mb-10
                                 block
@@ -160,10 +162,10 @@
 									type="password"
 									name="password"
 									required
-								/>
-							</div>
+							/>
+						</div>
 
-							<button
+						<button
 								class="mb-10
                             w-[300px]
                             rounded-[10px]
@@ -177,18 +179,20 @@
                             ease-in-out
                             hover:bg-[#55565b]"
 								on:click={handleContinue}
-							>
-								Continue
-							</button>
-						</div>
+						>
+							Continue
+						</button>
 					</div>
+				</div>
 
-					<div class="float-right m-5"><img src={copyIconWhite} alt="copyIcon" /></div>
-				</form>
+				<div class="float-right m-5"><img src={copyIconWhite} alt="copyIcon" /></div>
+
+
 			</div>
 		</div>
 	</div>
 </div>
 
 <style>
+
 </style>

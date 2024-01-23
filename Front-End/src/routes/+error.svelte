@@ -6,7 +6,7 @@
 
 	export async function handleHomeButtonClick() {
 		// Do some magic here... ✨
-		goto('/', {});
+		await goto('/', {});
 	}
 </script>
 

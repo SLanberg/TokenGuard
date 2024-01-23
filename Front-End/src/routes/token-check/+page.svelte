@@ -1,9 +1,5 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import whaleImage from '$lib/images/whale.png';
-
-	export let form: HTMLFormElement;
-	let thisForm: HTMLFormElement;
 
 	import { handleTokenCheckSubmit } from './token-check';
 </script>
@@ -19,14 +15,14 @@
 				src={whaleImage}
 				alt="Whale"
 			/>
-			<form id="form-section" bind:this={thisForm} use:enhance={() => {}} method="post">
-				<div class="m-auto w-fit">
-					<div class="form-item">
-						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Access Token"
-							>Access Token</label
-						>
-						<br />
-						<input
+
+			<div class="m-auto w-fit">
+				<div class="form-item">
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Access Token"
+					>Access Token</label
+					>
+					<br />
+					<input
 							class="mb-5
                                 block
                                 w-[300px]
@@ -39,15 +35,13 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-							class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-							value={form?.password ?? ''}
 							id="password"
 							type="password"
 							name="password"
 							required
-						/>
+					/>
 
-						<button
+					<button
 							class="mb-10
                             w-[300px]
                             rounded-[10px]
@@ -61,12 +55,11 @@
                             ease-in-out
                             hover:bg-[#55565b]"
 							on:click={handleTokenCheckSubmit}
-						>
-							Submit
-						</button>
-					</div>
+					>
+						Submit
+					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>
