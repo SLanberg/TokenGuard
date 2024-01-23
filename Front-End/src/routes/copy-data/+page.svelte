@@ -36,6 +36,10 @@
 <!--    </div>-->
 <!--</div>-->
 
+<svelte:head>
+	<title>Data | Whale</title>
+</svelte:head>
+
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
 		<div class="m-auto">

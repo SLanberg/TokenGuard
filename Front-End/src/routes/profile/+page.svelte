@@ -7,6 +7,10 @@
 	let thisForm: HTMLFormElement;
 </script>
 
+<svelte:head>
+	<title>Profile | Whale</title>
+</svelte:head>
+
 <div class="flex h-screen">
 	<div
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"

@@ -2,15 +2,20 @@
 	import { enhance } from '$app/forms';
 
 	import whaleImage from '../../src/static/whale.png';
-	import sadWhaleImage from '../../src/static/sad_whale.png';
 
+	import sadWhaleImage from '../../src/static/sad_whale.png';
 	import eye_blue from '../../src/static/eye_blue.png';
+
 	import eye_white from '../../src/static/eye_white.png';
 
 	export let form;
 
 	let thisForm: HTMLFormElement;
 </script>
+
+<svelte:head>
+	<title>Foyer | Whale</title>
+</svelte:head>
 
 <div class="flex h-screen">
 	<!--    <div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[325px] rounded-[10px]">-->
