@@ -14,9 +14,8 @@
 				src={whaleImage}
 				alt="Whale"
 		/>
-
-		<div class="m-auto w-fit">
-			<div class="form-item">
+		<form on:submit|preventDefault={handleTokenCheckSubmit}>
+			<div class="m-auto w-fit">
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Access Token"
 				>Access Token</label
 				>
@@ -41,7 +40,6 @@
 						name="password"
 						required
 				/>
-
 				<button
 						class="mb-10
                             w-[300px]
@@ -60,7 +58,7 @@
 					Submit
 				</button>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
 

@@ -2,49 +2,27 @@
 	import whaleImage from '$lib/images/whale.png';
 	import copyIconWhite from '$lib/images/copyWhite.svg';
 	import copyIconBlack from '$lib/images/copyBlack.svg';
-	import toast from 'svelte-french-toast';
 	import paramsStore from "./profile-summary";
 
 	import eye_white from '$lib/images/eye_white.png';
 
-	import { handleContinue } from './profile-summary';
+	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
 
 	let revealPassword = false;
 	let showPopUp = true;
 
+	const toggleRevealPassword = () => {
+		revealPassword = !revealPassword
+	}
+
 	const togglePopUp = () => {
 		showPopUp = !showPopUp
 	}
-
-	const copyContentsOfTheFields = () => {
-		const telegramIdInput = document.querySelector('#telegramID') as HTMLInputElement;
-		const passwordInput = document.querySelector('#password') as HTMLInputElement;
-		const tokenInput = document.querySelector('#token') as HTMLInputElement;
-		const createdAtInput = document.querySelector('#createdAt') as HTMLInputElement;
-
-		const inputData = {
-			telegramId: telegramIdInput.value,
-			password: passwordInput.value,
-			token: tokenInput.value,
-			createdAt: createdAtInput.value
-		}
-
-		console.log(inputData)
-
-		navigator.clipboard.writeText(`Telegram id: ${inputData.telegramId} 
-Password: ${inputData.password} 
-Token: ${inputData.token} 
-Created at: ${inputData.createdAt}`)
-
-		toast.success('Copied', {
-			position: "bottom-center",
-			style: "background-color: black; color: white;"
-		})
-
-		// TODO: complete this part and save it to the clipboard
-	}
 </script>
 
+<svelte:head>
+	<title>Data | Whale</title>
+</svelte:head>
 
 {#if showPopUp}
 	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[325px] rounded-[10px]">
@@ -72,11 +50,6 @@ Created at: ${inputData.createdAt}`)
 		</div>
 	</div>
 {/if}
-
-
-<svelte:head>
-	<title>Data | Whale</title>
-</svelte:head>
 
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
@@ -137,7 +110,7 @@ Created at: ${inputData.createdAt}`)
 						name="password"
 						required
 				/>
-				<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[41px] mr-2"
+				<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[41px] mr-2"
 				><img src={eye_white} alt="see password" /></button
 				>
 			</div>
