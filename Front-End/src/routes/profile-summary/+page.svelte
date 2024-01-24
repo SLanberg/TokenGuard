@@ -12,12 +12,32 @@
 
 	import { handleContinue } from './profile-summary';
 
+
+
 	let revealPassword = false;
 	let showPopUp = true;
 
-	function togglePopUp() {
+	const togglePopUp = () => {
 		showPopUp = !showPopUp
 	}
+
+	const copyContentsOfTheFields = () => {
+		const telegramIdInput = document.querySelector('#telegramID') as HTMLInputElement;
+		const passwordInput = document.querySelector('#password') as HTMLInputElement;
+		const tokenInput = document.querySelector('#token') as HTMLInputElement;
+		const createdAtInput = document.querySelector('#createdAt') as HTMLInputElement;
+
+		const inputData = {
+			telegramId: telegramIdInput.value,
+			password: passwordInput.value,
+			token: tokenInput.value,
+			createdAt: createdAtInput.value
+		}
+
+		console.log(inputData)
+	}
+
+
 </script>
 
 
@@ -28,7 +48,7 @@
 			<br>
 			<p class="text-black text-center">Make sure you will copy the data to your notepad or write it down before continuing.</p>
 			<br>
-			<p id="copy-text" class="text-black text-center">You can copy all the required data by pressing to the copy icon:</p><div class="absolute right-[70px] bottom-[100px]"><img src="{copyIconBlack}" alt="copyIcon"></div>
+			<p id="copy-text" class="text-black text-center">You can copy all the required data by pressing to the copy icon:</p><button on:click={copyContentsOfTheFields} class="absolute right-[70px] bottom-[100px]"><img src="{copyIconBlack}" alt="copyIcon"></button>
 
 			<div class="flex justify-center">
 				<button on:click={togglePopUp} class="mt-10 bg-[#43444A]
@@ -81,7 +101,7 @@
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 									class:fieldError={form?.telegramIdUsed}
-									value={form?.telegramID ?? ''}
+									value={form?.telegramID ?? 'TestTelegramID'}
 									id="telegramID"
 									type="text"
 									name="telegramID"
@@ -109,9 +129,9 @@
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? ''}
+									value={form?.password ?? '123456789'}
 									id="password"
-									type="password"
+									type={revealPassword ? "text" : "password"}
 									name="password"
 									required
 							/>
@@ -140,9 +160,9 @@
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? ''}
-									id="password"
-									type={revealPassword ? "text" : "password"}
+									value={form?.password ?? 'Very secret token'}
+									id="token"
+									type={revealPassword ? "text" : "text"}
 									name="password"
 									required
 							/>
@@ -155,6 +175,7 @@
 							<br />
 							<input
 									readonly
+									id="createdAt"
 									class="mb-10
                                 block
                                 w-[300px]
@@ -166,12 +187,13 @@
                                 text-sm
                                 text-white
                                 placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
+                                outline-none
+                                focus:border-[#5a70ec]
+                                focus:ring-[#5a70ec]"
 									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? ''}
-									id="password"
-									type="password"
-									name="password"
+									value="2024-01-23T14:30:00"
+									type="text"
+									name="Created At"
 									required
 							/>
 						</div>
@@ -196,7 +218,9 @@
 					</div>
 				</div>
 
-				<div class="float-right m-5"><img src={copyIconWhite} alt="copyIcon" /></div>
+				<button class="float-right m-5" on:click={copyContentsOfTheFields}>
+					<img src={copyIconWhite} alt="copyIcon" />
+				</button>
 
 
 			</div>

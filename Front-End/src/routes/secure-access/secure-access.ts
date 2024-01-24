@@ -1,6 +1,5 @@
 import { goto } from "$app/navigation";
 
-export async function handleTokenCheckSubmit() {
-    // Do some magic here... ✨
+export const handleTokenCheckSubmit = async (): Promise<void> => {
     await goto('/profile', {});
 }

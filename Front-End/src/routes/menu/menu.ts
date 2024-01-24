@@ -1,6 +1,5 @@
 import { goto } from '$app/navigation';
-	
-export async function handleAvatarClick() {
-    // Do some magic here... ✨
+
+export const handleAvatarClick = async () => {
     await goto('/secure-access', {});
 }

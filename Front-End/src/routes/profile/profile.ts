@@ -1,6 +1,5 @@
 import { goto } from "$app/navigation";
 
-export async function handleProfileContinue() {
-    // Do some magic here... ✨
+export const handleProfileContinue = async (): Promise<void> => {
     await goto('/', {});
 }

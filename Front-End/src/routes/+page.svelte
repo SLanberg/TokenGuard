@@ -5,15 +5,13 @@
 	import sadWhaleImage from '$lib/images/sad_whale.png'
 	import eye_white from '$lib/images/eye_white.png';
 
-
-
 	export let form;
 	let thisForm: HTMLFormElement;
 
 	let revealPassword = false
 	let showPopUp = false;
 
-	function togglePopUp() {
+	const togglePopUp = () => {
 		showPopUp = !showPopUp
 	}
 </script>

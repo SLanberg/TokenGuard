@@ -4,10 +4,9 @@
 	import sadWhaleImage from '$lib/images/sad_whale.png';
 	import { goto } from '$app/navigation';
 
-	export async function handleHomeButtonClick() {
-		// Do some magic here... ✨
-		await goto('/', {});
-	}
+    export const handleHomeButtonClick = async () => {
+        await goto('/', {});
+    }
 </script>
 
 <!--<h1>An error happened!</h1>-->

@@ -2,12 +2,21 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 
-	import { handleSignUpAction } from './sign-up';
+	import { handleSignUpAction, errorsPresented, errorMessage } from './sign-up';
 
 	export let form;
 	let thisForm: HTMLFormElement;
 
 	let revealPassword = false
+
+	$: {
+		errorsPresented;
+		errorMessage;
+
+		console.log(errorsPresented)
+		console.log(errorMessage)
+		console.log('hi!!')
+	}
 </script>
 
 <svelte:head>
@@ -47,6 +56,8 @@
 									required
 							/>
 						</div>
+<!--						TODO: write good error handling not this-->
+						<p>Error message: {errorMessage}</p>
 
 						<div>
 							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"

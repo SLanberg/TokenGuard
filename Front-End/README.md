@@ -1,38 +1,36 @@
-# create-svelte
+# TokenGuard Front-End Web App using Svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## Description
 
-## Creating a project
+Front-End Web Application using the Svelte framework that implements user registration, token generation, and login functionality. The application include a Sign-Up form, a secure token display mechanism, and a profile page with login authentication.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### 1. Sign-Up Form:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- The application provides a Sign-Up form where users can input their Telegram ID which is arbitrary 
+in this version of the app and Password.
+- Upon submitting the form, an automatically generated token is displayed in a box.
+- Users are prompted to copy and paste this token to a secure location.
 
-## Developing
+### 2. Copy Icon Functionality:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- Implement an icon functionality that allows users to copy the following data:
+    - Telegram ID (string)
+    - Password (string)
+    - Token (string) - automatically generated
+    - Creation Timestamp (Date)
 
-```bash
-npm run dev
+### 3. Profile Page and Login:
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Accessing the /profile page requires users to log in.
+- The Svelte app supports only one user at a time.
+- Users must enter their Telegram ID and password to log in.
 
-## Building
+### 4. Token Validation:
 
-To create a production version of your app:
+- On the /profile page, users are prompted to input the token.
+- Implement token validation:
+    - If the token is incorrect, users are redirected to the Sign-In page.
+    - If the token is correct, the application displays the number ”94592942990.”
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
