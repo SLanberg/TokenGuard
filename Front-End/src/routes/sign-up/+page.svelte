@@ -166,8 +166,5 @@
 	</div>
 </div>
 
-
-
-
 <style>
 </style>

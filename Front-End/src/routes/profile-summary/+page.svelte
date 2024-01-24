@@ -18,7 +18,11 @@
 		showPopUp = !showPopUp
 	}
 
-	// TODO: make spinner
+	let continueLoad = false;
+	const handleContinueLoad = async () => {
+		continueLoad = true;
+	}
+
 </script>
 
 <svelte:head>
@@ -176,20 +180,36 @@
 
 			<button
 					class="mb-10
-                            w-[300px]
-                            rounded-[10px]
-                            bg-[#43444A]
-                            px-4
-                            py-2
-                            font-bold
-                            text-white
-                            transition
-                            duration-500
-                            ease-in-out
-                            hover:bg-[#55565b]"
+							w-[300px]
+							rounded-[10px]
+							bg-[#43444A]
+							px-4
+							py-2
+							font-bold
+							text-white
+							transition
+							duration-500
+							ease-in-out
+							hover:bg-[#55565b]
+							flex
+							justify-center
+							align-middle
+							disabled:text-gray-600
+							disabled:bg-gray-900"
 					on:click={handleContinue}
+					on:click={handleContinueLoad}
+					disabled='{showPopUp}'
 			>
 				Continue
+
+				{#if continueLoad}
+					<div class="absolute ml-24" aria-label="Loading..." role="status">
+						<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
+							<path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12">
+							</path>
+						</svg>
+					</div>
+				{/if}
 			</button>
 		</div>
 
