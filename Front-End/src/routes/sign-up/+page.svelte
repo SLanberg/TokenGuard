@@ -15,18 +15,17 @@
 
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<div class="m-auto">
 
-			<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-			<div class="m-auto w-fit">
-				<div class="form-item">
-					<div>
-						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
-						>TelegramID</label
-						>
-						<br />
-						<input
-								class="mb-2.5
+		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
+		<div class="m-auto w-fit">
+			<div class="form-item">
+				<div>
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
+					>TelegramID</label
+					>
+					<br />
+					<input
+							class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -38,23 +37,23 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-								class:fieldError={''}
-								value={''}
-								id="telegramID"
-								type="text"
-								name="telegramID"
-								required
-						/>
-					</div>
-					<!--						TODO: write good error handling not this-->
-					<!--						<p>Error message: </p>-->
+							class:fieldError={''}
+							value={''}
+							id="telegramID"
+							type="text"
+							name="telegramID"
+							required
+					/>
+				</div>
+				<!--						TODO: write good error handling not this-->
+				<!--						<p>Error message: </p>-->
 
-					<div>
-						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password">Password</label
-						>
-						<br />
-						<input
-								class="mb-2.5
+				<div>
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password">Password</label
+					>
+					<br />
+					<input
+							class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -66,25 +65,25 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-								class:fieldError={''}
-								value={''}
-								id="password"
-								type={revealPassword ? "text" : "password"}
-								name="password"
-								required
-						/>
-						<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[41px] mr-2"
-						><img src={eye_white} alt="see password" /></button
-						>
-					</div>
+							class:fieldError={''}
+							value={''}
+							id="password"
+							type={revealPassword ? "text" : "password"}
+							name="password"
+							required
+					/>
+					<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[41px] mr-2"
+					><img src={eye_white} alt="see password" /></button
+					>
+				</div>
 
-					<div>
-						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
-						>Confirm Password</label
-						>
-						<br />
-						<input
-								class="mb-5
+				<div>
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+					>Confirm Password</label
+					>
+					<br />
+					<input
+							class="mb-5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -96,20 +95,20 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-								class:fieldError={''}
-								value={''}
-								id="password"
-								type={revealPassword ? "text" : "password"}
-								name="password"
-								required
-						/>
-						<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[51px] mr-2"
-						><img src={eye_white} alt="see password" /></button
-						>
-					</div>
+							class:fieldError={''}
+							value={''}
+							id="password"
+							type={revealPassword ? "text" : "password"}
+							name="password"
+							required
+					/>
+					<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[51px] mr-2"
+					><img src={eye_white} alt="see password" /></button
+					>
+				</div>
 
-					<button
-							class="mb-10
+				<button
+						class="mb-10
                             w-[300px]
                             rounded-[10px]
                             bg-[#43444A]
@@ -121,11 +120,10 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
-							on:click={handleSignUpAction}
-					>
-						Sign Up
-					</button>
-				</div>
+						on:click={handleSignUpAction}
+				>
+					Sign Up
+				</button>
 			</div>
 		</div>
 	</div>
