@@ -228,5 +228,4 @@ Created at: ${inputData.createdAt}`)
 </div>
 
 <style>
-
 </style>
