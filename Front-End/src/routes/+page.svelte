@@ -125,7 +125,7 @@
 					Sign In
 				</button>
 
-				<p class="mb-10 text-left text-sm font-medium text-white text-center" id="sign-up">
+				<p class="mb-10 text-sm font-medium text-white text-center" id="sign-up">
 					<u><a href="/sign-up">Sign Up</a></u>
 				</p>
 			</div>
