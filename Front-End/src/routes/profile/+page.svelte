@@ -13,24 +13,22 @@
 	<div
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
 	>
-		<div id="form-div" class="mt-32">
-			<img
-				class="mx-auto my-auto mb-7 rounded-full bg-blue-950"
+		<img
+				class="mx-auto my-auto mb-7 rounded-full bg-blue-950 mt-32"
 				id="mascot"
 				src={whaleImage}
 				alt="Whale"
-			/>
+		/>
 
-			<div class="m-auto w-fit">
-				<div class="form-item">
-					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Secret Key"
-					>Secret Key</label
-					>
-					<br />
+		<div class="m-auto w-fit">
+			<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Secret Key"
+			>Secret Key</label
+			>
+			<br />
 
-					<input
-							readonly
-							class="mb-5
+			<input
+					readonly
+					class="mb-5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -42,16 +40,16 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-							class:fieldError={''}
-							value={''}
-							id="password"
-							type="password"
-							name="password"
-							required
-					/>
+					class:fieldError={''}
+					value={''}
+					id="password"
+					type="password"
+					name="password"
+					required
+			/>
 
-					<button
-							class="mb-10
+			<button
+					class="mb-10
                             w-[300px]
                             rounded-[10px]
                             bg-[#43444A]
@@ -63,12 +61,10 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
-							on:click={handleProfileContinue}
-					>
-						Log Out
-					</button>
-				</div>
-			</div>
+					on:click={handleProfileContinue}
+			>
+				Log Out
+			</button>
 		</div>
 	</div>
 </div>

@@ -49,18 +49,16 @@
 	{/if}
 
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<div class="m-auto">
-			<div id="form-div">
-				<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-				<div class="m-auto w-fit">
-					<div class="form-item">
-						<div>
-							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
-							>TelegramID</label
-							>
-							<br />
-							<input
-									class="mb-2.5
+		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
+		<div class="m-auto w-fit">
+			<div class="form-item">
+				<div>
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
+					>TelegramID</label
+					>
+					<br />
+					<input
+							class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -72,22 +70,22 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={''}
-									value={''}
-									id="telegramID"
-									type="text"
-									name="telegramID"
-									required
-							/>
-						</div>
+							class:fieldError={''}
+							value={''}
+							id="telegramID"
+							type="text"
+							name="telegramID"
+							required
+					/>
+				</div>
 
-						<div>
-							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
-							>Password</label
-							>
-							<br />
-							<input
-									class="mb-5
+				<div>
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
+					>Password</label
+					>
+					<br />
+					<input
+							class="mb-5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -99,21 +97,21 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={''}
-									value={''}
-									id="password"
-									type={revealPassword ? "text" : "password"}
-									name="password"
-									required
-							/>
+							class:fieldError={''}
+							value={''}
+							id="password"
+							type={revealPassword ? "text" : "password"}
+							name="password"
+							required
+					/>
 
-							<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[51px] mr-2"
-							><img src={eye_white} alt="see password" /></button
-							>
-						</div>
+					<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[51px] mr-2"
+					><img src={eye_white} alt="see password" /></button
+					>
+				</div>
 
-						<button
-								class="mb-10
+				<button
+						class="mb-10
                             w-[300px]
                             rounded-[10px]
                             bg-[#43444A]
@@ -125,15 +123,13 @@
                             duration-500
                             ease-in-out
                             hover:bg-[#55565b]"
-						>
-							Sign In
-						</button>
+				>
+					Sign In
+				</button>
 
-						<p class="mb-10 text-left text-sm font-medium text-white" id="sign-up">
-							<u><a href="/sign-up">Sign Up</a></u>
-						</p>
-					</div>
-				</div>
+				<p class="mb-10 text-left text-sm font-medium text-white" id="sign-up">
+					<u><a href="/sign-up">Sign Up</a></u>
+				</p>
 			</div>
 		</div>
 	</div>
