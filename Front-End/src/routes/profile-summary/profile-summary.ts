@@ -32,7 +32,8 @@ Created at: ${inputData.createdAt}`)
 
     toast.success('Copied', {
         position: "bottom-center",
-        style: "background-color: black; color: white;"
+        style: "background-color: black; " +
+            "color: white;"
     })
 }
 

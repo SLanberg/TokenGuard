@@ -10,7 +10,6 @@ test('Home page as expected', async ({ page }) => {
 
 test('Sign-up page as expected', async ({ page }) => {
 	await page.goto('/sign-up');
-	console.log(await page.content());
 
 	await expect(page.locator('label:has-text("TelegramID")')).toBeVisible();
 	await expect(page.locator('label:has-text("Password")')).toBeVisible();

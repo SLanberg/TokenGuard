@@ -1,13 +1,33 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
-
-	import { handleSignUpAction } from './sign-up';
+	import { error } from "@sveltejs/kit";
+	import attention_sign from "$lib/images/Info-triangle.png";
 
 	let revealPassword = false
 
 	const toggleRevealPassword = () => {
 		revealPassword = !revealPassword
+	}
+
+	export let form;
+	async function registerUser(event: Event) {
+		const formEl = event.target as HTMLFormElement;
+		const data = new FormData(formEl);
+
+		console.log(data)
+
+		// const response = await fetch(formEl.action, {
+		// 	method: 'POST',
+		// 	body: data
+		// })
+
+		// console.log(response)
+		// form = await response.json()
+
+		// formEl.reset()
+
+		throw error(400, 'very-very sad');
 	}
 </script>
 
@@ -19,12 +39,13 @@
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
 
 		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-		<form on:submit|preventDefault={handleSignUpAction}>
+		<form method="POST" on:submit|preventDefault={registerUser}>
 			<div class="m-auto w-fit">
 				<div>
 					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
 					>TelegramID</label
 					>
+
 					<br />
 					<input
 							class="mb-2.5
@@ -40,7 +61,7 @@
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 							class:fieldError={''}
-							value={''}
+							value={form?.telegramID ?? ''}
 							id="telegramID"
 							type="text"
 							name="telegramID"
@@ -48,9 +69,9 @@
 					/>
 				</div>
 
-				<div class="m-auto w-fit">
-					<!--TODO: write good error handling not this-->
-					<!--<p>Error message: </p>-->
+				<div class="flex items-center w-fit -mt-2.5">
+					<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+					<p class="text-red-600 text-sm">Incorrect TelegramID</p>
 				</div>
 
 				<div>
@@ -82,6 +103,11 @@
 					>
 				</div>
 
+				<div class="flex items-center w-fit -mt-2.5">
+					<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+					<p class="text-red-600 text-sm">Password is not secure enough</p>
+				</div>
+
 				<div>
 					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
 					>Confirm Password</label
@@ -102,14 +128,19 @@
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 							class:fieldError={''}
 							value={''}
-							id="password"
+							id="confirmPassword"
 							type={revealPassword ? "text" : "password"}
-							name="password"
+							name="Confirm Password"
 							required
 					/>
-					<button on:click|preventDefault={() => revealPassword = !revealPassword} class="relative float-right -mt-[51px] mr-2"
+					<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[51px] mr-2"
 					><img src={eye_white} alt="see password" /></button
 					>
+				</div>
+
+				<div class="flex items-center w-fit -mt-5">
+					<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+					<p class="text-red-600 text-sm">Passwords don't match</p>
 				</div>
 
 				<button

@@ -2,9 +2,8 @@
 	import whaleImage from '$lib/images/whale.png';
 	import copyIconWhite from '$lib/images/copyWhite.svg';
 	import copyIconBlack from '$lib/images/copyBlack.svg';
-	import paramsStore from "./profile-summary";
-
 	import eye_white from '$lib/images/eye_white.png';
+	import paramsStore from "./profile-summary";
 
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
 
@@ -18,6 +17,8 @@
 	const togglePopUp = () => {
 		showPopUp = !showPopUp
 	}
+
+	// TODO: make spinner
 </script>
 
 <svelte:head>
@@ -195,7 +196,6 @@
 		<button class="float-right m-5" on:click={copyContentsOfTheFields}>
 			<img src={copyIconWhite} alt="copyIcon" />
 		</button>
-
 
 	</div>
 </div>

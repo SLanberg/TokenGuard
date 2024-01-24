@@ -5,6 +5,7 @@
 </script>
 
 <Toaster />
+
 <slot />
 
 <style>
@@ -22,7 +23,6 @@
 	@font-face {
 		font-family: 'Inter';
 		font-style: normal;
-		/*font-weight: 100;*/
 		src: url('/fonts/Inter-Regular.ttf');
 	}
 </style>

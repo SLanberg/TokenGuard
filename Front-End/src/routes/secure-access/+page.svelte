@@ -2,6 +2,8 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { handleTokenCheckSubmit } from './secure-access';
+
+	// TODO: make spinner
 </script>
 
 <div class="flex h-screen">

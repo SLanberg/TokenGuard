@@ -7,6 +7,10 @@
     export const handleHomeButtonClick = async () => {
         await goto('/', {});
     }
+
+    if ($page.status) {
+
+    }
 </script>
 
 <!--<h1>An error happened!</h1>-->

@@ -1,57 +1,63 @@
 import { goto } from '$app/navigation';
+import { fail } from '@sveltejs/kit';
+
 import paramsStore from "../profile-summary/profile-summary";
 
 export var errorsPresented = false;
 export var errorMessage = '';
 
-const userRegistrationPostRequest = async (): Promise<void> => {
-    let result: string;
-
+export const userRegistrationPostRequest = async (): Promise<any> => {
     const telegramIdInput = document.querySelector('#telegramID') as HTMLInputElement;
     const passwordInput = document.querySelector('#password') as HTMLInputElement;
+    const confirmPasswordInput = document.querySelector('#password') as HTMLInputElement;
 
     const telegramIdValue: number = parseInt(telegramIdInput.value);
     const passwordValue: string = passwordInput.value;
+    const confirmPasswordValue: string = confirmPasswordInput.value;
 
-    // console.log(telegramIdValue)
-    // console.log(passwordValue)
+    if (telegramIdValue.toString().length > 0) {
+        console.log('what?')
 
-    const res = await fetch('http://10.0.0.33:8000/api/auth/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            telegramID: telegramIdValue,
-            password: passwordValue,
+        return fail(400, {
+            // telegramIdValue,
+            errors: true,
+            message: 'Missing username or password'
         })
-    });
 
-    const json = await res.json();
+    } else {
+        const res = await fetch('http://10.0.0.33:8000/api/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                telegramID: telegramIdValue,
+                password: passwordValue,
+            })
+        });
 
-    if (json.type === "success") {
+        const json = await res.json();
 
-        const date = new Date(json.createdAt);
+        if (json.type === "success") {
 
-        paramsStore.update(store => {
-            store.telegramId = json.user['telegramid'];
-            store.password = json.user['password'];
-            store.token = json['token'];
-            store.createdAt = date?.
+            const date = new Date(json.createdAt);
+
+            paramsStore.update(store => {
+                store.telegramId = json.user['telegramid'];
+                store.password = json.user['password'];
+                store.token = json['token'];
+                store.createdAt = date?.
                 toLocaleDateString('en-US',
                     { year: 'numeric', day: 'numeric', month: 'numeric' });
 
-            return store;
-        });
+                return store;
+            });
 
-        await goto('/profile-summary',{});
-    } else {
-        errorsPresented = true;
-        errorMessage = json.response;
+            await goto('/profile-summary',{});
+        } else {
+            errorsPresented = true;
+            errorMessage = json.response;
+        }
     }
-}
-
-export const handleSignUpAction = async () => {
-    await userRegistrationPostRequest();
 }
 
