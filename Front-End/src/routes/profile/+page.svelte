@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import whaleImage from '$lib/images/whale.png';
-	
-	export let form;
-	let thisForm: HTMLFormElement;
 
 	import { handleProfileContinue } from './profile';
 </script>
@@ -45,8 +42,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-							class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-							value={form?.password ?? ''}
+							class:fieldError={''}
+							value={''}
 							id="password"
 							type="password"
 							name="password"

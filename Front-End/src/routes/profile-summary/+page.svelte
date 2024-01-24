@@ -1,18 +1,13 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-
 	import whaleImage from '$lib/images/whale.png';
 	import copyIconWhite from '$lib/images/copyWhite.svg';
 	import copyIconBlack from '$lib/images/copyBlack.svg';
+	import toast from 'svelte-french-toast';
+	import paramsStore from "./profile-summary";
 
 	import eye_white from '$lib/images/eye_white.png';
 
-	export let form;
-	let thisForm: HTMLFormElement;
-
 	import { handleContinue } from './profile-summary';
-
-
 
 	let revealPassword = false;
 	let showPopUp = true;
@@ -35,9 +30,14 @@
 		}
 
 		console.log(inputData)
+
+		toast.success('Copied, paste it in your secure vault', {
+			position: "bottom-center",
+			style: "background-color: black; color: white;"
+		})
+
+		// TODO: complete this part and save it to the clipboard
 	}
-
-
 </script>
 
 
@@ -100,8 +100,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={form?.telegramIdUsed}
-									value={form?.telegramID ?? 'TestTelegramID'}
+									class:fieldError={''}
+									value={$paramsStore.telegramId}
 									id="telegramID"
 									type="text"
 									name="telegramID"
@@ -128,8 +128,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? '123456789'}
+									class:fieldError={''}
+									value={$paramsStore.password}
 									id="password"
 									type={revealPassword ? "text" : "password"}
 									name="password"
@@ -159,8 +159,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? 'Very secret token'}
+									class:fieldError={''}
+									value={$paramsStore.token}
 									id="token"
 									type={revealPassword ? "text" : "text"}
 									name="password"
@@ -190,8 +190,8 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
-									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value="2024-01-23T14:30:00"
+									class:fieldError={''}
+									value="{$paramsStore.createdAt}"
 									type="text"
 									name="Created At"
 									required

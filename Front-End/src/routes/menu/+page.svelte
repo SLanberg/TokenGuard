@@ -1,11 +1,6 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import { enhance } from '$app/forms';
-
-	let thisForm: HTMLFormElement;
-	export let form;
-	
 	import { handleAvatarClick } from './menu';
 </script>
 

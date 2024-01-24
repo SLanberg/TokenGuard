@@ -2,21 +2,11 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 
-	import { handleSignUpAction, errorsPresented, errorMessage } from './sign-up';
-
-	export let form;
-	let thisForm: HTMLFormElement;
+	import { handleSignUpAction } from './sign-up';
 
 	let revealPassword = false
 
-	$: {
-		errorsPresented;
-		errorMessage;
 
-		console.log(errorsPresented)
-		console.log(errorMessage)
-		console.log('hi!!')
-	}
 </script>
 
 <svelte:head>
@@ -48,8 +38,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={form?.telegramIdUsed}
-									value={form?.telegramID ?? ''}
+									class:fieldError={''}
+									value={''}
 									id="telegramID"
 									type="text"
 									name="telegramID"
@@ -57,11 +47,10 @@
 							/>
 						</div>
 <!--						TODO: write good error handling not this-->
-						<p>Error message: {errorMessage}</p>
+<!--						<p>Error message: </p>-->
 
 						<div>
-							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
-							>Password</label
+							<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password">Password</label
 							>
 							<br />
 							<input
@@ -77,8 +66,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? ''}
+									class:fieldError={''}
+									value={''}
 									id="password"
 									type={revealPassword ? "text" : "password"}
 									name="password"
@@ -107,8 +96,8 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-									class:fieldError={(form?.weakPassword, form?.passNotMatch)}
-									value={form?.password ?? ''}
+									class:fieldError={''}
+									value={''}
 									id="password"
 									type={revealPassword ? "text" : "password"}
 									name="password"
