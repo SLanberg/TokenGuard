@@ -6,7 +6,7 @@ export const getSecretKey = async (req: Request, res: Response) => {
   const accessToken = req.cookies.JWT;
   if (!accessToken) return res.status(401).json({type:"error",response:"Not authorized!"});
 
-  let userData;
+  let userData: any;
 
   jwt.verify(accessToken, "SECRET KEY!!!",(err, decodedData)=>{
     if (err) return res.status(403).json({type:"error",response:"Invalid token!"});
@@ -14,7 +14,7 @@ export const getSecretKey = async (req: Request, res: Response) => {
   })
 
 
-  let db;
+  let db: any;
 
   try {
     db = await connectDB();

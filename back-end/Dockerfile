@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-WORKDIR /front-end
+WORKDIR /back-end
 
 COPY package*.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5173
 
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npx", "tsx","src/index.ts"]

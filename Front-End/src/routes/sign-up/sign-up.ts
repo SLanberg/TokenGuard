@@ -1,7 +1,12 @@
+import dotenv from 'dotenv'
+import paramsStore from "../profile-summary/profile-summary";
 import { goto } from '$app/navigation';
 import { fail } from '@sveltejs/kit';
 
-import paramsStore from "../profile-summary/profile-summary";
+dotenv.config();
+
+const backEndUrl = process.env.APP_MY_BACK_END;
+
 
 export var errorsPresented = false;
 export var errorMessage = '';
@@ -25,7 +30,7 @@ export const userRegistrationPostRequest = async (): Promise<any> => {
         })
 
     } else {
-        const res = await fetch('http://10.0.0.33:8000/api/auth/signup', {
+        const res = await fetch(backEndUrl + "/auth/sign-up", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

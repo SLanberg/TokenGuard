@@ -9,17 +9,15 @@ export const signup = async (req: Request, res: Response) => {
   const telegramID = req.body.telegramID;
   const password = req.body.password;
 
-  console.log(`Telegram: ${telegramID}`);
-  console.log(`Password: ${password}`);
   if (telegramID === undefined || typeof telegramID !== 'number' || password === undefined){
-    return res.status(400).json({response:"You need correctly to fill all fields!"})
+    return res.status(400).json({response:"You need correctly to fill all fields!"});
   }
 
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(password, salt);
   const values = [telegramID, hashedPassword];
   
-  let db;
+  let db: any;
 
   try {
     db = await connectDB();
@@ -29,7 +27,7 @@ export const signup = async (req: Request, res: Response) => {
       return res.status(409).json({type:"error",response:"TelegramID already use!"});
     }
   } catch (error) {
-    console.log("Error: ", error)
+    console.log(error);
      return res.status(500).json({type:"error",response:"Server Internal Error occured!"});
   } finally {
     await db.end();
@@ -97,7 +95,7 @@ export const signup = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log(error);
-    return res.status(500).json({type:"error", response:"Server Internal Error occurred!"});
+    return res.status(500).json({type:"error",response:"Server Internal Error occured!"});
   } finally {
     await db.end();
   }
@@ -111,11 +109,10 @@ export const signin = async (req: Request, res: Response) => {
   const password = req.body.password;
 
   if (telegramID === undefined || typeof telegramID !== 'number' || password === undefined){
-    return res.status(400).json({response:"You need correctly to fill all fields!!"}
-    )
+    return res.status(400).json({response:"You need correctly to fill all fields!!"});
   }
   
-  let db;
+  let db: any;
 
   try {
     db = await connectDB();
@@ -130,15 +127,13 @@ export const signin = async (req: Request, res: Response) => {
 
 
     const checkPassword = bcrypt.compareSync(password, result.rows[0].password)
-    if (!checkPassword)
-      return res.status(401).json({type:"error",response:"Incorrect TelegramID or Password!"});
-    const userData = result.rows[0]
+    if (!checkPassword) return res.status(401).json({type:"error",response:"Incorrect TelegramID or Password!"});  
+    const userData = result.rows[0];
     const accessToken = jwt.sign({id: userData.id}, "SECRET KEY!!!");
 
     res.cookie("JWT",accessToken,{
         httpOnly: true,
     })
-
     .status(201).json(
       {
         type: "success",
@@ -159,5 +154,5 @@ export const logout = (req: Request, res: Response) => {
   res.clearCookie("JWT",{
     secure: true,
     sameSite: "none"
-  }).status(200).json({type:"success",response:"User has been logged out!"})
+  }).status(200).json({type:"success",response:"User has been logged out!"});
 }

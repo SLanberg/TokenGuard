@@ -4,5 +4,6 @@ export const generateToken = (telegramID: number) => {
   const randomPart3 = Math.random().toString(36).slice(2, 6);
   const randomPart4 = Math.random().toString(36).slice(2, 6);
 
-  return `${telegramID}-${randomPart1}-${randomPart2}-${randomPart3}-${randomPart4}`;
+  const token = `${telegramID}-${randomPart1}-${randomPart2}-${randomPart3}-${randomPart4}`;
+  return token;
 }
