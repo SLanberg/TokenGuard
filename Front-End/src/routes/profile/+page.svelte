@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import whaleImage from '$lib/images/whale.png';
 
 	import { handleProfileContinue } from './profile';
