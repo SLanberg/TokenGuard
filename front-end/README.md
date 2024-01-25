@@ -12,25 +12,28 @@ Front-End Web Application using the Svelte framework that implements user regist
 in this version of the app and Password.
 - Upon submitting the form, an automatically generated token is displayed in a box.
 - Users are prompted to copy and paste this token to a secure location.
+- Validation of the fields.
+
 
 ### 2. Copy Icon Functionality:
 
-- Implement an icon functionality that allows users to copy the following data:
+- Implemented an icon functionality that allows users to copy the following data:
     - Telegram ID (string)
     - Password (string)
     - Token (string) - automatically generated
     - Creation Timestamp (Date)
+ - After this action user will see Snackbar at the bottom that will inform user that the copy is made.
 
 ### 3. Profile Page and Login:
 
 - Accessing the /profile page requires users to log in.
-- The Svelte app supports only one user at a time.
 - Users must enter their Telegram ID and password to log in.
+- Validation of the fields.
 
 ### 4. Token Validation:
 
 - On the /profile page, users are prompted to input the token.
 - Implement token validation:
-    - If the token is incorrect, users are redirected to the Sign-In page.
+    - If the token is incorrect, users are redirected to the Sign-In page. Pop-up message shown to the user indicating the token is incorrect with the offer to sign in again and try again.
     - If the token is correct, the application displays the number ”94592942990.”
 
