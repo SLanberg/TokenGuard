@@ -26,7 +26,7 @@ Docker implemented specifically to use PostgreSQL.
 
 ## Why NodeJS and not NestJS/NextJS?
 Since we talked about these technologies in the sense of the possible migration to them in the future I picked
-NodeJS as the focus. I understand why they can be attractive for the development considering importance of the adequate architecture.
+NodeJS as the focus. I understand why alternatives can be attractive for the development considering importance of the adequate architecture and what they offer.
 
 ## .env file in the repository?
 Yes, this is made on purpose. So you can simply run docker compose up. At the end of the day we want to make it comfortable.
