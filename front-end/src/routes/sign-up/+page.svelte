@@ -2,6 +2,7 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from "$lib/images/Info-triangle.png";
+	import {userRegistrationRequest} from "./sign-up";
 
 	let signUpLoad = false;
 	const handleSignUpLoad = async () => {
@@ -14,23 +15,17 @@
 	}
 
 	export let form;
-	export const registerUser = async (event: Event) => {
-		const formEl = event.target as HTMLFormElement;
-		const data = new FormData(formEl);
-
-		console.log(data)
-	}
 </script>
 
 <svelte:head>
-	<title>Sign Up T | Whale</title>
+	<title>Sign Up | Whale</title>
 </svelte:head>
 
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
 
 		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-			<form method="POST" on:submit|preventDefault={registerUser}>
+			<form method="POST" on:submit|preventDefault={userRegistrationRequest}>
 				<div class="m-auto w-fit">
 					<div>
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"

@@ -11,7 +11,7 @@ export const userRegistrationRequest = async (event: Event) => {
     const password = data.get('password')
 
     // write error check here to see if the passwords match
-    const confirmPassword = data.get('confirm password')
+    // const confirmPassword = data.get('confirm password')
 
     const response = await fetch(backEndUrl + "/auth/sign-up", {
             method: 'POST',
@@ -25,6 +25,9 @@ export const userRegistrationRequest = async (event: Event) => {
         });
 
         const json = await response.json();
+
+        console.log(json)
+        console.log(json.type)
 
         if (json.type === "success") {
             const date = new Date(json.createdAt);

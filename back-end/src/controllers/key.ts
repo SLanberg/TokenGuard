@@ -4,12 +4,12 @@ import { connectDB } from "../connect.js";
 
 export const getSecretKey = async (req: Request, res: Response) => {
   const accessToken = req.cookies.JWT;
-  if (!accessToken) return res.status(401).json({type:"error",response:"Not authorized!"});
+  if (!accessToken) return res.status(401).json({type:"error",response:"Not authorized"});
 
   let userData: any;
 
-  jwt.verify(accessToken, "SECRET KEY!!!",(err, decodedData)=>{
-    if (err) return res.status(403).json({type:"error",response:"Invalid token!"});
+  jwt.verify(accessToken, "Secret Key",(err, decodedData)=>{
+    if (err) return res.status(403).json({type:"error",response:"Invalid token"});
     userData = decodedData;
   })
 
@@ -26,12 +26,12 @@ export const getSecretKey = async (req: Request, res: Response) => {
 
     const result = await db.query(query, [userData.id]);
     
-    if (result.rows.length == 0) return res.status(409).json({type:"error",response:"Invalid token!"});
+    if (result.rows.length == 0) return res.status(409).json({type:"error", response:"Invalid Token"});
     
     return res.status(200).json({secretkey: result.rows[0].secretkey});
   } catch (error) {
     console.log(error);
-    return res.status(500).json({type:"error",response:"Server Internal Error occured!"});
+    return res.status(500).json({type:"error", response:"Server Internal Error"});
   } finally {
     await db.end();
   }
