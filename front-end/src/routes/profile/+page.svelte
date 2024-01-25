@@ -1,7 +1,7 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import { handleProfileContinue } from './profile';
+	import { logOutRequest } from './profile';
 
 	let logOutLoad = false;
 	const handleMenuLoad = async () => {
@@ -68,7 +68,7 @@
 							flex
 							justify-center
 							align-middle"
-					on:click={handleProfileContinue}
+					on:click={logOutRequest}
 					on:click={handleMenuLoad}
 			>
 				Log Out
