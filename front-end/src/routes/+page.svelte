@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { handleSignUpClick, signInUserRequest } from './login'
+	import {fieldsValidationSignIn, handleSignUpClick, signInUserRequest} from './login'
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png'
@@ -64,7 +64,8 @@
 		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
 		<div class="m-auto w-fit">
 
-			<form method="POST" on:submit|preventDefault={signInUserRequest}>
+			<form method="POST" on:submit|preventDefault={signInUserRequest}
+			on:submit|preventDefault={handleSignInLoad}>
 				<div>
 					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
 					>TelegramID</label
@@ -92,10 +93,12 @@
 					/>
 				</div>
 
-				<div class="flex items-center w-fit -mt-2.5">
-					<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
-					<p class="text-red-600 text-sm">TelegramID or Password is incorrect</p>
-				</div>
+				{#if $fieldsValidationSignIn.telegramId.error}
+					<div class="flex items-center w-fit -mt-2.5">
+						<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+						<p class="text-red-600 text-sm">TelegramID or Password is incorrect</p>
+					</div>
+				{/if}
 
 				<div>
 					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password"
@@ -131,7 +134,6 @@
 				</div>
 
 				<button
-						on:click={handleSignInLoad}
 						class="mb-10
 							w-[300px]
 							rounded-[10px]
@@ -178,9 +180,7 @@
 					{/if}
 				</div>
 			</div>
-
 			<div class="mb-5"></div>
-
 		</div>
 	</div>
 </div>

@@ -2,7 +2,9 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from "$lib/images/Info-triangle.png";
-	import {userRegistrationRequest} from "./sign-up";
+	import {fieldsValidationSignUp, userRegistrationRequest} from "./sign-up";
+
+	export let form;
 
 	let signUpLoad = false;
 	const handleSignUpLoad = async () => {
@@ -13,8 +15,6 @@
 	const toggleRevealPassword = () => {
 		revealPassword = !revealPassword
 	}
-
-	export let form;
 </script>
 
 <svelte:head>
@@ -23,9 +23,8 @@
 
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-
 		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-			<form method="POST" on:submit|preventDefault={userRegistrationRequest}>
+			<form autocomplete="off" method="POST" on:submit|preventDefault={ userRegistrationRequest }>
 				<div class="m-auto w-fit">
 					<div>
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
@@ -55,10 +54,12 @@
 						/>
 					</div>
 
-					<div class="flex items-center w-fit -mt-2.5">
-						<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
-						<p class="text-red-600 text-sm">Incorrect TelegramID</p>
-					</div>
+					{#if $fieldsValidationSignUp.telegramId.error}
+						<div class="flex items-center w-fit -mt-2.5">
+							<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+							<p class="text-red-600 text-sm">{$fieldsValidationSignUp.telegramId.message}</p>
+						</div>
+					{/if}
 
 					<div>
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password">Password</label
@@ -84,15 +85,17 @@
 								id="password"
 								required
 						/>
-						<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[41px] mr-2"
+						<button on:click|preventDefault={ toggleRevealPassword } class="relative float-right -mt-[41px] mr-2"
 						><img src={eye_white} alt="see password" /></button
 						>
 					</div>
 
-					<div class="flex items-center w-fit -mt-2.5">
-						<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
-						<p class="text-red-600 text-sm">Password is not secure enough</p>
-					</div>
+					{#if $fieldsValidationSignUp.password.error}
+						<div class="flex items-center w-fit -mt-2.5">
+							<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+							<p class="text-red-600 text-sm">{$fieldsValidationSignUp.password.message}</p>
+						</div>
+					{/if}
 
 					<div>
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="confirmPassword"
@@ -119,18 +122,20 @@
 								id="confirmPassword"
 								required
 						/>
-						<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[51px] mr-2"
+						<button on:click|preventDefault={ toggleRevealPassword } class="relative float-right -mt-[51px] mr-2"
 						><img src={eye_white} alt="see password" /></button
 						>
 					</div>
 
-					<div class="flex items-center w-fit -mt-5">
-						<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
-						<p class="text-red-600 text-sm">Passwords don't match</p>
-					</div>
+					{#if $fieldsValidationSignUp.confirmPassword.error}
+						<div class="flex items-center w-fit -mt-5">
+							<img class="h-3 mr-0.5" src="{attention_sign}" alt="error-sign">
+							<p class="text-red-600 text-sm">{$fieldsValidationSignUp.confirmPassword.message}</p>
+						</div>
+					{/if}
 
 					<button
-							on:click={handleSignUpLoad}
+							on:click={ handleSignUpLoad }
 							type="submit"
 							class="mb-10
 								w-[300px]

@@ -1,4 +1,5 @@
 import { goto } from "$app/navigation";
+import {writable} from "svelte/store";
 
 const backEndUrl = 'http://localhost:8000/api'
 
@@ -6,9 +7,14 @@ export const handleSignUpClick = async () => {
     await goto('/sign-up', {});
 }
 
+export const fieldsValidationSignIn = writable({
+    telegramId: { error: false, message: "" },
+    password: { error: false, message: "" },
+});
+
+
 export const signInUserRequest = async (event: Event) => {
     // Send API request to the BackEnd
-
     const formEl = event.target as HTMLFormElement;
     const data = new FormData(formEl);
 
@@ -30,7 +36,12 @@ export const signInUserRequest = async (event: Event) => {
     if (json.type === "success") {
         // If success accept cookie -> redirect
         return await goto('/menu',{});
-    } else if (json.type === "error") {
-        return console.log('pizdec');
+    } else {
+        // Example of updating the store
+        // fieldValid.update(() => ({
+        //     // ...currentValue,
+        //     telegramId: { error: true, message: "Invalid Telegram ID" },
+        //     password: { error: false, message: "" }, // No error for password
+        // }));
     }
 }
