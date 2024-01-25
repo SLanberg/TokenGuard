@@ -25,7 +25,7 @@
 		/>
 
 		<div class="m-auto w-fit">
-			<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Secret Key"
+			<label class="text-left text-sm font-medium text-[#B8B8B8]" for="secretKey"
 			>Secret Key</label
 			>
 			<br />
@@ -46,9 +46,9 @@
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 					class:fieldError={''}
 					value={''}
-					id="password"
+					id="secretKey"
 					type="password"
-					name="password"
+					name="secretKey"
 					required
 			/>
 

@@ -1,7 +1,7 @@
 import paramsStore from "../profile-summary/profile-summary";
 import { goto } from '$app/navigation';
 
-const backEndUrl = 'http://localhost:8000/api/'
+const backEndUrl = 'http://localhost:8000/api'
 
 export const userRegistrationRequest = async (event: Event) => {
     const formEl = event.target as HTMLFormElement;

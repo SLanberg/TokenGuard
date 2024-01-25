@@ -109,6 +109,9 @@ export const signin = async (req: Request, res: Response) => {
   const password = req.body.password;
 
   if (telegramID === undefined || typeof telegramID !== 'number' || password === undefined){
+    console.log(telegramID, password)
+
+
     return res.status(400).json({response:"You need correctly to fill all fields!!"});
   }
   

@@ -21,7 +21,7 @@
 		/>
 		<form on:submit|preventDefault={tokenSubmitRequest}>
 			<div class="m-auto w-fit">
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Access Token"
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="accessToken"
 				>Access Token</label
 				>
 				<br />
@@ -42,6 +42,7 @@
                                 focus:ring-[#5a70ec]"
 						type="password"
 						name="password"
+						id="accessToken"
 						required
 				/>
 				<button

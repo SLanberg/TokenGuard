@@ -60,7 +60,7 @@
 
 		<div class="m-auto w-fit">
 			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
 				>TelegramID</label
 				>
 				<br />
@@ -88,7 +88,7 @@
 			</div>
 
 			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password"
 				>Password</label
 				>
 				<br />
@@ -110,6 +110,7 @@
 						value={$paramsStore.password}
 						type={revealPassword ? "text" : "password"}
 						name="password"
+						id="password"
 						required
 				/>
 				<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[41px] mr-2"
@@ -118,7 +119,7 @@
 			</div>
 
 			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="token"
 				>Token</label
 				>
 				<br />
@@ -146,7 +147,7 @@
 			</div>
 
 			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="createdAt"
 				>Created At</label
 				>
 				<br />

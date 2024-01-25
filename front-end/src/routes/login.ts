@@ -1,6 +1,6 @@
 import { goto } from "$app/navigation";
 
-const backEndUrl = 'http://localhost:8000/api/'
+const backEndUrl = 'http://localhost:8000/api'
 
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});

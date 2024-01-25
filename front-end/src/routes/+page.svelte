@@ -66,7 +66,7 @@
 
 			<form method="POST" on:submit|preventDefault={signInUserRequest}>
 				<div>
-					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
 					>TelegramID</label
 					>
 					<br />
@@ -98,7 +98,7 @@
 				</div>
 
 				<div>
-					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
+					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password"
 					>Password</label
 					>
 					<br />
@@ -117,6 +117,7 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
+							id="password"
 							class:fieldError={''}
 							value={''}
 							type={revealPassword ? "text" : "password"}

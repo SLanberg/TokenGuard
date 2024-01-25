@@ -33,7 +33,7 @@
 			<form method="POST" on:submit|preventDefault={registerUser}>
 				<div class="m-auto w-fit">
 					<div>
-						<label id="TelegramID" class="text-left text-sm font-medium text-[#B8B8B8]" for="TelegramID"
+						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
 						>TelegramID</label
 						>
 
@@ -66,7 +66,7 @@
 					</div>
 
 					<div>
-						<label id="Password" class="text-left text-sm font-medium text-[#B8B8B8]" for="Password">Password</label
+						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password">Password</label
 						>
 						<br />
 						<input
@@ -86,6 +86,7 @@
 								value={''}
 								type={revealPassword ? "text" : "password"}
 								name="password"
+								id="password"
 								required
 						/>
 						<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[41px] mr-2"
@@ -99,7 +100,7 @@
 					</div>
 
 					<div>
-						<label id="Confirm Password" class="text-left text-sm font-medium text-[#B8B8B8]" for="Confirm Password"
+						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="confirmPassword"
 						>Confirm Password</label
 						>
 						<br />
@@ -118,9 +119,9 @@
 									outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 								class:fieldError={''}
 								value={''}
-								id="confirmPassword"
 								type={revealPassword ? "text" : "password"}
-								name="Confirm Password"
+								name="confirmPassword"
+								id="confirmPassword"
 								required
 						/>
 						<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[51px] mr-2"
