@@ -8,12 +8,11 @@
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
 
 	let revealPassword = false;
-	let showPopUp = true;
-
 	const toggleRevealPassword = () => {
 		revealPassword = !revealPassword
 	}
 
+	let showPopUp = true;
 	const togglePopUp = () => {
 		showPopUp = !showPopUp
 	}
@@ -22,7 +21,6 @@
 	const handleContinueLoad = async () => {
 		continueLoad = true;
 	}
-
 </script>
 
 <svelte:head>
@@ -30,7 +28,7 @@
 </svelte:head>
 
 {#if showPopUp}
-	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[325px] rounded-[10px]">
+	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[325px] rounded-[10px] backdrop-blur-md bg-[#bfc5d9]/60">
 		<div class="px-10">
 			<h1 class="text-center text-black font-bold text-3xl mt-5">WARNING</h1>
 			<br>

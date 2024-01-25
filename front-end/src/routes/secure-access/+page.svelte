@@ -3,7 +3,6 @@
 
 	import { handleTokenCheckSubmit } from './secure-access';
 
-	// TODO: make spinner
 	let secretKeyLoad = false;
 	const handleSecretKeyLoad = async () => {
 		secretKeyLoad = true;

@@ -26,7 +26,6 @@
 	<title>Foyer | Whale</title>
 </svelte:head>
 
-
 <div class="flex h-screen">
 
 	{#if showPopUp}
@@ -93,7 +92,6 @@
 					<p class="text-red-600 text-sm">TelegramID or Password is incorrect</p>
 				</div>
 
-
 				<div>
 					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Password"
 					>Password</label
@@ -111,7 +109,9 @@
                                 text-sm
                                 text-white
                                 placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
+                                outline-none
+                                focus:border-[#5a70ec]
+                                focus:ring-[#5a70ec]"
 							class:fieldError={''}
 							value={''}
 							id="password"
@@ -125,8 +125,6 @@
 					>
 				</div>
 
-
-				<!--				TODO: here should be logic and validation for the login-->
 				<button
 						on:click={handleSignInClick}
 						on:click={handleSignInLoad}
@@ -148,7 +146,6 @@
 							"
 				>
 					Sign In
-
 					{#if loadingSingInPage}
 						<div class="absolute ml-20" aria-label="Loading..." role="status">
 							<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
@@ -159,7 +156,6 @@
 					{/if}
 
 				</button>
-
 
 				<div class="mb-5">
 					<div class="flex items-center justify-center">

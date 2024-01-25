@@ -2,7 +2,6 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { handleAvatarClick } from './menu';
-	import {handleProfileContinue} from "../profile/profile";
 
 	let menuLoad = false;
 	const handleMenuLoad = async () => {
@@ -25,10 +24,7 @@
 					class="absolute inset-1/2 mx-auto mb-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-purple-900 p-4"
 					alt="Whale Avatar"
 			/>
-
 		</button>
-
-
 	</div>
 
 	{#if menuLoad}

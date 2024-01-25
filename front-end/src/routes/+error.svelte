@@ -8,8 +8,16 @@
         await goto('/', {});
     }
 
-    if ($page.status) {
+    let errorCode = '';
+    let errorMessage = '';
 
+    if ($page.status === 404) {
+        errorCode = '404'; // Convert to string
+        errorMessage = 'After exploring the deep ocean you didn\'t find wanted materials.\n' +
+            '                It might have been removed, had its name changed, or is temporarily unavailable.';
+    } else {
+        errorCode = ''
+        errorMessage = 'Something unexpected happened'
     }
 </script>
 
@@ -21,10 +29,9 @@
     <div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-fit rounded-[10px]">
         <div class="px-10">
             <br>
-            <p class="text-black text-center">{$page.status}</p>
+            <p class="text-black text-center">{errorCode}</p>
             <img class="mx-auto my-auto mb-7" id="mascot" src={sadWhaleImage} alt="Whale">
-            <p class="text-black text-center">After exploring the deep ocean you didn't find wanted materials.
-                It might have been removed, had its name changed, or is temporarily unavailable.
+            <p class="text-black text-center">{errorMessage}
             </p>
             <div class="flex justify-center">
                 <button class="mt-10 mb-10 bg-[#43444A]
