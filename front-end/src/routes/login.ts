@@ -1,8 +1,6 @@
 import { goto } from "$app/navigation";
 import {writable} from "svelte/store";
 
-const backEndUrl = 'http://localhost:8000/api'
-
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});
 }
@@ -21,7 +19,7 @@ export const signInUserRequest = async (event: Event) => {
     const telegramID = data.get('telegramID')
     const password = data.get('password')
 
-    const response = await fetch(backEndUrl + "/auth/sign-in", {
+    const response = await fetch(import.meta.env.APP_MY_BACKEND + "/auth/sign-in", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

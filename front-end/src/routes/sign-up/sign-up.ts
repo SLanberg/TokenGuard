@@ -2,8 +2,6 @@ import paramsStore from "../profile-summary/profile-summary";
 import { goto } from '$app/navigation';
 import {writable} from "svelte/store";
 
-const backEndUrl = 'http://localhost:8000/api'
-
 export const fieldsValidationSignUp = writable({
     telegramId: { error: false, message: "" },
     password: { error: false, message: "" },
@@ -29,7 +27,7 @@ export const userRegistrationRequest = async (event: Event) => {
     // Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
     // 1. API call to the Telegram API
     // 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
-    const response = await fetch(backEndUrl + "/auth/sign-up", {
+    const response = await fetch(import.meta.env.APP_MY_BACKEND + "/auth/sign-up", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

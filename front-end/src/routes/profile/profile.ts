@@ -1,9 +1,7 @@
 import { goto } from "$app/navigation";
 
-const backEndUrl = 'http://localhost:8000/api'
-
 export const logOutRequest = async (): Promise<void> => {
-    const response = await fetch(backEndUrl + "/auth/logout", {
+    const response = await fetch(import.meta.env.APP_MY_BACKEND + "/auth/logout", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
