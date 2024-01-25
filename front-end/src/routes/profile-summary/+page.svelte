@@ -108,7 +108,6 @@
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 						class:fieldError={''}
 						value={$paramsStore.password}
-						id="password"
 						type={revealPassword ? "text" : "password"}
 						name="password"
 						required

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import { handleTokenCheckSubmit } from './secure-access';
+	import { tokenSubmitRequest } from './secure-access';
 
 	let secretKeyLoad = false;
 	const handleSecretKeyLoad = async () => {
@@ -19,7 +19,7 @@
 				src={whaleImage}
 				alt="Whale"
 		/>
-		<form on:submit|preventDefault={handleTokenCheckSubmit}>
+		<form on:submit|preventDefault={tokenSubmitRequest}>
 			<div class="m-auto w-fit">
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="Access Token"
 				>Access Token</label
@@ -40,7 +40,6 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
-						id="password"
 						type="password"
 						name="password"
 						required
