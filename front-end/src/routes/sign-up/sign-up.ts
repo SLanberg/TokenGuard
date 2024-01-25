@@ -13,6 +13,10 @@ export const userRegistrationRequest = async (event: Event) => {
     // write error check here to see if the passwords match
     // const confirmPassword = data.get('confirm password')
 
+
+    // Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
+    // 1. API call to the Telegram API
+    // 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
     const response = await fetch(backEndUrl + "/auth/sign-up", {
             method: 'POST',
             headers: {
