@@ -9,9 +9,7 @@ export const signUp = async (request: Request, response: Response) => {
   const telegramID = request.body.telegramID;
   const password = request.body.password;
 
-  console.log(telegramID)
-
-  if (telegramID === null || typeof telegramID !== 'number' || password === null){
+  if (telegramID === null || !parseInt(telegramID) || password === null) {
     return response.status(400).json({response:"You need correctly to fill all fields!"});
   }
 
@@ -108,10 +106,7 @@ export const signIn = async (req: Request, res: Response) => {
   const telegramID = req.body.telegramID;
   const password = req.body.password;
 
-  if (telegramID === undefined || typeof telegramID !== 'number' || password === undefined){
-    console.log(telegramID, password)
-
-
+  if (telegramID === null || !parseInt(telegramID) || password === null) {
     return res.status(400).json({ response:"You need correctly to fill all fields" });
   }
   

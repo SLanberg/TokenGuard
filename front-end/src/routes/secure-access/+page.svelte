@@ -41,7 +41,7 @@
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
 						type="password"
-						name="password"
+						name="accessToken"
 						id="accessToken"
 						required
 				/>
