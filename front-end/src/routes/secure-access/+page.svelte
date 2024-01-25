@@ -61,11 +61,9 @@
 							flex
 							justify-center
 							align-middle"
-						on:click={handleTokenCheckSubmit}
 						on:click={handleSecretKeyLoad}
 				>
 					Submit
-
 					{#if secretKeyLoad}
 						<div class="absolute ml-20" aria-label="Loading..." role="status">
 							<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
