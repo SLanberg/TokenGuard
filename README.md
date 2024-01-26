@@ -3,6 +3,7 @@
 ## Task received at 22 Monday at 18:05. Request to extend period of the work for 2 working days till the Wednesday 11 AM.
 
 ## Initial installation
+(Or just wait for the Docker version because you deserve it)
 
 1) Create 2 .env files in front-end and back-end folder
 2) In back-end:
