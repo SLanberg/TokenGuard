@@ -1,6 +1,6 @@
 # TokenGuard
 
-## Task received at 22 Monday at 18:05. Request to extend period of the work for 2 working days till the Tuesday.
+## Task received at 22 Monday at 18:05. Request to extend period of the work for 2 working days till the Wednesday 11 AM.
 
 ## Initial installation
 
