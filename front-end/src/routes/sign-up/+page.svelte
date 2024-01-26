@@ -2,7 +2,7 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from "$lib/images/Info-triangle.png";
-	import {fieldsValidationSignUp, userRegistrationRequest} from "./sign-up";
+	import { fieldsValidationSignUp, userRegistrationRequest } from "./sign-up";
 
 	export let form;
 

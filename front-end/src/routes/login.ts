@@ -19,7 +19,7 @@ export const signInUserRequest = async (event: Event) => {
     const telegramID = data.get('telegramID')
     const password = data.get('password')
 
-    const response = await fetch(import.meta.env.APP_MY_BACKEND + "/auth/sign-in", {
+    const response = await fetch(import.meta.env.VITE_APP_MY_BACKEND + "/auth/sign-in", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -32,6 +32,7 @@ export const signInUserRequest = async (event: Event) => {
 
     const json = await response.json();
     if (json.type === "success") {
+        document.cookie = `JWT=${json.jwt}; path=/;`;
         // If success accept cookie -> redirect
         return await goto('/menu',{});
     } else {

@@ -4,6 +4,6 @@ import { getSecretKey } from '../controllers/key.js';
 
 const router: Router = express.Router();
 
-router.get("/", getSecretKey);
+router.post("/", getSecretKey);
 
 export default router;

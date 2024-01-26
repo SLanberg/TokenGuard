@@ -40,7 +40,7 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
-						type="password"
+						type="text"
 						name="accessToken"
 						id="accessToken"
 						required

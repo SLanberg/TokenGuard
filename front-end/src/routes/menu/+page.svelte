@@ -21,7 +21,7 @@
 				on:click={handleMenuLoad}>
 			<img
 					src={whaleImage}
-					class="absolute inset-1/2 mx-auto mb-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-purple-900 p-4"
+					class="absolute inset-1/2 mx-auto mb-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-blue-950"
 					alt="Whale Avatar"
 			/>
 		</button>

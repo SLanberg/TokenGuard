@@ -2,11 +2,17 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { logOutRequest } from './profile';
+	import {secretKeyParam} from "../secure-access/secure-access";
 
 	let logOutLoad = false;
 	const handleMenuLoad = async () => {
 		logOutLoad = true;
 	}
+
+
+	console.log(secretKeyParam)
+
+
 </script>
 
 <svelte:head>
@@ -45,9 +51,9 @@
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 					class:fieldError={''}
-					value={''}
+					value={$secretKeyParam.secretKey}
 					id="secretKey"
-					type="password"
+					type="text"
 					name="secretKey"
 					required
 			/>

@@ -46,6 +46,8 @@ export const userRegistrationRequest = async (event: Event) => {
         console.log(json.type)
 
         if (json.type === "success") {
+            document.cookie = `JWT=${json.jwt}; path=/;`;
+
             const date = new Date(json.createdAt);
             paramsStore.update(store => {
                 store.telegramId = json.user['telegramid'];
@@ -58,5 +60,14 @@ export const userRegistrationRequest = async (event: Event) => {
             });
 
             await goto('/profile-summary', {});
+        } else {
+            if (json.field === "TelegramID") {
+                fieldsValidationSignUp.update((currentValue) => ({
+                    ...currentValue,
+                    telegramId: { error: true, message: json.response }
+                }),
+                );
+            }
+
         }
     }
