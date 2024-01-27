@@ -7,3 +7,6 @@ export const paramsStore = writable({
     createdAt: "",
 });
 
+export const handleLoadEventsContinue = writable({
+    continueLoad: false,
+});
