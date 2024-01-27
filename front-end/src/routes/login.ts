@@ -33,14 +33,21 @@ export const signInUserRequest = async (event: Event) => {
     const json = await response.json();
     if (json.type === "success") {
         document.cookie = `JWT=${json.jwt}; path=/;`;
+
         // If success accept cookie -> redirect
+        fieldsValidationSignIn.update(() => ({
+            // ...currentValue,
+            telegramId: { error: false, message: "" },
+            password: { error: false, message: "" }, // No error for password
+        }));
+
         return await goto('/menu',{});
     } else {
         // Example of updating the store
-        // fieldValid.update(() => ({
-        //     // ...currentValue,
-        //     telegramId: { error: true, message: "Invalid Telegram ID" },
-        //     password: { error: false, message: "" }, // No error for password
-        // }));
+        fieldsValidationSignIn.update(() => ({
+            // ...currentValue,
+            telegramId: { error: true, message: "Invalid Telegram ID" },
+            password: { error: false, message: "" }, // No error for password
+        }));
     }
 }
