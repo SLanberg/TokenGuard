@@ -1,11 +1,11 @@
 // import { goto } from "$app/navigation";
-import {goto} from "$app/navigation";
+import { goto } from "$app/navigation";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
-import {writable} from "svelte/store";
-
-
+import { writable } from "svelte/store";
+import {handleLoadEventsSignUp} from "../sign-up/sign-upState";
+import {handleLoadEventsSecureAccess} from "./secure-accessState";
 
 export const secretKeyParam = writable({
     secretKey: '',
@@ -20,6 +20,10 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
     const formEl = event.target as HTMLFormElement;
     const data = new FormData(formEl);
     const token = data.get('accessToken')
+
+    handleLoadEventsSecureAccess.update(() => ({
+        secretKeyLoad: true
+    }));
 
     const response = await fetch(backend + "/secretkey", {
         method: 'POST',
