@@ -146,7 +146,7 @@ export const signIn = async (req: Request, res: Response) => {
   }
 }
 
-export const logout = (req: Request, res: Response) => {
+export const logOut = (req: Request, res: Response) => {
   res.clearCookie("JWT",{
     secure: true,
     sameSite: "none"
