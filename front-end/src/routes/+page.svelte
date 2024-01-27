@@ -77,8 +77,6 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-							class:fieldError={''}
-							value={''}
 							id="telegramID"
 							type="text"
 							name="telegramID"
@@ -114,8 +112,6 @@
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
 							id="password"
-							class:fieldError={''}
-							value={''}
 							type={revealPassword ? "text" : "password"}
 							name="password"
 							required

@@ -17,7 +17,6 @@ PGPORT=5432
 In front-end:
 4) VITE_APP_MY_BACKEND: "http://localhost:8000/api"
 5) In the front-end folder run "npm run dev"
-
 6) In the db create tables with the commands from the init.sql
 
 ## Technology description

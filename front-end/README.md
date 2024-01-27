@@ -2,7 +2,9 @@
 
 ## Description
 
-Front-End Web Application using the Svelte framework that implements user registration, token generation, and login functionality. The application include a Sign-Up form, a secure token display mechanism, and a profile page with login authentication.
+Front-End Web Application using the Svelte framework that implements user registration, token generation, 
+and login functionality. The application include a Sign-Up form, a secure token display mechanism, 
+and a profile page with login authentication.
 
 ## Features
 

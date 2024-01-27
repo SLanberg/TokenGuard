@@ -40,21 +40,8 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 
         return await goto('/profile',{});
     } else {
-
-
-
         await logOutRequest()
 
         return;
     }
-
-    // await fetch(import.meta.env.APP_MY_BACKEND + "/auth/logout", {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    // })
-
-    // If the token is incorrect, log out user, send him to the home page and set state for the pop up true at the home
-    // page
 }
