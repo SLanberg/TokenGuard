@@ -1,15 +1,9 @@
 import { goto } from "$app/navigation";
-import {writable} from "svelte/store";
+import { fieldsValidationSignIn, handleLoadEventsSignIn } from "./loginState";
 
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});
 }
-
-export const fieldsValidationSignIn = writable({
-    telegramId: { error: false, message: "" },
-    password: { error: false, message: "" },
-});
-
 
 export const signInUserRequest = async (event: Event) => {
     // Send API request to the BackEnd
@@ -18,6 +12,10 @@ export const signInUserRequest = async (event: Event) => {
 
     const telegramID = data.get('telegramID')
     const password = data.get('password')
+
+    handleLoadEventsSignIn.update(() => ({
+        loadingSingInPage: true
+    }));
 
     const response = await fetch(import.meta.env.VITE_APP_MY_BACKEND + "/auth/sign-in", {
         method: 'POST',
@@ -41,13 +39,23 @@ export const signInUserRequest = async (event: Event) => {
             password: { error: false, message: "" }, // No error for password
         }));
 
+        handleLoadEventsSignIn.update(() => ({
+            loadingSingInPage: false
+        }));
+
         return await goto('/menu',{});
     } else {
         // Example of updating the store
         fieldsValidationSignIn.update(() => ({
             // ...currentValue,
-            telegramId: { error: true, message: "Invalid Telegram ID" },
-            password: { error: false, message: "" }, // No error for password
+            telegramId: { error: true,
+                message: "Invalid Telegram ID" },
+            password: { error: false,
+                message: "" }, // No error for password
+        }));
+
+        handleLoadEventsSignIn.update(() => ({
+            loadingSingInPage: false
         }));
     }
 }

@@ -2,14 +2,10 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from "$lib/images/Info-triangle.png";
-	import { fieldsValidationSignUp, userRegistrationRequest } from "./sign-up";
+	import { userRegistrationRequest } from "./sign-up";
+	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "./sign-upState";
 
 	export let form;
-
-	let signUpLoad = false;
-	const handleSignUpLoad = async () => {
-		signUpLoad = true;
-	}
 
 	let revealPassword = false
 	const toggleRevealPassword = () => {
@@ -135,7 +131,6 @@
 					{/if}
 
 					<button
-							on:click={ handleSignUpLoad }
 							type="submit"
 							class="mb-10
 								w-[300px]
@@ -154,7 +149,7 @@
 								align-middle"
 					>
 						Sign Up
-						{#if signUpLoad}
+						{#if $handleLoadEventsSignUp.loadingSingUpPage}
 							<div class="absolute ml-24" aria-label="Loading..." role="status">
 								<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
 									<path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12">

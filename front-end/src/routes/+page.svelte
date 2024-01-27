@@ -1,19 +1,15 @@
 <script lang="ts">
-	import {fieldsValidationSignIn, handleSignUpClick, signInUserRequest} from './login'
+	import {handleSignUpClick, signInUserRequest} from './login'
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png'
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png'
+	import { fieldsValidationSignIn, handleLoadEventsSignIn } from "./loginState";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
 		loadingSingUpPage = true;
-	}
-
-	let loadingSingInPage = false;
-	const handleSignInLoad = async () => {
-		loadingSingInPage = true;
 	}
 
 	let showPopUp = false;
@@ -64,8 +60,7 @@
 		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
 		<div class="m-auto w-fit">
 
-			<form method="POST" on:submit|preventDefault={signInUserRequest}
-			on:submit|preventDefault={handleSignInLoad}>
+			<form method="POST" on:submit|preventDefault={signInUserRequest}>
 				<div>
 					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
 					>TelegramID</label
@@ -152,7 +147,7 @@
 							"
 				>
 					Sign In
-					{#if loadingSingInPage}
+					{#if $handleLoadEventsSignIn.loadingSingInPage}
 						<div class="absolute ml-20" aria-label="Loading..." role="status">
 							<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
 								<path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12">
