@@ -34,9 +34,9 @@ export const handleContinue = async (): Promise<void> => {
 
     await goto('/menu', {});
 
-    // handleLoadEventsContinue.update(() => ({
-    //     continueLoad: false,
-    // }));
+    handleLoadEventsContinue.update(() => ({
+        continueLoad: false,
+    }));
 }
 
 
