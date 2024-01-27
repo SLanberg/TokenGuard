@@ -8,7 +8,7 @@ export const getSecretKey = async (req: Request, res: Response) => {
 
   console.log('hi ' + jwtCookies)
 
-  if (!jwtCookies) return res.status(401).json({type:"error",response:"Not authorized"});
+  if (!jwtCookies) return res.status(401).json({ type:"error",response:"Not authorized" });
 
   let userData: any;
 

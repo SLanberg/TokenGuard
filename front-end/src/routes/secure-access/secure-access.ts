@@ -4,6 +4,7 @@ const backend = import.meta.env.VITE_APP_MY_BACKEND
 
 import {handleLoadEventsSecureAccess, secretKeyParam} from "./secure-accessState";
 import {logOutRequest} from "../profile/profile";
+import {popUpStateLogin} from "../loginState";
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
     const formEl = event.target as HTMLFormElement;
@@ -40,6 +41,10 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 
         return await goto('/profile',{});
     } else {
+        popUpStateLogin.update(() => ({
+            showPopUp: true,
+        }));
+
         await logOutRequest()
 
         return;

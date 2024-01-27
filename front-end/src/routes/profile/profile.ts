@@ -1,5 +1,4 @@
 import { goto } from "$app/navigation";
-import { popUpStateLogin } from "../loginState";
 import { handleLoadEventsLogOut } from "./profileState";
 
 export const logOutRequest = async (): Promise<void> => {
@@ -7,10 +6,6 @@ export const logOutRequest = async (): Promise<void> => {
 
     handleLoadEventsLogOut.update(() => ({
         logOutLoad: true,
-    }));
-
-    popUpStateLogin.update(() => ({
-        showPopUp: true,
     }));
 
     await goto('/', {});
