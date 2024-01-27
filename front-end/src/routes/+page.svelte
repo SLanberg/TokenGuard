@@ -1,14 +1,12 @@
 <script lang="ts">
-	import {dismissPopUp, handleSignUpClick, signInUserRequest} from './login'
+	import { dismissPopUp, handleSignUpClick, signInUserRequest } from './login'
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png'
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png'
 
-	import { fieldsValidationSignIn,
-		handleLoadEventsSignIn,
-		popUpStateLogin } from "./loginState";
+	import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "./loginState";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
