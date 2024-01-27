@@ -2,17 +2,12 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { logOutRequest } from './profile';
-	import {secretKeyParam} from "../secure-access/secure-access";
+	import { secretKeyParam } from "../secure-access/secure-accessState";
 
 	let logOutLoad = false;
 	const handleMenuLoad = async () => {
 		logOutLoad = true;
 	}
-
-
-	console.log(secretKeyParam)
-
-
 </script>
 
 <svelte:head>

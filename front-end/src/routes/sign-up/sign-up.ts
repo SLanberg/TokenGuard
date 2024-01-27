@@ -1,6 +1,6 @@
-import paramsStore from "../profile-summary/profile-summary";
 import { goto } from '$app/navigation';
 import {fieldsValidationSignUp, handleLoadEventsSignUp} from "./sign-upState";
+import {paramsStore} from "../profile-summary/profile-summaryState";
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
 
@@ -25,7 +25,6 @@ export const userRegistrationRequest = async (event: Event) => {
         confirmPassword: { error: false, message: "" }
     }));
 
-
     handleLoadEventsSignUp.update(() => ({
         loadingSingUpPage: true
     }));
@@ -49,7 +48,6 @@ export const userRegistrationRequest = async (event: Event) => {
     handleLoadEventsSignUp.update(() => ({
         loadingSingUpPage: false
     }));
-
         if (json.type === "success") {
             document.cookie = `JWT=${json.jwt}; path=/;`;
 
@@ -73,6 +71,5 @@ export const userRegistrationRequest = async (event: Event) => {
                 }),
                 );
             }
-
         }
     }

@@ -1,20 +1,15 @@
 <script lang="ts">
-	import {handleSignUpClick, signInUserRequest} from './login'
+	import {dismissPopUp, handleSignUpClick, signInUserRequest} from './login'
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png'
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png'
-	import { fieldsValidationSignIn, handleLoadEventsSignIn } from "./loginState";
+	import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "./loginState";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
 		loadingSingUpPage = true;
-	}
-
-	let showPopUp = false;
-	const togglePopUp = () => {
-		showPopUp = !showPopUp
 	}
 
 	let revealPassword = false
@@ -28,7 +23,7 @@
 </svelte:head>
 
 <div class="flex h-screen">
-	{#if showPopUp}
+	{#if $popUpStateLogin.showPopUp}
 	    <div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[345px] rounded-[10px]">
 	        <div class="px-10">
 	            <br>
@@ -37,7 +32,7 @@
 	            <p class="text-black text-center">
 	                You can login and try again or contact our tech support by the number <br /> +372 518 9349</p>
 	            <div class="flex justify-center">
-	                <button on:click={togglePopUp}
+	                <button on:click={dismissPopUp}
 							class="bg-[#43444A]
 	                            transition
 	                            ease-in-out
@@ -157,7 +152,6 @@
 					{/if}
 				</button>
 			</form>
-
 
 			<div class="mb-5">
 				<div class="flex items-center justify-center">

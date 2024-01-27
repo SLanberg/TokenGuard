@@ -3,9 +3,9 @@
 	import copyIconWhite from '$lib/images/copyWhite.svg';
 	import copyIconBlack from '$lib/images/copyBlack.svg';
 	import eye_white from '$lib/images/eye_white.png';
-	import paramsStore from "./profile-summary";
 
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
+	import { paramsStore } from "./profile-summaryState";
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {
@@ -28,7 +28,7 @@
 </svelte:head>
 
 {#if showPopUp}
-	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[325px] rounded-[10px] backdrop-blur-md bg-[#bfc5d9]/60">
+	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[325px] rounded-[10px] bg-[#bfc5d9]">
 		<div class="px-10">
 			<h1 class="text-center text-black font-bold text-3xl mt-5">WARNING</h1>
 			<br>

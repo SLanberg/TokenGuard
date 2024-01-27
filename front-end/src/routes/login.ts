@@ -1,8 +1,14 @@
 import { goto } from "$app/navigation";
-import { fieldsValidationSignIn, handleLoadEventsSignIn } from "./loginState";
+import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "./loginState";
 
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});
+}
+
+export const dismissPopUp = async () => {
+    popUpStateLogin.update(() => ({
+        showPopUp: false,
+    }));
 }
 
 export const signInUserRequest = async (event: Event) => {
@@ -47,7 +53,6 @@ export const signInUserRequest = async (event: Event) => {
     } else {
         // Example of updating the store
         fieldsValidationSignIn.update(() => ({
-            // ...currentValue,
             telegramId: { error: true,
                 message: "Invalid Telegram ID" },
             password: { error: false,

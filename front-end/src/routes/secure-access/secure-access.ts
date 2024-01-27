@@ -1,22 +1,11 @@
-// import { goto } from "$app/navigation";
 import { goto } from "$app/navigation";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
-import { writable } from "svelte/store";
-import {handleLoadEventsSignUp} from "../sign-up/sign-upState";
-import {handleLoadEventsSecureAccess} from "./secure-accessState";
-
-export const secretKeyParam = writable({
-    secretKey: '',
-});
-
+import {handleLoadEventsSecureAccess, secretKeyParam} from "./secure-accessState";
+import {logOutRequest} from "../profile/profile";
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
-    // Send request to the server
-    // Check there if the token is correct
-    // If it is good! Send to the /profile and add to the state response from the server with the token
-    // await goto('/profile', {});
     const formEl = event.target as HTMLFormElement;
     const data = new FormData(formEl);
     const token = data.get('accessToken')
@@ -38,6 +27,10 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 
     const json = await response.json();
 
+    handleLoadEventsSecureAccess.update(() => ({
+        secretKeyLoad: false
+    }));
+
     if (json.secretkey) {
         console.log('I going here')
 
@@ -45,8 +38,14 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
             secretKey: json.secretkey,
         }));
 
-
         return await goto('/profile',{});
+    } else {
+
+
+
+        await logOutRequest()
+
+        return;
     }
 
     // await fetch(import.meta.env.APP_MY_BACKEND + "/auth/logout", {
