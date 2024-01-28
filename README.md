@@ -18,7 +18,8 @@ PGPASSWORD="123"
 PGDATABASE=tokenguard
 PGPORT=5432`
 
-3) In the back-end folder run "npx tsx src/index.ts"
+In Back-End:
+3) In the Back-End folder run "npx tsx src/index.ts"
 
 In Front-End:
 1) VITE_APP_MY_BACKEND: "http://localhost:8000/api"
