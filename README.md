@@ -18,12 +18,12 @@ PGPASSWORD="123"
 PGDATABASE=tokenguard
 PGPORT=5432`
 
-3) In the Back-End folder run "npx tsx src/index.ts"
+3) In the Back-End folder run `npx tsx src/index.ts`
 
 In Front-End .env file write in:
-1) VITE_APP_MY_BACKEND: "http://localhost:8000/api"
+1) VITE_APP_MY_BACKEND: `http://localhost:8000/api`
    
-2) In the Front-End folder run "npm run dev"
+2) In the Front-End folder run `npm run dev`
 
 3) In the DB create tables with the commands from the init.sql or import it
 
