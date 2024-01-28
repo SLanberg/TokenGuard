@@ -4,6 +4,8 @@
 	import { logOutRequest } from './profile';
 	import { secretKeyParam } from "../../state/secure-accessState";
 	import { handleLoadEventsLogOut } from "../../state/profileState";
+
+
 </script>
 
 <svelte:head>

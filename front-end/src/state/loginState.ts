@@ -1,4 +1,4 @@
-import {writable} from "svelte/store";
+import { writable } from "svelte/store";
 
 export const fieldsValidationSignIn = writable({
     telegramId: { error: false, message: "" },
@@ -8,8 +8,6 @@ export const fieldsValidationSignIn = writable({
 export const handleLoadEventsSignIn = writable({
     loadingSingInPage: false,
 });
-
-
 
 export const popUpStateLogin = writable({
     showPopUp: false,

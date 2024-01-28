@@ -6,6 +6,8 @@
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png'
 	import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "../state/loginState";
+	import { authenticatedState } from "../state/authenticatedState";
+	import { goto } from "$app/navigation";
 
 
 	let loadingSingUpPage = false;
@@ -16,6 +18,12 @@
 	let revealPassword = false
 	const toggleRevealPassword = () => {
 		revealPassword = !revealPassword
+	}
+
+	let isAuthenticated = false;
+	authenticatedState.subscribe(a => isAuthenticated = a)
+	if (isAuthenticated) {
+		goto('/secure-access', {});
 	}
 </script>
 

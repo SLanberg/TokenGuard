@@ -4,15 +4,15 @@ import { paramsStore } from "../../state/profile-summaryState";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
-
 export const userRegistrationRequest = async (event: Event) => {
     const formEl = event.target as HTMLFormElement;
     const data = new FormData(formEl);
 
     const telegramID = data.get('telegramID')
     const password = data.get('password')
+    const confirmPassword = data.get('confirmPassword')
 
-    if (data.get('password') !== data.get('confirmPassword')) {
+    if (password !== confirmPassword) {
         fieldsValidationSignUp.update((currentValue) => ({
             ...currentValue,
             confirmPassword: { error: true, message: "Passwords don't match" }
@@ -21,9 +21,10 @@ export const userRegistrationRequest = async (event: Event) => {
         return;
     }
 
-    fieldsValidationSignUp.update((currentValue) => ({
-        ...currentValue,
-        confirmPassword: { error: false, message: "" }
+    fieldsValidationSignUp.update(() => ({
+        telegramId: { error: false, message: "" },
+        password: { error: false, message: "" },
+        confirmPassword: { error: false, message: "" },
     }));
 
     handleLoadEventsSignUp.update(() => ({
@@ -31,7 +32,7 @@ export const userRegistrationRequest = async (event: Event) => {
     }));
 
     // Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
-    // 1. API call to the Telegram API
+    // 1. API call to the Telegram API (Probability it is not presented)
     // 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
     const response = await fetch(backend + "/auth/sign-up", {
             method: 'POST',
@@ -45,6 +46,7 @@ export const userRegistrationRequest = async (event: Event) => {
         });
 
         const json = await response.json();
+
 
     handleLoadEventsSignUp.update(() => ({
         loadingSingUpPage: false

@@ -5,7 +5,7 @@
 	import eye_white from '$lib/images/eye_white.png';
 
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
-	import {handleLoadEventsContinue, paramsStore} from "../../state/profile-summaryState";
+	import { handleLoadEventsContinue, paramsStore } from "../../state/profile-summaryState";
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {
