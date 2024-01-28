@@ -4,7 +4,7 @@
 	import attention_sign from "$lib/images/Info-triangle.png";
 	import { userRegistrationRequest } from "./sign-up";
 	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
-	import {authenticatedState} from "../../state/authenticatedState";
+	import { authenticatedState } from "../../state/authenticatedState";
 	import { goto } from "$app/navigation";
 
 	let revealPassword = false
@@ -12,8 +12,8 @@
 		revealPassword = !revealPassword
 	}
 
-	if (authenticatedState) {
-		goto('/secure-access', {});
+	if ($authenticatedState === false) {
+		goto('/', {});
 	}
 </script>
 

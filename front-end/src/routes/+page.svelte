@@ -7,8 +7,8 @@
 	import attention_sign from '$lib/images/Info-triangle.png'
 	import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "../state/loginState";
 	import { authenticatedState } from "../state/authenticatedState";
-	import { goto } from "$app/navigation";
-
+	import {redirect} from "@sveltejs/kit";
+	import {goto} from "$app/navigation";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
@@ -20,9 +20,7 @@
 		revealPassword = !revealPassword
 	}
 
-	let isAuthenticated = false;
-	authenticatedState.subscribe(a => isAuthenticated = a)
-	if (isAuthenticated) {
+	if ($authenticatedState) {
 		goto('/secure-access', {});
 	}
 </script>

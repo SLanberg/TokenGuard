@@ -6,6 +6,8 @@
 
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
 	import { handleLoadEventsContinue, paramsStore } from "../../state/profile-summaryState";
+	import {authenticatedState} from "../../state/authenticatedState";
+	import {goto} from "$app/navigation";
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {
@@ -15,6 +17,10 @@
 	let showPopUp = true;
 	const togglePopUp = () => {
 		showPopUp = !showPopUp
+	}
+
+	if ($authenticatedState === false) {
+		goto('/', {});
 	}
 </script>
 

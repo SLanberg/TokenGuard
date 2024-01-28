@@ -3,6 +3,12 @@
 
 	import { tokenSubmitRequest } from './secure-access';
 	import { handleLoadEventsSecureAccess } from "../../state/secure-accessState";
+	import {authenticatedState} from "../../state/authenticatedState";
+	import {goto} from "$app/navigation";
+
+	if ($authenticatedState === false) {
+		goto('/', {});
+	}
 </script>
 
 <div class="flex h-screen">
