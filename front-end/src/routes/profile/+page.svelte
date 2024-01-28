@@ -6,7 +6,7 @@
 	import { handleLoadEventsLogOut } from "../../state/profileState";
 	import { authenticatedState } from "../../state/authenticatedState";
 	import { goto } from "$app/navigation";
-	import {onMount} from "svelte";
+	import { onMount } from "svelte";
 
 	onMount(() => {
 		if ($authenticatedState === false) {
