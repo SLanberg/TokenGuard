@@ -8,6 +8,7 @@
 	import { handleLoadEventsContinue, paramsStore } from "../../state/profile-summaryState";
 	import {authenticatedState} from "../../state/authenticatedState";
 	import {goto} from "$app/navigation";
+	import { onMount } from 'svelte';
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {
@@ -19,9 +20,12 @@
 		showPopUp = !showPopUp
 	}
 
-	if ($authenticatedState === false) {
-		goto('/', {});
-	}
+	onMount(() => {
+		// This code will run only on the client side
+		if ($authenticatedState === false) {
+			goto('/', {});
+		}
+	});
 </script>
 
 <svelte:head>

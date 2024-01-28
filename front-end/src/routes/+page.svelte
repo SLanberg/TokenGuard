@@ -7,7 +7,7 @@
 	import attention_sign from '$lib/images/Info-triangle.png'
 	import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "../state/loginState";
 	import { authenticatedState } from "../state/authenticatedState";
-	import {goto} from "$app/navigation";
+	import { goto } from "$app/navigation";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
@@ -81,8 +81,8 @@
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
 							id="telegramID"
-							type="text"
 							name="telegramID"
+							type="text"
 							required
 					/>
 				</div>

@@ -3,6 +3,16 @@
 
 	import { handleAvatarClick } from './menu';
 	import { handleLoadEventsProfilePage } from "../../state/menuState";
+	import {onMount} from "svelte";
+	import {authenticatedState} from "../../state/authenticatedState";
+	import {goto} from "$app/navigation";
+
+	onMount(() => {
+		// This code will run only on the client side
+		if ($authenticatedState === false) {
+			goto('/', {});
+		}
+	});
 </script>
 
 <svelte:head>

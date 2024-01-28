@@ -5,10 +5,14 @@
 	import { handleLoadEventsSecureAccess } from "../../state/secure-accessState";
 	import {authenticatedState} from "../../state/authenticatedState";
 	import {goto} from "$app/navigation";
+	import {onMount} from "svelte";
 
-	if ($authenticatedState === false) {
-		goto('/', {});
-	}
+	onMount(() => {
+		// This code will run only on the client side
+		if ($authenticatedState === false) {
+			goto('/', {});
+		}
+	});
 </script>
 
 <div class="flex h-screen">

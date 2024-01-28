@@ -6,10 +6,13 @@
 	import { handleLoadEventsLogOut } from "../../state/profileState";
 	import { authenticatedState } from "../../state/authenticatedState";
 	import { goto } from "$app/navigation";
+	import {onMount} from "svelte";
 
-	if ($authenticatedState === false) {
-		goto('/', {});
-	}
+	onMount(() => {
+		if ($authenticatedState === false) {
+			goto('/', {});
+		}
+	});
 </script>
 
 <svelte:head>

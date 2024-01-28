@@ -6,15 +6,19 @@
 	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
 	import { authenticatedState } from "../../state/authenticatedState";
 	import { goto } from "$app/navigation";
+	import {onMount} from "svelte";
 
 	let revealPassword = false
 	const toggleRevealPassword = () => {
 		revealPassword = !revealPassword
 	}
 
-	if ($authenticatedState) {
-		goto('/secure-access', {});
-	}
+	onMount(() => {
+		// This code will run only on the client side
+		if ($authenticatedState) {
+			goto('/secure-access', {});
+		}
+	});
 </script>
 
 <svelte:head>
