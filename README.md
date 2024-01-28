@@ -10,7 +10,7 @@
 
 # Installation with .env files
 1) Create 2 .env files in front-end and back-end folder
-2)In Back-End write in:
+2) In Back-End write in:
 `PGUSER=postgres
 PGHOST=127.0.0.1
 PGPASSWORD="123"
