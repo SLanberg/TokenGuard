@@ -7,7 +7,6 @@
 	import attention_sign from '$lib/images/Info-triangle.png'
 	import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "../state/loginState";
 	import { authenticatedState } from "../state/authenticatedState";
-	import {redirect} from "@sveltejs/kit";
 	import {goto} from "$app/navigation";
 
 	let loadingSingUpPage = false;
