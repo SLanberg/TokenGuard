@@ -2,9 +2,9 @@ import { goto } from "$app/navigation";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
-import {handleLoadEventsSecureAccess, secretKeyParam} from "./secure-accessState";
-import {logOutRequest} from "../profile/profile";
-import {popUpStateLogin} from "../loginState";
+import { logOutRequest } from "../profile/profile";
+import { handleLoadEventsSecureAccess, secretKeyParam } from "../../state/secure-accessState";
+import {popUpStateLogin} from "../../state/loginState";
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
     const formEl = event.target as HTMLFormElement;

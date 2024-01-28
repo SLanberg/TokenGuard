@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
-import {fieldsValidationSignUp, handleLoadEventsSignUp} from "./sign-upState";
-import {paramsStore} from "../profile-summary/profile-summaryState";
+import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
+import { paramsStore } from "../../state/profile-summaryState";
+
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
 

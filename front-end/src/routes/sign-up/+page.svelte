@@ -3,9 +3,8 @@
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from "$lib/images/Info-triangle.png";
 	import { userRegistrationRequest } from "./sign-up";
-	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "./sign-upState";
+	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
 
-	export let form;
 
 	let revealPassword = false
 	const toggleRevealPassword = () => {
@@ -41,8 +40,6 @@
 									text-white
 									placeholder-gray-400
 									outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-								class:fieldError={''}
-								value={form?.telegramID ?? ''}
 								id="telegramID"
 								type="text"
 								name="telegramID"

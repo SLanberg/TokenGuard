@@ -1,5 +1,5 @@
 import { goto } from "$app/navigation";
-import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "./loginState";
+import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "../state/loginState";
 
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});
@@ -8,7 +8,9 @@ export const handleSignUpClick = async () => {
 export const dismissPopUp = async () => {
     popUpStateLogin.update(() => ({
         showPopUp: false,
-    }));
+    }
+    ),
+        );
 }
 
 export const signInUserRequest = async (event: Event) => {

@@ -2,7 +2,7 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { handleAvatarClick } from './menu';
-	import {handleLoadEventsProfilePage} from "./menuState";
+	import { handleLoadEventsProfilePage } from "../../state/menuState";
 </script>
 
 <svelte:head>

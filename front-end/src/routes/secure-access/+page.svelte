@@ -2,7 +2,7 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { tokenSubmitRequest } from './secure-access';
-	import { handleLoadEventsSecureAccess } from "./secure-accessState";
+	import { handleLoadEventsSecureAccess } from "../../state/secure-accessState";
 </script>
 
 <div class="flex h-screen">
