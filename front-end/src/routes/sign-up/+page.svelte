@@ -4,11 +4,16 @@
 	import attention_sign from "$lib/images/Info-triangle.png";
 	import { userRegistrationRequest } from "./sign-up";
 	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
-
+	import {authenticatedState} from "../../state/authenticatedState";
+	import { goto } from "$app/navigation";
 
 	let revealPassword = false
 	const toggleRevealPassword = () => {
 		revealPassword = !revealPassword
+	}
+
+	if (authenticatedState) {
+		goto('/secure-access', {});
 	}
 </script>
 

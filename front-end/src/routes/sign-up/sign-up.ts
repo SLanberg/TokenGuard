@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
 import { paramsStore } from "../../state/profile-summaryState";
+import { authenticatedState } from "../../state/authenticatedState";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
@@ -55,6 +56,9 @@ export const userRegistrationRequest = async (event: Event) => {
             document.cookie = `JWT=${json.jwt}; path=/;`;
 
             const date = new Date(json.createdAt);
+
+            authenticatedState.set(true)
+
             paramsStore.update(store => {
                 store.telegramId = json.user['telegramid'];
                 store.password = json.user['password'];

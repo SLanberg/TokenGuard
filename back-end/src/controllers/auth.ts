@@ -82,12 +82,14 @@ export const signUp = async (request: Request, response: Response) => {
 
     response.cookie("JWT", jwtCookie,{
         httpOnly: true,
+        SameSite: 'None',
     })
     .status(201).json(
       {
         type: "success",
         message: "User registered",
         jwt: jwtCookie,
+        SameSite: 'None',
         user: userData,
         token: tokenData.token,
         createdAt: tokenData.createdat
