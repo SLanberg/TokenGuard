@@ -5,6 +5,7 @@ const backend = import.meta.env.VITE_APP_MY_BACKEND
 import { logOutRequest } from "../profile/profile";
 import { handleLoadEventsSecureAccess, secretKeyParam } from "../../state/secure-accessState";
 import { popUpStateLogin } from "../../state/loginState";
+import { authenticatedState } from "../../state/authenticatedState";
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
     const formEl = event.target as HTMLFormElement;
@@ -28,19 +29,19 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 
     const json = await response.json();
 
-    handleLoadEventsSecureAccess.update(() => ({
-        secretKeyLoad: false
-    }));
-
     if (json.secretkey) {
-        console.log('I going here')
-
         secretKeyParam.update(() => ({
             secretKey: json.secretkey,
         }));
 
+        handleLoadEventsSecureAccess.update(() => ({
+            secretKeyLoad: false
+        }));
+
         return await goto('/profile',{});
     } else {
+        authenticatedState.set(false)
+
         popUpStateLogin.update(() => ({
             showPopUp: true,
         }));

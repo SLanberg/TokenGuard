@@ -12,8 +12,8 @@
 		revealPassword = !revealPassword
 	}
 
-	if ($authenticatedState === false) {
-		goto('/', {});
+	if ($authenticatedState) {
+		goto('/secure-access', {});
 	}
 </script>
 
