@@ -10,7 +10,7 @@ export const signUp = async (request: Request, response: Response) => {
   const password = request.body.password;
 
   if (telegramID === null || !parseInt(telegramID) || password === null) {
-    return response.status(400).json({response:"You need correctly to fill all fields!"});
+    return response.status(400).json({response:"Empty fields"});
   }
 
   const salt = bcrypt.genSaltSync(10);
@@ -121,11 +121,11 @@ export const signIn = async (req: Request, res: Response) => {
     const result = await db.query(query, [telegramID,]);
 
     if (result.rows.length == 0) {
-      return res.status(401).json({ type:"error", field:'TelegramID', response:"Incorrect TelegramID or Password!" });
+      return res.status(401).json({ type:"error", field:'TelegramID', response:"Incorrect TelegramID or Password" });
     }
 
     const checkPassword = bcrypt.compareSync(password, result.rows[0].password)
-    if (!checkPassword) return res.status(401).json({ type:"error", response:"Incorrect TelegramID or Password!" });
+    if (!checkPassword) return res.status(401).json({ type:"error", response:"Incorrect TelegramID or Password" });
     const userData = result.rows[0];
     
     const jwtCookies = jwt.sign({ id: userData.id }, "key");
@@ -136,7 +136,7 @@ export const signIn = async (req: Request, res: Response) => {
         {
           jwt: jwtCookies,
           type: "success",
-          message: 'User successfully authorized!',
+          message: 'User successfully authorized',
         }
     )
 
