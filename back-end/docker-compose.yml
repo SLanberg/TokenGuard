@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: TokenGuard
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "123"
+    ports:
+      - "5432:5432"
+    networks:
+      - TokenGuard-network
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./back-end
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      PGUSER: postgres
+      PGHOST: postgres
+      PGPASSWORD: "123"
+      PGDATABASE: TokenGuard
+      PGPORT: 5432
+    networks:
+      TokenGuard-network:
+        ipv4_address: 172.28.1.2
+
+  frontend:
+    build: ./front-end
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      TokenGuard-network:
+        ipv4_address: 172.28.1.3
+    environment:
+      VITE_APP_MY_BACKEND: http://localhost:8000/api
+
+

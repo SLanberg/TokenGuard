@@ -1,33 +1,42 @@
-import express, { Application, Request, Response, NextFunction } from "express";
-import config from "config"; 
-import cors from "cors";
-import cookieParser from "cookie-parser";
+require('dotenv').config()
 
-import authRoutes from "./routes/auth.js"
-import keyRoutes from "./routes/key.js"
+import express from 'express';
+import {DataSource} from "typeorm";
+import {routes} from "./routes";
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
-const app: Application = express();
+export const dataSource = new DataSource({
+    type: "postgres",
+    host: "localhost",
+    port: 5432,
+    username: "postgres",
+    password: "root",
+    database: "tokenguard",
+    entities: [
+        "src/entity/*.ts"
+    ],
+    logging: false,
+    synchronize: true
+})
 
-const port: number = config.get("server.port");
+dataSource.initialize()
+    .then(() => {
+        const app = express();
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+        app.use(express.json());
+        app.use(cookieParser())
+        app.use(cors({
+            origin: ['http://localhost:5173'],
+            credentials: true
+        }));
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+        routes(app);
 
-app.use(cookieParser());
-app.use(express.json());
-
-app.use("/api/auth", authRoutes);
-app.use("/api/secretkey", keyRoutes);
-
-app.listen(port,()=>{
-  console.log(`Server is listening at port :${port}`);
-});
-
+        app.listen(8000, () => {
+            console.log('Listening to port 8000')
+        });
+    })
+    .catch((err: Error) => {
+        console.error('Error during Data Source', err)
+    });

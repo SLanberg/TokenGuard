@@ -24,11 +24,12 @@ export const signInUserRequest = async (event: Event) => {
         loadingSingInPage: true
     }));
 
-    const response = await fetch(import.meta.env.VITE_APP_MY_BACKEND + "/auth/sign-in", {
+    const response = await fetch(import.meta.env.VITE_APP_MY_BACKEND + "/login", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: "include",
         body: JSON.stringify({
             telegramID: telegramID,
             password: password,
@@ -36,8 +37,10 @@ export const signInUserRequest = async (event: Event) => {
     });
 
     const json = await response.json();
+
+    console.log(json);
     if (json.type === "success") {
-        document.cookie = `JWT=${json.jwt}; path=/;`;
+        // document.cookie = `JWT=${json.jwt}; path=/;`;
 
         // If success accept cookie -> redirect
         fieldsValidationSignIn.update(() => ({
