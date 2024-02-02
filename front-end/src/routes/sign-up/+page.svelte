@@ -2,10 +2,10 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from "$lib/images/Info-triangle.png";
-	import { userRegistrationRequest } from "./sign-up";
-	import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
-	import { authenticatedState } from "../../state/authenticatedState";
-	import { goto } from "$app/navigation";
+	import {userRegistrationRequest} from "./sign-up";
+	import {fieldsValidationSignUp, handleLoadEventsSignUp} from "../../state/sign-upState";
+	import {authenticatedState} from "../../state/authenticatedState";
+	import {goto} from "$app/navigation";
 	import {onMount} from "svelte";
 
 	let revealPassword = false
@@ -28,7 +28,7 @@
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
 		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-			<form autocomplete="off" method="POST" on:submit|preventDefault={ userRegistrationRequest }>
+			<form autocomplete="off" method="POST" on:submit|preventDefault={userRegistrationRequest}>
 				<div class="m-auto w-fit">
 					<div>
 						<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
@@ -166,7 +166,6 @@
 					</button>
 				</div>
 			</form>
-
 	</div>
 </div>
 

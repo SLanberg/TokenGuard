@@ -10,41 +10,67 @@ import {SecretCode} from "../entity/secretCode.entity";
 export const Register = async (req: Request, res: Response) => {
     const secretKey: bigint = BigInt("94592942990");
 
-    const body = req.body;
+    const {password, telegramID} = req.body;
 
     try {
-        const user = dataSource.getRepository(User).save({
-            telegram_id: body.telegramID,
-            password: await bcryptjs.hash(body.password, 12),
+        const isUserInDb = await dataSource.getRepository(User).count({
+            where: {
+                telegram_id: telegramID,
+            },
         });
+
+        if (isUserInDb !== 0) {
+            return res.status(409).json({
+                type: "error",
+                issueWith: "TelegramID",
+                response: "Telegram ID already used"});
+        }
+    } catch (e) {
+        return res.status(500).json({type: "error", response: "Server Internal Error"});
+    }
+
+    try {
+        const [user] = await Promise.all([dataSource.getRepository(User).save({
+            telegram_id: telegramID,
+            password: await bcryptjs.hash(password, 12),
+        })]);
 
         // There is very useful createQueryRunner() function for now skip it but implement after
         if (!user) {
-            return res.status(500).json({ type: "error", response: "User creation failed" });
+            return res.status(500).json({type: "error", response: "User creation failed"});
         }
 
-        const secretCode = dataSource.getRepository(SecretCode).save({
+        const secretCode = await dataSource.getRepository(SecretCode).save({
             code: secretKey,
         });
 
-        const securityToken = dataSource.getRepository(SecurityToken).save({
-            user_id: (await user).id,
-            secret_code_id: (await secretCode).id,
-            security_token: generateToken((await user).id),
+        const userInDb = await dataSource.getRepository(User).findOne({
+            where: {telegram_id: (telegramID)}
         });
 
-        res.send(securityToken);
+        const securityToken = await dataSource.getRepository(SecurityToken).save({
+            user_id: user.id,
+            secret_code_id: secretCode.id,
+            security_token: generateToken(user.id),
+        });
+
+        return res.send({
+            status: 200,
+            type: 'success',
+            securityToken: securityToken,
+            user: userInDb
+        });
     } catch (e) {
-        return res.status(500).json({ type: "error", response: "Server Internal Error" });
+        console.log(e)
+        return res.status(500).json({type: "error", response: "Server Internal Error"});
     }
 }
 
 export const Login = async (req: Request, res: Response) => {
+    const {password, telegramID} = req.body;
     const user = await dataSource.getRepository(User).findOne({
-        where: { telegram_id: req.body.telegramID },
+        where: {telegram_id: telegramID},
     });
-
-    console.log('Login');
 
     if (!user) {
         return res.status(400).send({
@@ -52,7 +78,7 @@ export const Login = async (req: Request, res: Response) => {
         })
     }
 
-    if (!await bcryptjs.compare(req.body.password, user.password)) {
+    if (!await bcryptjs.compare(password, user.password)) {
         return res.status(400).send({
             message: 'Invalid credentials'
         })
@@ -62,23 +88,24 @@ export const Login = async (req: Request, res: Response) => {
         id: user.id,
     }, process.env.ACCESS_SECRET || '', {expiresIn: '1d'});
 
-
     const refreshToken = sign({
         id: user.id,
     }, process.env.REFRESH_SECRET || '', {expiresIn: '1w'});
 
     res.cookie('access_token', accessToken, {
         httpOnly: true,
+        sameSite: 'lax',
         maxAge: 24*60*60*1000 // 1 day
     });
 
     res.cookie('refresh_token', refreshToken, {
         httpOnly: true,
+        sameSite: "lax",
         maxAge: 7*24*60*60*1000 // 7 days
     });
 
     res.send({
-        type: 'success'
+        type: 'success',
     });
 }
 
@@ -134,8 +161,9 @@ export const Refresh = async (req: Request, res: Response) => {
         }, process.env.ACCESS_SECRET || '', {expiresIn: '30s'});
 
         res.cookie('access_token', accessToken, {
-           httpOnly: true,
-           maxAge: 24*60*60*1000 // 1 day
+            httpOnly: true,
+            sameSite: "lax",
+            maxAge: 24*60*60*1000 // 1 day
         });
 
         res.send({
@@ -148,7 +176,7 @@ export const Refresh = async (req: Request, res: Response) => {
     }
 }
 
-export const Logout = async (req: Request, res: Response) => {
+export const Logout = async (res: Response) => {
     res.cookie('access_token', '', {maxAge: 0})
     res.cookie('refresh_token', '', {maxAge: 0})
 
@@ -156,5 +184,3 @@ export const Logout = async (req: Request, res: Response) => {
         message: 'success'
     });
 }
-
-

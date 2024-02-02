@@ -1,6 +1,6 @@
-import { goto } from "$app/navigation";
-import { fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin } from "../state/loginState";
-import { authenticatedState } from "../state/authenticatedState";
+import {goto} from "$app/navigation";
+import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "../state/loginState";
+import {authenticatedState} from "../state/authenticatedState";
 
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});

@@ -2,32 +2,39 @@ import { goto } from "$app/navigation";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
-import { logOutRequest } from "../profile/profile";
-import { handleLoadEventsSecureAccess, secretKeyParam } from "../../state/secure-accessState";
-import { popUpStateLogin } from "../../state/loginState";
-import { authenticatedState } from "../../state/authenticatedState";
+import {logOutRequest} from "../profile/profile";
+import {handleLoadEventsSecureAccess, secretKeyParam} from "../../state/secure-accessState";
+import {popUpStateLogin} from "../../state/loginState";
+import {authenticatedState} from "../../state/authenticatedState";
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
     const formEl = event.target as HTMLFormElement;
     const data = new FormData(formEl);
-    const token = data.get('accessToken')
+    const token = data.get('accessToken');
 
     handleLoadEventsSecureAccess.update(() => ({
         secretKeyLoad: true
     }));
 
-    const response = await fetch(backend + "/secretkey", {
+    console.log('---')
+    console.log(document.cookie)
+    console.log('---')
+
+    const response = await fetch(backend + "/secret", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             token: token,
-            jwt: document.cookie.replace(/^JWT=/, ''),
+            credentials: 'include',
+            // jwt: document.cookie.replace(/^JWT=/, ''),
         })
     });
 
     const json = await response.json();
+
+    console.log(response)
 
     if (json.secretkey) {
         secretKeyParam.update(() => ({

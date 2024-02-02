@@ -1,7 +1,7 @@
-import { goto } from '$app/navigation';
-import { fieldsValidationSignUp, handleLoadEventsSignUp } from "../../state/sign-upState";
-import { paramsStore } from "../../state/profile-summaryState";
-import { authenticatedState } from "../../state/authenticatedState";
+import {goto} from '$app/navigation';
+import {fieldsValidationSignUp, handleLoadEventsSignUp} from "../../state/sign-upState";
+import {paramsStore} from "../../state/profile-summaryState";
+import {authenticatedState} from "../../state/authenticatedState";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
@@ -10,7 +10,7 @@ export const userRegistrationRequest = async (event: Event) => {
     const data = new FormData(formEl);
 
     const telegramID = data.get('telegramID')
-    const password = data.get('password')
+    const password: string = data.get('password')!.toString()
     const confirmPassword = data.get('confirmPassword')
 
     if (password !== confirmPassword) {
@@ -23,9 +23,9 @@ export const userRegistrationRequest = async (event: Event) => {
     }
 
     fieldsValidationSignUp.update(() => ({
-        telegramId: { error: false, message: "" },
-        password: { error: false, message: "" },
-        confirmPassword: { error: false, message: "" },
+        telegramId: {error: false, message: ""},
+        password: {error: false, message: ""},
+        confirmPassword: {error: false, message: ""},
     }));
 
     handleLoadEventsSignUp.update(() => ({
@@ -35,46 +35,47 @@ export const userRegistrationRequest = async (event: Event) => {
     // Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
     // 1. API call to the Telegram API (Probability it is not presented)
     // 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
-    const response = await fetch(backend + "/auth/sign-up", {
+    const response = await fetch(backend + "/register", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'true',
             },
             body: JSON.stringify({
                 telegramID: telegramID,
                 password: password,
             })
         });
-
         const json = await response.json();
 
 
     handleLoadEventsSignUp.update(() => ({
         loadingSingUpPage: false
     }));
-        if (json.type === "success") {
-            document.cookie = `JWT=${json.jwt}; path=/;`;
 
-            const date = new Date(json.createdAt);
-
+    const {type, user, message, issueWith, securityToken} = json;
+    if (type === "success") {
+            // document.cookie = `JWT=${json.jwt}; path=/;`;
             authenticatedState.set(true)
 
+            // Log the 'user' property
+            console.log(user);
+
             paramsStore.update(store => {
-                store.telegramId = json.user['telegramid'];
-                store.password = json.user['password'];
-                store.token = json['token'];
-                store.createdAt = date?.toLocaleDateString('en-US',
-                    {year: 'numeric', day: 'numeric', month: 'numeric'});
+                store.telegramId = user['telegram_id'];
+                store.password = password;
+                store.token = securityToken['security_token'];
+                store.createdAt = user['created_at'];
 
                 return store;
             });
 
             await goto('/profile-summary', {});
         } else {
-            if (json.field === "TelegramID") {
+            if (issueWith === "TelegramID") {
                 fieldsValidationSignUp.update((currentValue) => ({
                     ...currentValue,
-                    telegramId: { error: true, message: json.response }
+                    telegramId: { error: true, message: message }
                 }),
                 );
             }

@@ -11,46 +11,46 @@ export const SecretKey = async (req: Request, res: Response) => {
 
     // check if authenticated
     const cookie = req.cookies['access_token'];
-    const payload: any =
-        verify(cookie, process.env.ACCESS_SECRET || '');
+    console.log(cookie)
 
-    if (!payload) {
-        return res.status(401).send({
-            message: 'unauthenticated'
-        });
-    }
+    // const payload: any = verify(cookie, process.env.ACCESS_SECRET || '');
 
-    const user = dataSource.getRepository(User).findOne({
-        where: {id: payload.id}
-    });
-    if (!user) {
-        return res.status(401).send({
-            message: 'unauthenticated'
-        });
-    }
+    // if (!payload) {
+    //     return res.status(401).send({
+    //         message: 'unauthenticated'
+    //     });
+    // }
+    // const user = dataSource.getRepository(User).findOne({
+    //     where: {id: payload.id}
+    // });
+    // if (!user) {
+    //     return res.status(401).send({
+    //         message: 'unauthenticated'
+    //     });
+    // }
 
-    const token = dataSource.getRepository(SecurityToken).
-    createQueryBuilder("token")
-        .leftJoinAndSelect('token.secret_code_id', 'secret_code.id')
-        .leftJoinAndSelect('token.user_id', 'user.id')
-        .where('token.security_token = :security_token', { security_token: securityToken })
-        .getOneOrFail()
+    // const token = dataSource.getRepository(SecurityToken).
+    // createQueryBuilder("token")
+    //     .leftJoinAndSelect('token.secret_code_id', 'secret_code.id')
+    //     .leftJoinAndSelect('token.user_id', 'user.id')
+    //     .where('token.security_token = :security_token', { security_token: securityToken })
+    //     .getOneOrFail()
 
-    try {
-        const tokenObj = await (token)
+    // try {
+    //     const tokenObj = await (token);
+    //
+    //     const data = JSON.stringify(tokenObj);
+    //     const parsedData = JSON.parse(data);
+    //     const userId = parsedData.user_id.id;
+    //
+    //     console.log('something will happen below');
+        // if (payload.id === userId) {
+        //     res.send(parsedData.secret_code_id.code);
+        // } else {
+        //     console.log('Not for you, warn user about possible token leak')
+        // }
 
-        const data = JSON.stringify(tokenObj);
-        const parsedData = JSON.parse(data);
-
-        const userId = parsedData.user_id.id;
-
-        if (payload.id === userId) {
-            res.send(parsedData.secret_code_id.code);
-        } else {
-            console.log('Not for you, warn user about possible token leak')
-        }
-
-    } catch (e) {
-        console.log(e)
-    }
+    // } catch (e) {
+    //     console.log(e);
+    // }
 }
