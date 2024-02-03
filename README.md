@@ -1,7 +1,5 @@
 # TokenGuard
 
-## Task received at 22 Monday at 18:05
-
 ## Initial installation
 
 # Docker (System with no Docker Desktop)
