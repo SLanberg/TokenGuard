@@ -1,15 +1,15 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import { handleAvatarClick } from './menu';
-	import { handleLoadEventsProfilePage } from "../../state/menuState";
+	import {handleAvatarClick} from './menu';
+	import {handleLoadEventsProfilePage} from "../../stores/menuStore";
 	import {onMount} from "svelte";
-	import {authenticatedState} from "../../state/authenticatedState";
+	import {authenticatedStore} from "../../stores/authenticatedStore";
 	import {goto} from "$app/navigation";
 
 	onMount(() => {
 		// This code will run only on the client side
-		if ($authenticatedState === false) {
+		if ($authenticatedStore === false) {
 			goto('/', {});
 		}
 	});

@@ -2,15 +2,15 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import {tokenSubmitRequest} from './secure-access';
-	import {handleLoadEventsSecureAccess} from "../../state/secure-accessState";
-	import {authenticatedState} from "../../state/authenticatedState";
+	import {handleLoadEventsSecureAccess} from "../../stores/secureAccessStore";
+	import {authenticatedStore} from "../../stores/authenticatedStore";
 	import {goto} from "$app/navigation";
 	import {onMount} from "svelte";
 	import Loader from "../../components/shared/Loader.component.svelte";
 
 	onMount(() => {
 		// This code will run only on the client side
-		if ($authenticatedState === false) {
+		if ($authenticatedStore === false) {
 			goto('/', {});
 		}
 	});

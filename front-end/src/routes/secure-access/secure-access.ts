@@ -3,9 +3,9 @@ import { goto } from "$app/navigation";
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
 import {logOutRequest} from "../profile/profile";
-import {handleLoadEventsSecureAccess, secretKeyParam} from "../../state/secure-accessState";
-import {popUpStateLogin} from "../../state/loginState";
-import {authenticatedState} from "../../state/authenticatedState";
+import {handleLoadEventsSecureAccess, secretKeyParam} from "../../stores/secureAccessStore";
+import {popUpStateLogin} from "../../stores/loginStore";
+import {authenticatedStore} from "../../stores/authenticatedStore";
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
     const formEl = event.target as HTMLFormElement;
@@ -47,7 +47,7 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 
         return await goto('/profile',{});
     } else {
-        authenticatedState.set(false)
+        authenticatedStore.set(false)
 
         popUpStateLogin.update(() => ({
             showPopUp: true,

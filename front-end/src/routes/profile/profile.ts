@@ -1,6 +1,6 @@
 import { goto } from "$app/navigation";
-import { handleLoadEventsLogOut } from "../../state/profileState";
-import {authenticatedState} from "../../state/authenticatedState";
+import { handleLoadEventsLogOut } from "../../stores/profileState";
+import {authenticatedStore} from "../../stores/authenticatedStore";
 
 export const logOutRequest = async (): Promise<void> => {
     document.cookie =  document.cookie +"; expires=" + "Thu, 01 Jan 1970 00:00:00 UTC"
@@ -9,7 +9,7 @@ export const logOutRequest = async (): Promise<void> => {
         logOutLoad: true,
     }));
 
-    authenticatedState.set(false)
+    authenticatedStore.set(false)
 
     await goto('/', {});
 

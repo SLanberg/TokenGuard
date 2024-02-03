@@ -1,7 +1,7 @@
 import {goto} from '$app/navigation';
-import {fieldsValidationSignUp, handleLoadEventsSignUp} from "../../state/sign-upState";
-import {paramsStore} from "../../state/profile-summaryState";
-import {authenticatedState} from "../../state/authenticatedState";
+import {fieldsValidationSignUp, handleLoadEventsSignUp} from "../../stores/signUpStore";
+import {paramsStore} from "../../stores/profileSummaryStore";
+import {authenticatedStore} from "../../stores/authenticatedStore";
 
 const backend = import.meta.env.VITE_APP_MY_BACKEND
 
@@ -56,7 +56,7 @@ export const userRegistrationRequest = async (event: Event) => {
     const {type, user, message, issueWith, securityToken} = json;
     if (type === "success") {
             // document.cookie = `JWT=${json.jwt}; path=/;`;
-            authenticatedState.set(true)
+            authenticatedStore.set(true)
 
             // Log the 'user' property
             console.log(user);

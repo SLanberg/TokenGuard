@@ -2,14 +2,14 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { logOutRequest } from './profile';
-	import { secretKeyParam } from "../../state/secure-accessState";
-	import { handleLoadEventsLogOut } from "../../state/profileState";
-	import { authenticatedState } from "../../state/authenticatedState";
+	import { secretKeyParam } from "../../stores/secureAccessStore";
+	import { handleLoadEventsLogOut } from "../../stores/profileState";
+	import { authenticatedStore } from "../../stores/authenticatedStore";
 	import { goto } from "$app/navigation";
 	import { onMount } from "svelte";
 
 	onMount(() => {
-		if ($authenticatedState === false) {
+		if ($authenticatedStore === false) {
 			goto('/', {});
 		}
 	});

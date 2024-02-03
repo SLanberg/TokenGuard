@@ -1,6 +1,6 @@
 import {goto} from "$app/navigation";
-import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "../state/loginState";
-import {authenticatedState} from "../state/authenticatedState";
+import {authenticatedStore} from "../stores/authenticatedStore";
+import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "../stores/loginStore";
 
 export const handleSignUpClick = async () => {
     await goto('/sign-up', {});
@@ -53,7 +53,7 @@ export const signInUserRequest = async (event: Event) => {
             loadingSingInPage: false
         }));
 
-        authenticatedState.set(true)
+        authenticatedStore.set(true)
 
         return await goto('/menu',{});
     } else {

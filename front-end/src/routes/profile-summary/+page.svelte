@@ -5,8 +5,8 @@
 	import eye_white from '$lib/images/eye_white.png';
 
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
-	import { handleLoadEventsContinue, paramsStore } from "../../state/profile-summaryState";
-	import {authenticatedState} from "../../state/authenticatedState";
+	import { handleLoadEventsContinue, paramsStore } from "../../stores/profileSummaryStore";
+	import {authenticatedStore} from "../../stores/authenticatedStore";
 	import {goto} from "$app/navigation";
 	import { onMount } from 'svelte';
 
@@ -22,7 +22,7 @@
 
 	onMount(() => {
 		// This code will run only on the client side
-		if ($authenticatedState === false) {
+		if ($authenticatedStore === false) {
 			goto('/', {});
 		}
 	});

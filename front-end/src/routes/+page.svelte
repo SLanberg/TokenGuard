@@ -1,16 +1,15 @@
 <script lang="ts">
-	import { dismissPopUp, handleSignUpClick, signInUserRequest } from './login'
+	import {dismissPopUp, handleSignUpClick, signInUserRequest} from './login'
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png'
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png'
-	import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "../state/loginState";
-	import { authenticatedState } from "../state/authenticatedState";
-	import { goto } from "$app/navigation";
-
-	import Loader from "../components/shared/Loader.component.svelte";
+	import {goto} from "$app/navigation";
+	import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "../stores/loginStore";
 	import ElButton from "../components/primitives/buttons/ElButton.svelte";
+	import {authenticatedStore} from "../stores/authenticatedStore";
+	import Loader from "../components/shared/Loader.component.svelte";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
@@ -22,7 +21,7 @@
 		revealPassword = !revealPassword
 	}
 
-	if ($authenticatedState) {
+	if ($authenticatedStore) {
 		goto('/secure-access', {});
 	}
 </script>

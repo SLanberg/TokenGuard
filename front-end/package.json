@@ -41,6 +41,8 @@
 	"type": "module",
 	"dependencies": {
 		"dotenv": "^16.4.1",
-		"svelte-french-toast": "^1.2.0"
+		"routes": "^2.1.0",
+		"svelte-french-toast": "^1.2.0",
+		"svelte-spa-router": "^4.0.1"
 	}
 }
