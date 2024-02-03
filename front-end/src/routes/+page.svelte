@@ -1,15 +1,19 @@
 <script lang="ts">
-	import {dismissPopUp, handleSignUpClick, signInUserRequest} from './login'
+	import {dismissPopUp, handleSignUpClick, signInUserRequest} from './sign-in'
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png'
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png'
-	import {goto} from "$app/navigation";
+	// import {goto} from "$app/navigation";
+
+	const backend = import.meta.env.VITE_APP_MY_BACKEND
+
 	import {fieldsValidationSignIn, handleLoadEventsSignIn, popUpStateLogin} from "../stores/loginStore";
-	import ElButton from "../components/primitives/buttons/ElButton.svelte";
-	import {authenticatedStore} from "../stores/authenticatedStore";
+	import ElButton from "../components/primitives/buttons/button.svelte";
 	import Loader from "../components/shared/Loader.component.svelte";
+	import {onMount} from "svelte";
+	import axios from "axios";
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {
@@ -18,12 +22,20 @@
 
 	let revealPassword = false
 	const toggleRevealPassword = () => {
-		revealPassword = !revealPassword
+		revealPassword = !revealPassword;
 	}
 
-	if ($authenticatedStore) {
-		goto('/secure-access', {});
-	}
+	onMount(async () => {
+		try {
+			const {data} = await axios.get(`${backend + "/user"}`);
+
+			var message = `Hi ${data.telegram_id}`;
+
+			console.log(message)
+		} catch (e) {
+			console.log(e)
+		}
+	});
 </script>
 
 <svelte:head>

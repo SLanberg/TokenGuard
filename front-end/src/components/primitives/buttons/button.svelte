@@ -1,7 +1,5 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte'
-    import {handleLoadEventsSignIn} from "../../../stores/loginStore";
-    import Loader from "../../shared/Loader.component.svelte";
     export let testid: string = 'not-set'
 
     export let id: string = 'not-set'

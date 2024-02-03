@@ -23,7 +23,7 @@ export const signInUserRequest = async (event: Event) => {
     handleLoadEventsSignIn.update(() => ({
         loadingSingInPage: true
     }));
-
+    
     const response = await fetch(import.meta.env.VITE_APP_MY_BACKEND + "/login", {
         method: 'POST',
         headers: {
@@ -38,7 +38,6 @@ export const signInUserRequest = async (event: Event) => {
 
     const json = await response.json();
 
-    console.log(json);
     if (json.type === "success") {
         // document.cookie = `JWT=${json.jwt}; path=/;`;
 
