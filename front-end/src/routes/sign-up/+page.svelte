@@ -78,8 +78,6 @@
 									text-white
 									placeholder-gray-400
 									outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-						class:fieldError={''}
-						value={''}
 						type={revealPassword ? 'text' : 'password'}
 						name="password"
 						id="password"
@@ -117,8 +115,6 @@
 									text-white
 									placeholder-gray-400
 									outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-						class:fieldError={''}
-						value={''}
 						type={revealPassword ? 'text' : 'password'}
 						name="confirmPassword"
 						id="confirmPassword"

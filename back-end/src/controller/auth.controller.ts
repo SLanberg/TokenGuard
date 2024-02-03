@@ -40,6 +40,26 @@ export const Register = async (req: Request, res: Response) => {
             return res.status(500).json({type: "error", response: "User creation failed"});
         }
 
+
+        // Apply DRY
+        const accessToken = sign({
+            id: user.id,
+        }, process.env.ACCESS_SECRET || '', {expiresIn: '1d'});
+        const refreshToken = sign({
+            id: user.id,
+        }, process.env.REFRESH_SECRET || '', {expiresIn: '1w'});
+        res.cookie('access_token', accessToken, {
+            httpOnly: true,
+            sameSite: "lax",
+            maxAge: 24*60*60*1000 // 1 day
+        });
+        res.cookie('refresh_token', refreshToken, {
+            httpOnly: true,
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+        });
+
+
         const secretCode = await dataSource.getRepository(SecretCode).save({
             code: secretKey,
         });
@@ -94,7 +114,7 @@ export const Login = async (req: Request, res: Response) => {
 
     res.cookie('access_token', accessToken, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: "lax",
         maxAge: 24*60*60*1000 // 1 day
     });
 
@@ -176,9 +196,9 @@ export const Refresh = async (req: Request, res: Response) => {
     }
 }
 
-export const Logout = async (res: Response) => {
-    res.cookie('access_token', '', {maxAge: 0})
-    res.cookie('refresh_token', '', {maxAge: 0})
+export const Logout = async (req: Request, res: Response) => {
+    res.cookie('access_token', '', { maxAge: 0, httpOnly: true, sameSite: 'lax' });
+    res.cookie('refresh_token', '', { maxAge: 0, httpOnly: true, sameSite: 'lax' });
 
     res.send({
         message: 'success'

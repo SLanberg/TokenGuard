@@ -1,6 +1,8 @@
 <script>
 	import {Toaster} from 'svelte-french-toast';
 	import '../app.css';
+
+    import '../interceptors/axios.ts';
 </script>
 
 <Toaster />
