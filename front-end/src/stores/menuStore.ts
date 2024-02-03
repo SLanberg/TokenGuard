@@ -1,6 +1,5 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 export const handleLoadEventsProfilePage = writable({
-    loadProfilePage: false,
+	loadProfilePage: false
 });
-

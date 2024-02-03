@@ -1,5 +1,5 @@
 <script>
-    import {Toaster} from 'svelte-french-toast';
+	import {Toaster} from 'svelte-french-toast';
 	import '../app.css';
 </script>
 
@@ -12,7 +12,7 @@
 		background: linear-gradient(to bottom, #1f232f, #151a26);
 		color: #ffffff;
 		font-family: Inter, ui-serif;
-    }
+	}
 
 	:global(a) {
 		text-decoration: none;

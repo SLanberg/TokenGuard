@@ -2,17 +2,15 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import {tokenSubmitRequest} from './secure-access';
-	import {handleLoadEventsSecureAccess} from "../../stores/secureAccessStore";
-	import {authenticatedStore} from "../../stores/authenticatedStore";
-	import {goto} from "$app/navigation";
-	import {onMount} from "svelte";
-	import Loader from "../../components/shared/Loader.component.svelte";
+	import {handleLoadEventsSecureAccess} from '../../stores/secureAccessStore';
+	import {onMount} from 'svelte';
+	import Loader from '../../components/shared/Loader.component.svelte';
+	import {checkUserAuthentication} from "../../utils/isAuth";
 
-	onMount(() => {
-		// This code will run only on the client side
-		if ($authenticatedStore === false) {
-			goto('/', {});
-		}
+	onMount(async () => {
+		await checkUserAuthentication({
+			expectedToBeAuthenticated: true
+		});
 	});
 </script>
 
@@ -21,19 +19,19 @@
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
 	>
 		<img
-				class="mx-auto my-auto mb-7 rounded-full bg-blue-950 mt-32"
-				id="mascot"
-				src={whaleImage}
-				alt="Whale"
+			class="mx-auto my-auto mb-7 rounded-full bg-blue-950 mt-32"
+			id="mascot"
+			src={whaleImage}
+			alt="Whale"
 		/>
 		<form on:submit|preventDefault={tokenSubmitRequest}>
 			<div class="m-auto w-fit">
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="accessToken"
-				>Access Token</label
+					>Access Token</label
 				>
 				<br />
 				<input
-						class="mb-5
+					class="mb-5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -47,13 +45,13 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
-						type="text"
-						name="accessToken"
-						id="accessToken"
-						required
+					type="text"
+					name="accessToken"
+					id="accessToken"
+					required
 				/>
 				<button
-						class="mb-10
+					class="mb-10
 							w-[300px]
 							rounded-[10px]
 							bg-[#43444A]

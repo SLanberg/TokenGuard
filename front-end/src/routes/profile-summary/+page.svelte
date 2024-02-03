@@ -5,26 +5,24 @@
 	import eye_white from '$lib/images/eye_white.png';
 
 	import {handleContinue, copyContentsOfTheFields} from './profile-summary';
-	import {handleLoadEventsContinue, paramsStore} from "../../stores/profileSummaryStore";
-	import {authenticatedStore} from "../../stores/authenticatedStore";
-	import {goto} from "$app/navigation";
+	import {handleLoadEventsContinue, paramsStore} from '../../stores/profileSummaryStore';
 	import {onMount} from 'svelte';
+	import {checkUserAuthentication} from "../../utils/isAuth";
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {
-		revealPassword = !revealPassword
-	}
+		revealPassword = !revealPassword;
+	};
 
 	let showPopUp = true;
 	const togglePopUp = () => {
-		showPopUp = !showPopUp
-	}
+		showPopUp = !showPopUp;
+	};
 
-	onMount(() => {
-		// This code will run only on the client side
-		if ($authenticatedStore === false) {
-			goto('/', {});
-		}
+	onMount(async () => {
+		await checkUserAuthentication({
+			expectedToBeAuthenticated: true
+		});
 	});
 </script>
 
@@ -33,16 +31,27 @@
 </svelte:head>
 
 {#if showPopUp}
-	<div class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[325px] rounded-[10px] bg-[#bfc5d9]">
+	<div
+		class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[325px] rounded-[10px] bg-[#bfc5d9]"
+	>
 		<div class="px-10">
 			<h1 class="text-center text-black font-bold text-3xl mt-5">WARNING</h1>
-			<br>
-			<p class="text-black text-center">Make sure you will copy the data to your notepad or write it down before continuing.</p>
-			<br>
-			<p id="copy-text" class="text-black text-center">You can copy all the required data by pressing to the copy icon:</p><button on:click={copyContentsOfTheFields} class="absolute right-[70px] bottom-[100px]"><img src="{copyIconBlack}" alt="copyIcon"></button>
+			<br />
+			<p class="text-black text-center">
+				Make sure you will copy the data to your notepad or write it down before continuing.
+			</p>
+			<br />
+			<p id="copy-text" class="text-black text-center">
+				You can copy all the required data by pressing to the copy icon:
+			</p>
+			<button on:click={copyContentsOfTheFields} class="absolute right-[70px] bottom-[100px]"
+				><img src={copyIconBlack} alt="copyIcon" /></button
+			>
 
 			<div class="flex justify-center">
-				<button on:click={togglePopUp} class="mt-10 bg-[#43444A]
+				<button
+					on:click={togglePopUp}
+					class="mt-10 bg-[#43444A]
                             transition
                             ease-in-out
                             duration-500
@@ -51,7 +60,8 @@
                             font-bold
                             py-2
                             px-4
-                            rounded-[10px]">
+                            rounded-[10px]"
+				>
 					Dismiss
 				</button>
 			</div>
@@ -66,12 +76,12 @@
 		<div class="m-auto w-fit">
 			<div>
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
-				>TelegramID</label
+					>TelegramID</label
 				>
 				<br />
 				<input
-						readonly
-						class="mb-2.5
+					readonly
+					class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -83,23 +93,21 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-						class:fieldError={''}
-						value={$paramsStore.telegramId}
-						id="telegramID"
-						type="text"
-						name="telegramID"
-						required
+					class:fieldError={''}
+					value={$paramsStore.telegramId}
+					id="telegramID"
+					type="text"
+					name="telegramID"
+					required
 				/>
 			</div>
 
 			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password"
-				>Password</label
-				>
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password">Password</label>
 				<br />
 				<input
-						readonly
-						class="mb-2.5
+					readonly
+					class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -111,26 +119,26 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-						class:fieldError={''}
-						value={$paramsStore.password}
-						type={revealPassword ? "text" : "password"}
-						name="password"
-						id="password"
-						required
+					class:fieldError={''}
+					value={$paramsStore.password}
+					type={revealPassword ? 'text' : 'password'}
+					name="password"
+					id="password"
+					required
 				/>
-				<button on:click|preventDefault={toggleRevealPassword} class="relative float-right -mt-[41px] mr-2"
-				><img src={eye_white} alt="see password" /></button
+				<button
+					on:click|preventDefault={toggleRevealPassword}
+					class="relative float-right -mt-[41px] mr-2"
+					><img src={eye_white} alt="see password" /></button
 				>
 			</div>
 
 			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="token"
-				>Token</label
-				>
+				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="token">Token</label>
 				<br />
 				<input
-						readonly
-						class="mb-2.5
+					readonly
+					class="mb-2.5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -142,24 +150,24 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-						class:fieldError={''}
-						value={$paramsStore.token}
-						id="token"
-						type={revealPassword ? "text" : "text"}
-						name="password"
-						required
+					class:fieldError={''}
+					value={$paramsStore.token}
+					id="token"
+					type={revealPassword ? 'text' : 'text'}
+					name="password"
+					required
 				/>
 			</div>
 
 			<div>
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="createdAt"
-				>Created At</label
+					>Created At</label
 				>
 				<br />
 				<input
-						readonly
-						id="createdAt"
-						class="mb-10
+					readonly
+					id="createdAt"
+					class="mb-10
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -173,16 +181,16 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
-						class:fieldError={''}
-						value="{$paramsStore.createdAt}"
-						type="text"
-						name="Created At"
-						required
+					class:fieldError={''}
+					value={$paramsStore.createdAt}
+					type="text"
+					name="Created At"
+					required
 				/>
 			</div>
 
 			<button
-					class="mb-10
+				class="mb-10
 							w-[300px]
 							rounded-[10px]
 							bg-[#43444A]
@@ -199,14 +207,27 @@
 							align-middle
 							disabled:text-gray-600
 							disabled:bg-gray-900"
-					on:click={handleContinue}
-					disabled='{showPopUp}'
+				on:click={handleContinue}
+				disabled={showPopUp}
 			>
 				Continue
 				{#if $handleLoadEventsContinue.continueLoad}
 					<div class="absolute ml-24" aria-label="Loading..." role="status">
-						<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
-							<path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12">
+						<svg
+							width="24"
+							height="24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							viewBox="0 0 24 24"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							xmlns="http://www.w3.org/2000/svg"
+							class="animate-spin w-6 h-6 stroke-slate-500"
+						>
+							<path
+								d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12"
+							>
 							</path>
 						</svg>
 					</div>
@@ -217,7 +238,6 @@
 		<button class="float-right m-5" on:click={copyContentsOfTheFields}>
 			<img src={copyIconWhite} alt="copyIcon" />
 		</button>
-
 	</div>
 </div>
 

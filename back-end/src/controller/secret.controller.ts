@@ -11,7 +11,6 @@ export const SecretKey = async (req: Request, res: Response) => {
 
     // check if authenticated
     const cookie = req.cookies['access_token'];
-    console.log(cookie)
 
     // const payload: any = verify(cookie, process.env.ACCESS_SECRET || '');
 

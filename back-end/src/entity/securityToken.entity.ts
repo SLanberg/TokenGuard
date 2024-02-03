@@ -12,11 +12,11 @@ export class SecurityToken {
     id: number;
 
     @ManyToOne(() => User, (user) => user.id)
-    @JoinColumn({ name: "userId" })
+    @JoinColumn({name: "userId"})
     user_id!: number;
 
     @ManyToOne(() => SecretCode, (secretCode) => secretCode.id)
-    @JoinColumn({ name: "secretId" })
+    @JoinColumn({name: "secretId"})
     secret_code_id!: number;
 
     @Column("varchar")

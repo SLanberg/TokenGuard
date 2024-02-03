@@ -1,13 +1,13 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 export const handleLoadEventsSecureAccess = writable({
-    secretKeyLoad: false,
+	secretKeyLoad: false
 });
 
 export const secretKeyParam = writable({
-    secretKey: '',
+	secretKey: ''
 });
 
 export const fieldsValidationSecureAccess = writable({
-    invalidToken: { error: false, message: "" },
+	invalidToken: { error: false, message: '' }
 });

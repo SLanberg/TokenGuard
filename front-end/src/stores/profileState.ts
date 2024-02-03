@@ -1,5 +1,5 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 export const handleLoadEventsLogOut = writable({
-    logOutLoad: false,
+	logOutLoad: false
 });

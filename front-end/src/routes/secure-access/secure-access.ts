@@ -1,60 +1,51 @@
-import { goto } from "$app/navigation";
+import {goto} from '$app/navigation';
 
-const backend = import.meta.env.VITE_APP_MY_BACKEND
+const backend = import.meta.env.VITE_APP_MY_BACKEND;
 
-import {logOutRequest} from "../profile/profile";
-import {handleLoadEventsSecureAccess, secretKeyParam} from "../../stores/secureAccessStore";
-import {popUpStateLogin} from "../../stores/loginStore";
-import {authenticatedStore} from "../../stores/authenticatedStore";
+import {logOutRequest} from '../profile/profile';
+import {handleLoadEventsSecureAccess, secretKeyParam} from '../../stores/secureAccessStore';
+import {popUpStateLogin} from '../../stores/loginStore';
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
-    const formEl = event.target as HTMLFormElement;
-    const data = new FormData(formEl);
-    const token = data.get('accessToken');
+	const formEl = event.target as HTMLFormElement;
+	const data = new FormData(formEl);
+	const token = data.get('accessToken');
 
-    handleLoadEventsSecureAccess.update(() => ({
-        secretKeyLoad: true
-    }));
+	handleLoadEventsSecureAccess.update(() => ({
+		secretKeyLoad: true
+	}));
 
-    console.log('---')
-    console.log(document.cookie)
-    console.log('---')
+	const response = await fetch(backend + '/secret', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			token: token,
+			credentials: 'include'
+			// jwt: document.cookie.replace(/^JWT=/, ''),
+		})
+	});
 
-    const response = await fetch(backend + "/secret", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: token,
-            credentials: 'include',
-            // jwt: document.cookie.replace(/^JWT=/, ''),
-        })
-    });
+	const json = await response.json();
 
-    const json = await response.json();
+	if (json.secretkey) {
+		secretKeyParam.update(() => ({
+			secretKey: json.secretkey
+		}));
 
-    console.log(response)
+		handleLoadEventsSecureAccess.update(() => ({
+			secretKeyLoad: false
+		}));
 
-    if (json.secretkey) {
-        secretKeyParam.update(() => ({
-            secretKey: json.secretkey,
-        }));
+		return await goto('/profile', {});
+	} else {
+		popUpStateLogin.update(() => ({
+			showPopUp: true
+		}));
 
-        handleLoadEventsSecureAccess.update(() => ({
-            secretKeyLoad: false
-        }));
+		await logOutRequest();
 
-        return await goto('/profile',{});
-    } else {
-        authenticatedStore.set(false)
-
-        popUpStateLogin.update(() => ({
-            showPopUp: true,
-        }));
-
-        await logOutRequest()
-
-        return;
-    }
-}
+		return;
+	}
+};

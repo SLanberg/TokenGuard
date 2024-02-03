@@ -11,7 +11,7 @@ const config = {
 	ssr: false,
 	prerender: {
 		crawl: true,
-		enabled: true,
+		enabled: true
 	},
 
 	kit: {

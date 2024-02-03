@@ -2,29 +2,28 @@
 
 ## Description
 
-Front-End Web Application using the Svelte framework that implements user registration, token generation, 
-and login functionality. The application include a Sign-Up form, a secure token display mechanism, 
+Front-End Web Application using the Svelte framework that implements user registration, token generation,
+and login functionality. The application include a Sign-Up form, a secure token display mechanism,
 and a profile page with login authentication.
 
 ## Features
 
 ### 1. Sign-Up Form:
 
-- The application provides a Sign-Up form where users can input their Telegram ID which is arbitrary 
-in this version of the app and Password.
+- The application provides a Sign-Up form where users can input their Telegram ID which is arbitrary
+  in this version of the app and Password.
 - Upon submitting the form, an automatically generated token is displayed in a box.
 - Users are prompted to copy and paste this token to a secure location.
 - Validation of the fields.
 
-
 ### 2. Copy Icon Functionality:
 
 - Implemented an icon functionality that allows users to copy the following data:
-    - Telegram ID (string)
-    - Password (string)
-    - Token (string) - automatically generated
-    - Creation Timestamp (Date)
- - After this action user will see Snackbar at the bottom that will inform user that the copy is made.
+  - Telegram ID (string)
+  - Password (string)
+  - Token (string) - automatically generated
+  - Creation Timestamp (Date)
+- After this action user will see Snackbar at the bottom that will inform user that the copy is made.
 
 ### 3. Profile Page and Login:
 
@@ -36,6 +35,5 @@ in this version of the app and Password.
 
 - On the /profile page, users are prompted to input the token.
 - Implement token validation:
-    - If the token is incorrect, users are redirected to the Sign-In page. Pop-up message shown to the user indicating the token is incorrect with the offer to sign in again and try again.
-    - If the token is correct, the application displays the number ”94592942990.”
-
+  - If the token is incorrect, users are redirected to the Sign-In page. Pop-up message shown to the user indicating the token is incorrect with the offer to sign in again and try again.
+  - If the token is correct, the application displays the number ”94592942990.”
