@@ -26,7 +26,7 @@ export const Register = async (req: Request, res: Response) => {
                 response: "Telegram ID already used"});
         }
     } catch (e) {
-        return res.status(500).json({type: "error", response: "Server Internal Error"});
+        return res.status(500).json({type: "error", issueWith: "TelegramID", response: "Server Internal Error"});
     }
 
     try {
@@ -94,12 +94,16 @@ export const Login = async (req: Request, res: Response) => {
 
     if (!user) {
         return res.status(400).send({
+            type: "error",
+            issueWith: "TelegramID",
             message: 'Invalid credentials'
         })
     }
 
     if (!await bcryptjs.compare(password, user.password)) {
         return res.status(400).send({
+            type: "error",
+            issueWith: "TelegramID",
             message: 'Invalid credentials'
         })
     }

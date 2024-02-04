@@ -25,15 +25,14 @@ export const SecretKey = async (req: Request, res: Response) => {
         });
     }
 
-    const token = dataSource.getRepository(SecurityToken).
-    createQueryBuilder("token")
-        .leftJoinAndSelect('token.secret_code_id', 'secret_code.id')
-        .leftJoinAndSelect('token.user_id', 'user.id')
-        .where('token.security_token = :security_token', { security_token: securityToken })
-        .getOneOrFail()
-
     try {
-        const tokenObj = await (token);
+    const token = dataSource.getRepository(SecurityToken).
+        createQueryBuilder("token")
+            .leftJoinAndSelect('token.secret_code_id', 'secret_code.id')
+            .leftJoinAndSelect('token.user_id', 'user.id')
+            .where('token.security_token = :security_token', {security_token: securityToken})
+            .getOneOrFail()
+            const tokenObj = await (token);
 
         const data = JSON.stringify(tokenObj);
         const parsedData = JSON.parse(data);
@@ -42,9 +41,11 @@ export const SecretKey = async (req: Request, res: Response) => {
         if (payload.id === userId) {
             res.send(parsedData.secret_code_id.code);
         } else {
-            console.log('Not for you, warn user about possible token leak')
+            // User account can be warned about possibility of the token leak
+            // message notifying that there was an attempt with the timestamp to access token from another account
+            return res.status(401).json({type: "error", issueWith: "TelegramID", response: "Incorrect Token"});
         }
     } catch (e) {
-        console.log(e);
+        return res.status(401).json({type: "error", issueWith: "TelegramID", response: "Incorrect Token"});
     }
 }

@@ -4,7 +4,8 @@ import {
 	handleLoadEventsSignIn,
 	popUpStateLogin
 } from '../stores/loginStore';
-import axios from "axios";
+import axios, {type AxiosError} from "axios";
+import {fieldsValidationSignUp} from "../stores/signUpStore";
 
 export const handleSignUpClick = async () => {
 	await goto('/sign-up', {});
@@ -24,51 +25,57 @@ export const signInUserRequest = async (event: Event) => {
 	const telegramID = formData.get('telegramID');
 	const password = formData.get('password');
 
-
 	handleLoadEventsSignIn.update(() => ({
 		loadingSingInPage: true
 	}));
 
 
-	const { data } = await axios.post(
-		`login`,
-		{
-			telegramID: telegramID,
-			password: password
-		},
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': 'true' // or specific origin, adjust as needed
+	try {
+		const {data} = await axios.post(
+			`login`,
+			{
+				telegramID: telegramID,
+				password: password
 			},
-			withCredentials: true
+			{
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': 'true'
+				},
+				withCredentials: true
+			}
+		);
+
+		if (data.type === 'success') {
+			// If success accept cookie -> redirect
+			fieldsValidationSignIn.update(() => ({
+				// ...currentValue,
+				telegramId: {error: false, message: ''},
+				password: {error: false, message: ''} // No error for password
+			}));
+
+			handleLoadEventsSignIn.update(() => ({
+				loadingSingInPage: false
+			}));
+
+			return await goto('/menu', {});
 		}
-	);
-
-	console.log(data)
-
-	if (data.type === 'success') {
-		// If success accept cookie -> redirect
-		fieldsValidationSignIn.update(() => ({
-			// ...currentValue,
-			telegramId: {error: false, message: ''},
-			password: {error: false, message: ''} // No error for password
-		}));
-
-		handleLoadEventsSignIn.update(() => ({
-			loadingSingInPage: false
-		}));
-
-		return await goto('/menu', {});
-	} else {
-		// Example of updating the store
-		fieldsValidationSignIn.update(() => ({
-			telegramId: {error: true, message: 'Invalid Telegram ID'},
-			password: {error: false, message: ''} // No error for password
-		}));
+	} catch (err: unknown | AxiosError) {
+		if (axios.isAxiosError(err))  {
+			if (err.response?.data['issueWith'] === "TelegramID") {
+				fieldsValidationSignUp.update((currentValue) => ({
+					...currentValue,
+					telegramId: {error: true, message: 'Invalid Telegram ID'},
+				}));
+			}
+		} else {
+			// Just a stock error
+		}
 
 		handleLoadEventsSignIn.update(() => ({
 			loadingSingInPage: false
 		}));
 	}
+
+
 };

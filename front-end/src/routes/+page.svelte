@@ -11,7 +11,6 @@
 		handleLoadEventsSignIn,
 		popUpStateLogin
 	} from '../stores/loginStore';
-	import ElButton from '../components/primitives/buttons/button.svelte';
 	import Loader from '../components/shared/Loader.component.svelte';
 	import {onMount} from 'svelte';
 	import {checkUserAuthentication} from '../utils/isAuth';
@@ -138,13 +137,6 @@
 						><img src={eye_white} alt="see password" /></button
 					>
 				</div>
-
-				<ElButton
-					id="my-button"
-					disabled={false}
-					label="This is a button"
-					on:clicked={signInUserRequest}
-				/>
 
 				<button
 					class="mb-10

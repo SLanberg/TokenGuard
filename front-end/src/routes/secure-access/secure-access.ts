@@ -14,11 +14,12 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 		secretKeyLoad: true
 	}));
 
-	const {data} = await axios.post(`secret`, {
-		token: token,
-	}, {withCredentials:true})
+	try {
+		const {data} = await axios.post(`secret`, {
+			token: token,
+		}, {withCredentials:true})
 
-	if (data) {
+
 		secretKeyParam.update(() => ({
 			secretKey: data
 		}));
@@ -28,13 +29,17 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 		}));
 
 		return await goto('/profile', {});
-	} else {
+	} catch (e) {
 		popUpStateLogin.update(() => ({
 			showPopUp: true
 		}));
 
 		await logOutRequest();
 
-		return;
+		handleLoadEventsSecureAccess.update(() => ({
+			secretKeyLoad: false
+		}));
+
+		return await goto('/', {});
 	}
 };

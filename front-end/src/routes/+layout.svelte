@@ -11,7 +11,7 @@
 
 <style>
 	:global(html) {
-		background: linear-gradient(to bottom, #1f232f, #151a26);
+		background: #13181C;
 		color: #ffffff;
 		font-family: Inter, ui-serif;
 	}
@@ -24,6 +24,6 @@
 	@font-face {
 		font-family: 'Inter';
 		font-style: normal;
-		src: url('/fonts/Inter-Regular.ttf');
+		src: url('/fonts/Inter/Inter-Regular.ttf');
 	}
 </style>
