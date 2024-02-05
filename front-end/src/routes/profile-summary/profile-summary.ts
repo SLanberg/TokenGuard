@@ -1,6 +1,6 @@
-import {goto} from '$app/navigation';
+import { goto } from '$app/navigation';
 import toast from 'svelte-french-toast';
-import {handleLoadEventsContinue} from '../../stores/profileSummaryStore';
+import { handleLoadEventsContinue } from '../../stores/profileSummaryStore';
 
 export const copyContentsOfTheFields = () => {
 	const telegramIdInput = document.querySelector('#telegramID') as HTMLInputElement;

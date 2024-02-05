@@ -1,8 +1,8 @@
 <script>
-	import {page} from '$app/stores';
+	import { page } from '$app/stores';
 
 	import sadWhaleImage from '$lib/images/sad_whale.png';
-	import {goto} from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	export const handleHomeButtonClick = async () => {
 		await goto('/', {});

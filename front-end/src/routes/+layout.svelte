@@ -1,8 +1,8 @@
 <script>
-	import {Toaster} from 'svelte-french-toast';
+	import { Toaster } from 'svelte-french-toast';
 	import '../app.css';
 
-    import '../interceptors/axios.ts';
+	import '../interceptors/axios.ts';
 </script>
 
 <Toaster />
@@ -11,7 +11,7 @@
 
 <style>
 	:global(html) {
-		background: #13181C;
+		background: #13181c;
 		color: #ffffff;
 		font-family: Inter, ui-serif;
 	}
@@ -24,6 +24,6 @@
 	@font-face {
 		font-family: 'Inter';
 		font-style: normal;
-		src: url('/fonts/Inter/Inter-Regular.ttf');
+		src: url('$lib/fonts/Inter/Inter-Regular.ttf');
 	}
 </style>

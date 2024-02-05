@@ -1,5 +1,5 @@
-import {goto} from '$app/navigation';
-import {handleLoadEventsProfilePage} from '../../stores/menuStore';
+import { goto } from '$app/navigation';
+import { handleLoadEventsProfilePage } from '../../stores/menuStore';
 
 export const handleAvatarClick = async () => {
 	handleLoadEventsProfilePage.update(() => ({

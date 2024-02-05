@@ -23,7 +23,14 @@ In Front-End:
 2) In the Front-End folder run "npm run dev"
 3) In the DB create tables with the commands from the init.sql or import it
 
+## Run tests
+1) Go the the /front-end folder
+2) Run `npm test`
+
+## Format with prettier
+1) npx prettier --write .
+
 ## Technology description
 For the front-end used: SvelteKit, Tailwind, TypeScript
-For the back-end used: NodeJS, PostgreSQL, TypeScript
+For the back-end used: Node.js, Postgres, TypeScript
 Wrapped in the Docker.

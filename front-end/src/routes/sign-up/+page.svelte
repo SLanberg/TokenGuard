@@ -2,10 +2,10 @@
 	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png';
-	import {userRegistrationRequest} from './sign-up';
-	import {fieldsValidationSignUp, handleLoadEventsSignUp} from '../../stores/signUpStore';
-	import {onMount} from 'svelte';
-	import {checkUserAuthentication} from "../../utils/isAuth";
+	import { userRegistrationRequest } from './sign-up';
+	import { fieldsValidationSignUp, handleLoadEventsSignUp } from '../../stores/signUpStore';
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {

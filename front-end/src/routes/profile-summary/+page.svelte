@@ -4,10 +4,10 @@
 	import copyIconBlack from '$lib/images/copy_black.svg';
 	import eye_white from '$lib/images/eye_white.png';
 
-	import {handleContinue, copyContentsOfTheFields} from './profile-summary';
-	import {handleLoadEventsContinue, paramsStore} from '../../stores/profileSummaryStore';
-	import {onMount} from 'svelte';
-	import {checkUserAuthentication} from "../../utils/isAuth";
+	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
+	import { handleLoadEventsContinue, paramsStore } from '../../stores/profileSummaryStore';
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	let revealPassword = false;
 	const toggleRevealPassword = () => {

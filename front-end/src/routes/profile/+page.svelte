@@ -1,11 +1,11 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import {logOutRequest} from './profile';
-	import {secretKeyParam} from '../../stores/secureAccessStore';
-	import {handleLoadEventsLogOut} from '../../stores/profileState';
-	import {onMount} from 'svelte';
-	import {checkUserAuthentication} from "../../utils/isAuth";
+	import { logOutRequest } from './profile';
+	import { secretKeyParam } from '../../stores/secureAccessStore';
+	import { handleLoadEventsLogOut } from '../../stores/profileState';
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	onMount(async () => {
 		await checkUserAuthentication({

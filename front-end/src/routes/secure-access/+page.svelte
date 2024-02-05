@@ -1,11 +1,11 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import {tokenSubmitRequest} from './secure-access';
-	import {handleLoadEventsSecureAccess} from '../../stores/secureAccessStore';
-	import {onMount} from 'svelte';
+	import { tokenSubmitRequest } from './secure-access';
+	import { handleLoadEventsSecureAccess } from '../../stores/secureAccessStore';
+	import { onMount } from 'svelte';
 	import Loader from '../../components/shared/Loader.component.svelte';
-	import {checkUserAuthentication} from "../../utils/isAuth";
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	onMount(async () => {
 		await checkUserAuthentication({

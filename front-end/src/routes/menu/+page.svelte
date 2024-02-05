@@ -1,10 +1,10 @@
 <script lang="ts">
 	import whaleImage from '$lib/images/whale.png';
 
-	import {handleAvatarClick} from './menu';
-	import {handleLoadEventsProfilePage} from '../../stores/menuStore';
-	import {onMount} from 'svelte';
-	import {checkUserAuthentication} from "../../utils/isAuth";
+	import { handleAvatarClick } from './menu';
+	import { handleLoadEventsProfilePage } from '../../stores/menuStore';
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	onMount(async () => {
 		await checkUserAuthentication({

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {dismissPopUp, handleSignUpClick, signInUserRequest} from './sign-in';
+	import { dismissPopUp, handleSignUpClick, signInUserRequest } from './sign-in';
 
 	import whaleImage from '$lib/images/whale.png';
 	import sadWhaleImage from '$lib/images/sad_whale.png';
@@ -12,8 +12,8 @@
 		popUpStateLogin
 	} from '../stores/loginStore';
 	import Loader from '../components/shared/Loader.component.svelte';
-	import {onMount} from 'svelte';
-	import {checkUserAuthentication} from '../utils/isAuth';
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../utils/isAuth';
 
 	let loadingSingUpPage = false;
 	const handleSignUpLoad = async () => {

@@ -1,8 +1,8 @@
-import {goto} from '$app/navigation';
-import {fieldsValidationSignUp, handleLoadEventsSignUp} from '../../stores/signUpStore';
-import {paramsStore} from '../../stores/profileSummaryStore';
-import axios, {type AxiosError} from "axios";
-import {fieldsValidationSignIn} from "../../stores/loginStore";
+import { goto } from '$app/navigation';
+import { fieldsValidationSignUp, handleLoadEventsSignUp } from '../../stores/signUpStore';
+import { paramsStore } from '../../stores/profileSummaryStore';
+import axios, { type AxiosError } from 'axios';
+import { fieldsValidationSignIn } from '../../stores/loginStore';
 // import {fieldsValidationSignIn} from "../../stores/loginStore";
 
 export const userRegistrationRequest = async (event: Event) => {
@@ -36,7 +36,7 @@ export const userRegistrationRequest = async (event: Event) => {
 	// 1. API call to the Telegram API (Probability it is not presented)
 	// 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
 	try {
-		const {data} = await axios.post(
+		const { data } = await axios.post(
 			`register`,
 			{
 				telegramID: telegramID,
@@ -66,18 +66,17 @@ export const userRegistrationRequest = async (event: Event) => {
 
 			await goto('/profile-summary', {});
 		}
-
 	} catch (err: unknown | AxiosError) {
 		if (axios.isAxiosError(err)) {
-			if (err.response?.data['issueWith'] === "TelegramID") {
-				console.log('hi')
+			if (err.response?.data['issueWith'] === 'TelegramID') {
+				console.log('hi');
 
 				fieldsValidationSignUp.update((currentValue) => ({
 					...currentValue,
 					telegramId: {
 						error: true,
 						message: 'TelegramID already in use'
-					},
+					}
 				}));
 			}
 		} else {
@@ -88,9 +87,4 @@ export const userRegistrationRequest = async (event: Event) => {
 			loadingSingUpPage: false
 		}));
 	}
-
-
-
-
-
 };
