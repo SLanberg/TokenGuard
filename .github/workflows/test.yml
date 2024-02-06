@@ -13,6 +13,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm --prefix ./front-end install
-          npm --prefix ./front-end install playwright
+          npx --prefix ./front-end playwright install-deps
       - name: Run tests
         run: npm --prefix ./front-end run test
