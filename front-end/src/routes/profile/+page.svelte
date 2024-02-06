@@ -22,13 +22,6 @@
 	<div
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
 	>
-		<img
-			class="mx-auto my-auto mb-7 rounded-full bg-blue-950 mt-32"
-			id="mascot"
-			src={whaleImage}
-			alt="Whale"
-		/>
-
 		<div class="m-auto w-fit">
 			<label class="text-left text-sm font-medium text-[#B8B8B8]" for="secretKey">Secret Key</label>
 			<br />

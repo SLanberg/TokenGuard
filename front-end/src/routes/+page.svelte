@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { dismissPopUp, handleSignUpClick, signInUserRequest } from './sign-in';
 
-	import whaleImage from '$lib/images/whale.png';
-	import sadWhaleImage from '$lib/images/sad_whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png';
 
@@ -44,7 +42,6 @@
 			<div class="px-10">
 				<br />
 				<p class="text-black text-center">Incorrect Token</p>
-				<img class="mx-auto my-auto mb-7" id="mascot" src={sadWhaleImage} alt="Whale" />
 				<p class="text-black text-center">
 					You can login and try again or contact our tech support by the number <br /> +372 518 9349
 				</p>
@@ -71,7 +68,6 @@
 	{/if}
 
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
 		<div class="m-auto w-fit">
 			<form method="POST" on:submit|preventDefault={signInUserRequest}>
 				<div>

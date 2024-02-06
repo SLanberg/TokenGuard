@@ -71,8 +71,6 @@
 
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
-
 		<div class="m-auto w-fit">
 			<div>
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"

@@ -1,7 +1,6 @@
 <script>
 	import { page } from '$app/stores';
 
-	import sadWhaleImage from '$lib/images/sad_whale.png';
 	import { goto } from '$app/navigation';
 
 	export const handleHomeButtonClick = async () => {
@@ -29,7 +28,6 @@
 		<div class="px-10">
 			<br />
 			<p class="text-black text-center">{errorCode}</p>
-			<img class="mx-auto my-auto mb-7" id="mascot" src={sadWhaleImage} alt="Whale" />
 			<p class="text-black text-center">{errorMessage}</p>
 			<div class="flex justify-center">
 				<button

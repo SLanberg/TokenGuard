@@ -38,6 +38,3 @@ and a profile page with login authentication.
   - If the token is incorrect, users are redirected to the Sign-In page. Pop-up message shown to the user indicating the token is incorrect with the offer to sign in again and try again.
   - If the token is correct, the application displays the number ”94592942990.”
 
-### 5. Linter
-
--

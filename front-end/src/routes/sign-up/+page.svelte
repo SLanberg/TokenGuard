@@ -1,5 +1,4 @@
 <script lang="ts">
-	import whaleImage from '$lib/images/whale.png';
 	import eye_white from '$lib/images/eye_white.png';
 	import attention_sign from '$lib/images/Info-triangle.png';
 	import { userRegistrationRequest } from './sign-up';
@@ -25,7 +24,6 @@
 
 <div class="flex h-screen">
 	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<img class="mx-auto mb-10 p-4" id="mascot" src={whaleImage} alt="Whale" />
 		<form autocomplete="off" method="POST" on:submit|preventDefault={userRegistrationRequest}>
 			<div class="m-auto w-fit">
 				<div>
