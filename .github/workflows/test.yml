@@ -14,6 +14,7 @@ jobs:
         run: |
           npm --prefix ./front-end install
           npm --prefix ./front-end install playwright
+          npm install -g ts-node
       - name: Run server
         run:
           npm --prefix ./back-end start
