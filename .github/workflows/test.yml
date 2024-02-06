@@ -11,6 +11,8 @@ jobs:
         with:
           node-version: 20.5.1
       - name: Install dependencies
-        run: npm --prefix ./front-end install
+        run: |
+          npm --prefix ./front-end install
+          npm --prefix ./front-end install playwright
       - name: Run tests
         run: npm --prefix ./front-end run test
