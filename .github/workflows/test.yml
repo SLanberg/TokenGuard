@@ -14,5 +14,8 @@ jobs:
         run: |
           npm --prefix ./front-end install
           npm --prefix ./front-end install playwright
+      - name: Run server
+        run:
+          npm --prefix ./back-end start
       - name: Run tests
         run: npm --prefix ./front-end run test
