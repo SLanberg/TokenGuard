@@ -1,6 +1,4 @@
 <script lang="ts">
-	import whaleImage from '$lib/images/whale.png';
-
 	import { tokenSubmitRequest } from './secure-access';
 	import { handleLoadEventsSecureAccess } from '../../stores/secureAccessStore';
 	import { onMount } from 'svelte';

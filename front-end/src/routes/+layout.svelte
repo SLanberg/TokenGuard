@@ -2,8 +2,17 @@
 	import { Toaster } from 'svelte-french-toast';
 	import '../app.css';
 
-	import '../interceptors/axios.ts';
+	import { navigating } from '$app/stores';
+	import { loading } from './new-design/spinner/loading';
+	import Loader from "../components/shared/Loader.component.svelte"
+
+	$: $loading = !!$navigating
+
+	import '../interceptors/axios';
 </script>
+
+
+<Loader />
 
 <Toaster />
 
@@ -13,17 +22,20 @@
 	:global(html) {
 		background: #13181c;
 		color: #ffffff;
-		font-family: Inter, ui-serif;
+		font-family: Prompt, ui-serif;
 	}
 
 	:global(a) {
 		text-decoration: none;
-		color: white;
 	}
 
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		src: url('$lib/fonts/Inter/Inter-Regular.ttf');
-	}
+  @font-face {
+      src: url('$lib/fonts/Cinzel/Cinzel-Bold.ttf');
+      font-family: 'Cinzel';
+  }
+  @font-face {
+      src: url('$lib/fonts/Prompt/Prompt-Regular.ttf');
+      font-family: 'Prompt';
+      font-weight: normal;
+  }
 </style>
