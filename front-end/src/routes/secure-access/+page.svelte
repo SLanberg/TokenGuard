@@ -2,16 +2,15 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { tokenSubmitRequest } from './secure-access';
-	import { handleLoadEventsSecureAccess } from "../../state/secure-accessState";
-	import {authenticatedState} from "../../state/authenticatedState";
-	import {goto} from "$app/navigation";
-	import {onMount} from "svelte";
+	import { handleLoadEventsSecureAccess } from '../../stores/secureAccessStore';
+	import { onMount } from 'svelte';
+	import Loader from '../../components/shared/Loader.component.svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
-	onMount(() => {
-		// This code will run only on the client side
-		if ($authenticatedState === false) {
-			goto('/', {});
-		}
+	onMount(async () => {
+		await checkUserAuthentication({
+			expectedToBeAuthenticated: true
+		});
 	});
 </script>
 
@@ -19,20 +18,14 @@
 	<div
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
 	>
-		<img
-				class="mx-auto my-auto mb-7 rounded-full bg-blue-950 mt-32"
-				id="mascot"
-				src={whaleImage}
-				alt="Whale"
-		/>
 		<form on:submit|preventDefault={tokenSubmitRequest}>
 			<div class="m-auto w-fit">
 				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="accessToken"
-				>Access Token</label
+					>Access Token</label
 				>
 				<br />
 				<input
-						class="mb-5
+					class="mb-5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -46,13 +39,13 @@
                                 outline-none
                                 focus:border-[#5a70ec]
                                 focus:ring-[#5a70ec]"
-						type="text"
-						name="accessToken"
-						id="accessToken"
-						required
+					type="text"
+					name="accessToken"
+					id="accessToken"
+					required
 				/>
 				<button
-						class="mb-10
+					class="mb-10
 							w-[300px]
 							rounded-[10px]
 							bg-[#43444A]
@@ -70,12 +63,7 @@
 				>
 					Submit
 					{#if $handleLoadEventsSecureAccess.secretKeyLoad}
-						<div class="absolute ml-20" aria-label="Loading..." role="status">
-							<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
-								<path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12">
-								</path>
-							</svg>
-						</div>
+						<Loader />
 					{/if}
 				</button>
 			</div>

@@ -2,16 +2,15 @@
 	import whaleImage from '$lib/images/whale.png';
 
 	import { logOutRequest } from './profile';
-	import { secretKeyParam } from "../../state/secure-accessState";
-	import { handleLoadEventsLogOut } from "../../state/profileState";
-	import { authenticatedState } from "../../state/authenticatedState";
-	import { goto } from "$app/navigation";
-	import { onMount } from "svelte";
+	import { secretKeyParam } from '../../stores/secureAccessStore';
+	import { handleLoadEventsLogOut } from '../../stores/profileState';
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
 
-	onMount(() => {
-		if ($authenticatedState === false) {
-			goto('/', {});
-		}
+	onMount(async () => {
+		await checkUserAuthentication({
+			expectedToBeAuthenticated: true
+		});
 	});
 </script>
 
@@ -23,22 +22,13 @@
 	<div
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
 	>
-		<img
-				class="mx-auto my-auto mb-7 rounded-full bg-blue-950 mt-32"
-				id="mascot"
-				src={whaleImage}
-				alt="Whale"
-		/>
-
 		<div class="m-auto w-fit">
-			<label class="text-left text-sm font-medium text-[#B8B8B8]" for="secretKey"
-			>Secret Key</label
-			>
+			<label class="text-left text-sm font-medium text-[#B8B8B8]" for="secretKey">Secret Key</label>
 			<br />
 
 			<input
-					readonly
-					class="mb-5
+				readonly
+				class="mb-5
                                 block
                                 w-[300px]
                                 rounded-[10px]
@@ -50,15 +40,15 @@
                                 text-white
                                 placeholder-gray-400
                                 outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-					value={$secretKeyParam.secretKey}
-					id="secretKey"
-					type="text"
-					name="secretKey"
-					required
+				value={$secretKeyParam.secretKey}
+				id="secretKey"
+				type="text"
+				name="secretKey"
+				required
 			/>
 
 			<button
-					class="mb-10
+				class="mb-10
 							w-[300px]
 							rounded-[10px]
 							bg-[#43444A]
@@ -73,19 +63,31 @@
 							flex
 							justify-center
 							align-middle"
-					on:click={logOutRequest}
+				on:click={logOutRequest}
 			>
 				Log Out
 				{#if $handleLoadEventsLogOut.logOutLoad}
 					<div class="absolute ml-24" aria-label="Loading..." role="status">
-						<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-6 h-6 stroke-slate-500">
-							<path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12">
+						<svg
+							width="24"
+							height="24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							viewBox="0 0 24 24"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							xmlns="http://www.w3.org/2000/svg"
+							class="animate-spin w-6 h-6 stroke-slate-500"
+						>
+							<path
+								d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12"
+							>
 							</path>
 						</svg>
 					</div>
 				{/if}
 			</button>
-
 		</div>
 	</div>
 </div>

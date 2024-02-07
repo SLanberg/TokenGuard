@@ -1,53 +1,48 @@
-import { goto } from "$app/navigation";
+import { handleLoadEventsSecureAccess, secretKeyParam } from '../../stores/secureAccessStore';
 
-const backend = import.meta.env.VITE_APP_MY_BACKEND
-
-import { logOutRequest } from "../profile/profile";
-import { handleLoadEventsSecureAccess, secretKeyParam } from "../../state/secure-accessState";
-import { popUpStateLogin } from "../../state/loginState";
-import { authenticatedState } from "../../state/authenticatedState";
+import axios from 'axios';
+import { goto } from '$app/navigation';
+import { popUpStateLogin } from '../../stores/loginStore';
+import { logOutRequest } from '../profile/profile';
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
-    const formEl = event.target as HTMLFormElement;
-    const data = new FormData(formEl);
-    const token = data.get('accessToken')
+	const formEl = event.target as HTMLFormElement;
+	const formData = new FormData(formEl);
+	const token = formData.get('accessToken');
 
-    handleLoadEventsSecureAccess.update(() => ({
-        secretKeyLoad: true
-    }));
+	handleLoadEventsSecureAccess.update(() => ({
+		secretKeyLoad: true
+	}));
 
-    const response = await fetch(backend + "/secretkey", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: token,
-            jwt: document.cookie.replace(/^JWT=/, ''),
-        })
-    });
+	try {
+		const { data } = await axios.post(
+			`secret`,
+			{
+				token: token
+			},
+			{ withCredentials: true }
+		);
 
-    const json = await response.json();
+		secretKeyParam.update(() => ({
+			secretKey: data
+		}));
 
-    if (json.secretkey) {
-        secretKeyParam.update(() => ({
-            secretKey: json.secretkey,
-        }));
+		handleLoadEventsSecureAccess.update(() => ({
+			secretKeyLoad: false
+		}));
 
-        handleLoadEventsSecureAccess.update(() => ({
-            secretKeyLoad: false
-        }));
+		return await goto('/profile', {});
+	} catch (e) {
+		popUpStateLogin.update(() => ({
+			showPopUp: true
+		}));
 
-        return await goto('/profile',{});
-    } else {
-        authenticatedState.set(false)
+		await logOutRequest();
 
-        popUpStateLogin.update(() => ({
-            showPopUp: true,
-        }));
+		handleLoadEventsSecureAccess.update(() => ({
+			secretKeyLoad: false
+		}));
 
-        await logOutRequest()
-
-        return;
-    }
-}
+		return await goto('/', {});
+	}
+};
