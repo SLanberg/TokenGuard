@@ -98,8 +98,7 @@
 			shadow-2xl
 			before:duration-500
 			hover:before:translate-x-80
-			hover:shadow-[#aa916d]/10
-"
+			hover:shadow-[#aa916d]/10"
 			>
 
 				<span class="relative z-10">Sign In</span>
