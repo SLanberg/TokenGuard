@@ -91,7 +91,7 @@
 			flex
 			justify-center
 			align-middle
-			bg-gradient
+			bg-gradient-to-r from-[#7d6834] to-[#998759]
 			before:ease
 			relative
 			overflow-hidden
@@ -101,6 +101,7 @@
 			hover:shadow-[#aa916d]/10
 "
 			>
+
 				<span class="relative z-10">Sign In</span>
 			</button>
 
@@ -141,11 +142,10 @@
 		color: #9f8e62;
 		font-family: 'Cinzel', serif;
 	}
-
-	.bg-gradient {
-		background-image: linear-gradient(to right, #7d6834, #998759);
-	}
-
+  input {
+      width: 300px;
+      padding-left: 15px;
+  }
 	p {
 		font-size: 12px;
 		font-family: 'Prompt', serif;
@@ -154,18 +154,11 @@
 	.sign-up-p {
 		text-shadow: 0 4px 50px #dd8100;
 	}
-
-	input {
-		width: 300px;
-		padding-left: 15px;
-	}
-
 	.line-container {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
-
 	.gradient-line {
 		flex-grow: 1;
 		height: 1px; /* Adjust as needed */
@@ -174,7 +167,6 @@
 	.left-to-right {
 		background: linear-gradient(to right, #13181c, #ffd59a);
 	}
-
 	.right-to-left {
 		background: linear-gradient(to left, #13181c, #ffd59a);
 	}
@@ -182,7 +174,6 @@
 	.logo-container {
 		margin: 0 12px;
 	}
-
 	.logo-container img {
 		width: 23px;
 		height: auto;
