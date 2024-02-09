@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-test('magic login happy path', async ({page}) => {
+test('magic login happy path', async ({ page }) => {
 	await page.goto('/');
 
 	await page.getByLabel('telegramID').fill('6516');
@@ -10,4 +10,4 @@ test('magic login happy path', async ({page}) => {
 	await page.waitForTimeout(2000);
 
 	await page.waitForURL('**/');
-})
+});

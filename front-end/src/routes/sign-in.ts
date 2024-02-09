@@ -1,15 +1,8 @@
 import { goto } from '$app/navigation';
-import {
-	fieldsValidationSignIn,
-	handleLoadEventsSignIn,
-	popUpStateLogin
-} from '../stores/loginStore';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios, { type AxiosError } from 'axios';
+import { fieldsValidationSignIn, popUpStateLogin } from '../stores/loginStore';
 import { fieldsValidationSignUp } from '../stores/signUpStore';
-
-export const handleSignUpClick = async () => {
-	await goto('/sign-up', {});
-};
 
 export const dismissPopUp = async () => {
 	popUpStateLogin.update(() => ({
@@ -20,14 +13,11 @@ export const dismissPopUp = async () => {
 export const signInUserRequest = async (event: Event) => {
 	// Send API request to the BackEnd
 	const formEl = event.target as HTMLFormElement;
-	const formData = new FormData(formEl);
 
+
+	const formData = new FormData(formEl);
 	const telegramID = formData.get('telegramID');
 	const password = formData.get('password');
-
-	handleLoadEventsSignIn.update(() => ({
-		loadingSingInPage: true
-	}));
 
 	try {
 		const { data } = await axios.post(
@@ -53,10 +43,6 @@ export const signInUserRequest = async (event: Event) => {
 				password: { error: false, message: '' } // No error for password
 			}));
 
-			handleLoadEventsSignIn.update(() => ({
-				loadingSingInPage: false
-			}));
-
 			return await goto('/menu', {});
 		}
 	} catch (err: unknown | AxiosError) {
@@ -70,9 +56,5 @@ export const signInUserRequest = async (event: Event) => {
 		} else {
 			// Just a stock error
 		}
-
-		handleLoadEventsSignIn.update(() => ({
-			loadingSingInPage: false
-		}));
 	}
 };

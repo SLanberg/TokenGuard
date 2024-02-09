@@ -1,15 +1,7 @@
 <script lang="ts">
 	import { tokenSubmitRequest } from './secure-access';
 	import { handleLoadEventsSecureAccess } from '../../stores/secureAccessStore';
-	import { onMount } from 'svelte';
 	import Loader from '../../components/shared/Loader.component.svelte';
-	import { checkUserAuthentication } from '../../utils/isAuth';
-
-	onMount(async () => {
-		await checkUserAuthentication({
-			expectedToBeAuthenticated: true
-		});
-	});
 </script>
 
 <div class="flex h-screen">
@@ -24,19 +16,19 @@
 				<br />
 				<input
 					class="mb-5
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none
-                                focus:border-[#5a70ec]
-                                focus:ring-[#5a70ec]"
+					block
+					w-[300px]
+					rounded-[10px]
+					border
+					border-gray-600
+					bg-[#13161E]
+					p-2.5
+					text-sm
+					text-white
+					placeholder-gray-400
+					outline-none
+					focus:border-[#5a70ec]
+					focus:ring-[#5a70ec]"
 					type="text"
 					name="accessToken"
 					id="accessToken"

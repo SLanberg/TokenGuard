@@ -1,178 +1,111 @@
 <script lang="ts">
-	import { dismissPopUp, handleSignUpClick, signInUserRequest } from './sign-in';
+	import roulette_icon from '$lib/images/roulette_icon.svg';
 
-	import eye_white from '$lib/images/eye_white.png';
-	import attention_sign from '$lib/images/Info-triangle.png';
-
-	import {
-		fieldsValidationSignIn,
-		handleLoadEventsSignIn,
-		popUpStateLogin
-	} from '../stores/loginStore';
-	import Loader from '../components/shared/Loader.component.svelte';
-	import { onMount } from 'svelte';
-	import { checkUserAuthentication } from '../utils/isAuth';
-
-	let loadingSingUpPage = false;
-	const handleSignUpLoad = async () => {
-		loadingSingUpPage = true;
-	};
-
-	let revealPassword = false;
-	const toggleRevealPassword = () => {
-		revealPassword = !revealPassword;
-	};
-
-	onMount(async () => {
-		await checkUserAuthentication({
-			expectedToBeAuthenticated: false
-		});
-	});
+	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
+	import BigButton from '../components/primitives/buttons/BigButton.svelte';
+	import { signInUserRequest } from './sign-in';
+	import { popUpStateLogin } from '../stores/loginStore';
+	import InputField from '../components/primitives/inputs/InputField.component.svelte';
 </script>
 
 <svelte:head>
 	<title>Foyer | Whale</title>
 </svelte:head>
 
-<div class="flex h-screen">
+<div class="min-h-screen flex items-center justify-center">
 	{#if $popUpStateLogin.showPopUp}
-		<div
-			class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bfc5d9] w-[400px] h-[345px] rounded-[10px]"
-		>
-			<div class="px-10">
-				<br />
-				<p class="text-black text-center">Incorrect Token</p>
-				<p class="text-black text-center">
-					You can login and try again or contact our tech support by the number <br /> +372 518 9349
-				</p>
-				<div class="flex justify-center">
-					<button
-						on:click={dismissPopUp}
-						class="bg-[#43444A]
-	                            transition
-	                            ease-in-out
-	                            duration-500
-	                            hover:bg-[#55565b]
-	                            text-[#BFC5D9]
-	                            font-bold
-	                            py-2
-	                            px-4
-	                            rounded-[10px]
-								mt-10"
-					>
-						Dismiss
-					</button>
-				</div>
-			</div>
+		<div class="z-10
+                absolute
+                border-2
+                border-gold-third
+                transform
+                inset-1/2
+                -translate-x-1/2
+                -translate-y-1/2
+                bg-background-color
+                w-[200px]
+                h-[150px]
+                rounded-[24px]
+                flex
+                flex-col
+                justify-center
+                items-center">
+
+			<p class="text-center p-5 text-gold-main -mt-4">You entered incorrect security token. You were forcefully logged out.</p>
+
+			<button class="text-center
+			bg-gradient-to-r
+			from-gold-dark
+			to-gold-lighter-dark
+			w-[80px]
+			p-2
+			rounded-[8px]"
+			><p>Dismiss</p></button>
+
 		</div>
 	{/if}
 
-	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<div class="m-auto w-fit">
+	<div class="text-center">
+		<h1>Whale</h1>
+
+		<div class="border-gold-main border-2 rounded-[24px] w-fit h-fit pl-5 pr-5 pt-5">
+			<div class="flex items-center justify-between">
+				<div class="flex-grow h-px left-to-right"></div>
+
+				<div class="logo-container mx-3">
+					<img class="w-6 h-auto" src={roulette_icon} alt="Roulette icon" />
+				</div>
+
+				<div class="flex-grow h-px right-to-left"></div>
+			</div>
+
+			<h2 class="mb-4 mt-1">Foyer</h2>
+
 			<form method="POST" on:submit|preventDefault={signInUserRequest}>
-				<div>
-					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
-						>TelegramID</label
-					>
-					<br />
-					<input
-						class="mb-2.5
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-						id="telegramID"
-						name="telegramID"
-						type="text"
-						required
-					/>
-				</div>
+				<div class="container mx-auto pt-5 w-[300px]">
+					<InputField name="Telegram ID" />
+					<PasswordField name="Password" />
 
-				{#if $fieldsValidationSignIn.telegramId.error}
-					<div class="flex items-center w-fit -mt-2.5">
-						<img class="h-3 mr-0.5" src={attention_sign} alt="error-sign" />
-						<p class="text-red-600 text-sm">TelegramID or Password is incorrect</p>
+					<div class="text-left mb-10 duration-500 text-white/50 hover:text-white cursor-pointer">
+						<p>Forgot password?</p>
 					</div>
-				{/if}
-
-				<div>
-					<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password">Password</label
-					>
-					<br />
-					<input
-						class="mb-5
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none
-                                focus:border-[#5a70ec]
-                                focus:ring-[#5a70ec]"
-						id="password"
-						type={revealPassword ? 'text' : 'password'}
-						name="password"
-						required
-					/>
-
-					<button
-						on:click|preventDefault={toggleRevealPassword}
-						class="relative float-right -mt-[51px] mr-2"
-						><img src={eye_white} alt="see password" /></button
-					>
 				</div>
 
-				<button
-					class="mb-10
-							w-[300px]
-							rounded-[10px]
-							bg-[#43444A]
-							px-4
-							py-2
-							font-bold
-							text-white
-							transition
-							duration-500
-							ease-in-out
-							hover:bg-[#55565b]
-							flex
-							justify-center
-							align-middle
-							"
-				>
-					Sign In
-					{#if $handleLoadEventsSignIn.loadingSingInPage}
-						<Loader />
-					{/if}
-				</button>
+				<BigButton label="Sign In" />
 			</form>
 
-			<div class="mb-5">
-				<div class="flex items-center justify-center">
-					<p class="text-sm font-medium text-white text-center" id="sign-up">
-						<button on:click={handleSignUpClick} on:click={handleSignUpLoad}><u>Sign Up</u></button>
-					</p>
-					{#if loadingSingUpPage}
-						<Loader />
-					{/if}
-				</div>
-			</div>
-			<div class="mb-5"></div>
+			<p class="m-10">
+				New member? <span
+					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
+				>
+					<a href="/sign-up"><b>Sign up</b></a>
+				</span>
+			</p>
 		</div>
 	</div>
 </div>
 
 <style>
+	.text-shadow-custom {
+		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
+	}
+	.left-to-right {
+		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
+	.right-to-left {
+		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
+
+	.logo-container img {
+		animation-duration: 0.6s;
+		animation-fill-mode: forwards;
+	}
+	.logo-container img:hover {
+		animation-name: spin;
+	}
+	@keyframes spin {
+		100% {
+			transform: rotate(720deg);
+		}
+	}
 </style>

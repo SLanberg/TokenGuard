@@ -1,17 +1,16 @@
 import { goto } from '$app/navigation';
 import { fieldsValidationSignUp, handleLoadEventsSignUp } from '../../stores/signUpStore';
 import { paramsStore } from '../../stores/profileSummaryStore';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios, { type AxiosError } from 'axios';
-import { fieldsValidationSignIn } from '../../stores/loginStore';
-// import {fieldsValidationSignIn} from "../../stores/loginStore";
 
 export const userRegistrationRequest = async (event: Event) => {
 	const formEl = event.target as HTMLFormElement;
 	const formData = new FormData(formEl);
 
 	const telegramID = formData.get('telegramID');
-	const password: string = formData.get('password')!.toString();
-	const confirmPassword = formData.get('confirmPassword');
+	const password: string = formData.get('Password')!.toString();
+	const confirmPassword = formData.get('Confirm password');
 
 	if (password !== confirmPassword) {
 		fieldsValidationSignUp.update((currentValue) => ({
@@ -69,7 +68,7 @@ export const userRegistrationRequest = async (event: Event) => {
 	} catch (err: unknown | AxiosError) {
 		if (axios.isAxiosError(err)) {
 			if (err.response?.data['issueWith'] === 'TelegramID') {
-				console.log('hi');
+				console.log(err);
 
 				fieldsValidationSignUp.update((currentValue) => ({
 					...currentValue,

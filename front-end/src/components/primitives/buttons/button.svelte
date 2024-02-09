@@ -43,7 +43,7 @@
 </script>
 
 <button
-	type="button"
+	type="submit"
 	aria-label={label}
 	data-testid={testid}
 	{disabled}

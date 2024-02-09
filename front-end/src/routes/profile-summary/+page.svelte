@@ -1,7 +1,4 @@
 <script lang="ts">
-	import whaleImage from '$lib/images/whale.png';
-	import copyIconWhite from '$lib/images/copy_white.svg';
-	import copyIconBlack from '$lib/images/copy_black.svg';
 	import eye_white from '$lib/images/eye_white.png';
 
 	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
