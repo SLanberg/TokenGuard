@@ -1,11 +1,11 @@
 <script lang="ts">
-	import roulette_icon from '$lib/images/roulette_icon.svg';
 
 	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
 	import BigButton from '../components/primitives/buttons/BigButton.svelte';
 	import { signInUserRequest } from './sign-in';
 	import { popUpStateLogin } from '../stores/loginStore';
 	import InputField from '../components/primitives/inputs/InputField.component.svelte';
+	import SpinningIcon from '../components/shared/SpinningIcon.component.svelte';
 </script>
 
 <svelte:head>
@@ -34,12 +34,12 @@
 			<p class="text-center p-5 text-gold-main -mt-4">You entered incorrect security token. You were forcefully logged out.</p>
 
 			<button class="text-center
-			bg-gradient-to-r
-			from-gold-dark
-			to-gold-lighter-dark
-			w-[80px]
-			p-2
-			rounded-[8px]"
+            bg-gradient-to-r
+            from-gold-dark
+            to-gold-lighter-dark
+            w-[80px]
+            p-2
+            rounded-[8px]"
 			><p>Dismiss</p></button>
 
 		</div>
@@ -53,7 +53,7 @@
 				<div class="flex-grow h-px left-to-right"></div>
 
 				<div class="logo-container mx-3">
-					<img class="w-6 h-auto" src={roulette_icon} alt="Roulette icon" />
+					<SpinningIcon />
 				</div>
 
 				<div class="flex-grow h-px right-to-left"></div>
@@ -76,36 +76,23 @@
 
 			<p class="m-10">
 				New member? <span
-					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
-				>
-					<a href="/sign-up"><b>Sign up</b></a>
-				</span>
+				class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
+			>
+                    <a href="/sign-up"><b>Sign up</b></a>
+                </span>
 			</p>
 		</div>
 	</div>
 </div>
 
 <style>
-	.text-shadow-custom {
-		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
-	}
-	.left-to-right {
-		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
-	.right-to-left {
-		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
-
-	.logo-container img {
-		animation-duration: 0.6s;
-		animation-fill-mode: forwards;
-	}
-	.logo-container img:hover {
-		animation-name: spin;
-	}
-	@keyframes spin {
-		100% {
-			transform: rotate(720deg);
-		}
-	}
+    .text-shadow-custom {
+        text-shadow: 0 4px 50px hsl(35, 100%, 80%);
+    }
+    .left-to-right {
+        background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+    }
+    .right-to-left {
+        background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+    }
 </style>

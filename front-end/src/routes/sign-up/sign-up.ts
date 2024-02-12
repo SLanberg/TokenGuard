@@ -8,7 +8,7 @@ export const userRegistrationRequest = async (event: Event) => {
 	const formEl = event.target as HTMLFormElement;
 	const formData = new FormData(formEl);
 
-	const telegramID = formData.get('telegramID');
+	const telegramID = formData.get('Telegram ID');
 	const password: string = formData.get('Password')!.toString();
 	const confirmPassword = formData.get('Confirm password');
 
@@ -68,8 +68,6 @@ export const userRegistrationRequest = async (event: Event) => {
 	} catch (err: unknown | AxiosError) {
 		if (axios.isAxiosError(err)) {
 			if (err.response?.data['issueWith'] === 'TelegramID') {
-				console.log(err);
-
 				fieldsValidationSignUp.update((currentValue) => ({
 					...currentValue,
 					telegramId: {

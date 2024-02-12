@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: [
-		'./src/**/*.{html,js,svelte,ts}',
-		'./node_modules/tw-elements/dist/js/**/*.js',
-		'./index.html'
-	],
+	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
 			// In the book "Refactoring UI" authors condemn use of the hex or RGB colors and recommend
@@ -20,5 +16,7 @@ export default {
 			}
 		}
 	},
-	plugins: [require('tw-elements/dist/plugin.cjs')]
+	plugins: [
+		require('flowbite/plugin')
+	]
 };

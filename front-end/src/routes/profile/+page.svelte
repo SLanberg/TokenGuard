@@ -1,6 +1,4 @@
 <script lang="ts">
-	import whaleImage from '$lib/images/whale.png';
-
 	import { logOutRequest } from './profile';
 	import { secretKeyParam } from '../../stores/secureAccessStore';
 	import { handleLoadEventsLogOut } from '../../stores/profileState';

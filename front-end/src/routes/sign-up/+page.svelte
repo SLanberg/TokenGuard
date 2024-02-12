@@ -1,11 +1,12 @@
 <script lang="ts">
-	import roulette_icon from '$lib/images/roulette_icon.svg';
-
 	import PasswordField from '../../components/primitives/inputs/PasswordField.component.svelte';
 	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
 	import { popUpStateLogin } from '../../stores/loginStore';
 	import { userRegistrationRequest } from './sign-up';
+	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
+	import attention_sign from '$lib/images/Info-triangle.png';
+	import { fieldsValidationSignUp } from '../../stores/signUpStore';
 </script>
 
 <svelte:head>
@@ -53,7 +54,7 @@
 				<div class="flex-grow h-px left-to-right"></div>
 
 				<div class="logo-container mx-3">
-					<img class="w-6 h-auto" src={roulette_icon} alt="Roulette icon" />
+					<SpinningIcon />
 				</div>
 
 				<div class="flex-grow h-px right-to-left"></div>
@@ -64,6 +65,18 @@
 			<form class="mb-10" method="POST" on:submit|preventDefault={userRegistrationRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
 					<InputField name="Telegram ID" />
+
+					{#if $fieldsValidationSignUp.telegramId.error}
+						<div class="flex
+									items-center
+									w-fit
+									-mt-2.5
+									mb-2.5">
+							<img class="h-3 mr-0.5" src={attention_sign} alt="error-sign" />
+							<span class="text-red-600 text-xs">{$fieldsValidationSignUp.telegramId.message}</span>
+						</div>
+					{/if}
+
 					<PasswordField name="Password" />
 					<PasswordField name="Confirm password" />
 				</div>
@@ -84,18 +97,5 @@
     }
     .right-to-left {
         background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
-
-    .logo-container img {
-        animation-duration: 0.6s;
-        animation-fill-mode: forwards;
-    }
-    .logo-container img:hover {
-        animation-name: spin;
-    }
-    @keyframes spin {
-        100% {
-            transform: rotate(720deg);
-        }
     }
 </style>

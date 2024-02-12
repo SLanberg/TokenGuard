@@ -1,240 +1,108 @@
 <script lang="ts">
-	import eye_white from '$lib/images/eye_white.png';
+	import roulette_icon from '$lib/images/roulette_icon.svg';
 
-	import { handleContinue, copyContentsOfTheFields } from './profile-summary';
-	import { handleLoadEventsContinue, paramsStore } from '../../stores/profileSummaryStore';
-	import { onMount } from 'svelte';
-	import { checkUserAuthentication } from '../../utils/isAuth';
-
-	let revealPassword = false;
-	const toggleRevealPassword = () => {
-		revealPassword = !revealPassword;
-	};
+	import PasswordField from '../../components/primitives/inputs/PasswordField.component.svelte';
+	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
+	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
+	import { copyContentsOfTheFields } from './profile-summary';
+	import { paramsStore } from '../../stores/profileSummaryStore';
+	import { goto } from '$app/navigation';
 
 	let showPopUp = true;
-	const togglePopUp = () => {
+	const handleCopyButton = () => {
+		copyContentsOfTheFields();
 		showPopUp = !showPopUp;
 	};
-
-	onMount(async () => {
-		await checkUserAuthentication({
-			expectedToBeAuthenticated: true
-		});
-	});
 </script>
 
 <svelte:head>
-	<title>Data | Whale</title>
+	<title>Summary | Whale</title>
 </svelte:head>
 
-{#if showPopUp}
-	<div
-		class="z-10 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[325px] rounded-[10px] bg-[#bfc5d9]"
-	>
-		<div class="px-10">
-			<h1 class="text-center text-black font-bold text-3xl mt-5">WARNING</h1>
-			<br />
-			<p class="text-black text-center">
-				Make sure you will copy the data to your notepad or write it down before continuing.
-			</p>
-			<br />
-			<p id="copy-text" class="text-black text-center">
-				You can copy all the required data by pressing to the copy icon:
-			</p>
-			<button on:click={copyContentsOfTheFields} class="absolute right-[70px] bottom-[100px]"
-				><img src={copyIconBlack} alt="copyIcon" /></button
-			>
+<div class="min-h-screen flex items-center justify-center">
+	{#if showPopUp}
+		<div class="z-10
+                absolute
+                border-2
+                border-gold-third
+                transform
+                inset-1/2
+                -translate-x-1/2
+                -translate-y-1/2
+                bg-background-color
+                w-[200px]
+                h-[150px]
+                rounded-[24px]
+                flex
+                flex-col
+                justify-center
+                items-center">
 
-			<div class="flex justify-center">
-				<button
-					on:click={togglePopUp}
-					class="mt-10 bg-[#43444A]
-                            transition
-                            ease-in-out
-                            duration-500
-                            hover:bg-[#55565b]
-                            text-[#BFC5D9]
-                            font-bold
-                            py-2
-                            px-4
-                            rounded-[10px]"
-				>
-					Dismiss
-				</button>
-			</div>
-		</div>
-	</div>
-{/if}
-
-<div class="flex h-screen">
-	<div class="m-auto w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-		<div class="m-auto w-fit">
-			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="telegramID"
-					>TelegramID</label
-				>
-				<br />
-				<input
-					readonly
-					class="mb-2.5
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-					class:fieldError={''}
-					value={$paramsStore.telegramId}
-					id="telegramID"
-					type="text"
-					name="telegramID"
-					required
-				/>
-			</div>
-
-			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="password">Password</label>
-				<br />
-				<input
-					readonly
-					class="mb-2.5
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-					class:fieldError={''}
-					value={$paramsStore.password}
-					type={revealPassword ? 'text' : 'password'}
-					name="password"
-					id="password"
-					required
-				/>
-				<button
-					on:click|preventDefault={toggleRevealPassword}
-					class="relative float-right -mt-[41px] mr-2"
-					><img src={eye_white} alt="see password" /></button
-				>
-			</div>
-
-			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="token">Token</label>
-				<br />
-				<input
-					readonly
-					class="mb-2.5
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none focus:border-[#5a70ec] focus:ring-[#5a70ec]"
-					class:fieldError={''}
-					value={$paramsStore.token}
-					id="token"
-					type={revealPassword ? 'text' : 'text'}
-					name="password"
-					required
-				/>
-			</div>
-
-			<div>
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="createdAt"
-					>Created At</label
-				>
-				<br />
-				<input
-					readonly
-					id="createdAt"
-					class="mb-10
-                                block
-                                w-[300px]
-                                rounded-[10px]
-                                border
-                                border-gray-600
-                                bg-[#13161E]
-                                p-2.5
-                                text-sm
-                                text-white
-                                placeholder-gray-400
-                                outline-none
-                                focus:border-[#5a70ec]
-                                focus:ring-[#5a70ec]"
-					class:fieldError={''}
-					value={$paramsStore.createdAt}
-					type="text"
-					name="Created At"
-					required
-				/>
-			</div>
+			<p class="text-center p-5 text-gold-main -mt-4">Copy the data by clicking on the icon and save it to your notes.</p>
 
 			<button
-				class="mb-10
-							w-[300px]
-							rounded-[10px]
-							bg-[#43444A]
-							px-4
-							py-2
-							font-bold
-							text-white
-							transition
-							duration-500
-							ease-in-out
-							hover:bg-[#55565b]
-							flex
-							justify-center
-							align-middle
-							disabled:text-gray-600
-							disabled:bg-gray-900"
-				on:click={handleContinue}
-				disabled={showPopUp}
+				on:click="{handleCopyButton}" class="text-center
+			bg-gradient-to-r
+			from-gold-dark
+			to-gold-lighter-dark
+			w-[80px]
+			p-2
+			rounded-[8px]
+            flex
+            justify-center
+            items-center"
 			>
-				Continue
-				{#if $handleLoadEventsContinue.continueLoad}
-					<div class="absolute ml-24" aria-label="Loading..." role="status">
-						<svg
-							width="24"
-							height="24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.5"
-							viewBox="0 0 24 24"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							xmlns="http://www.w3.org/2000/svg"
-							class="animate-spin w-6 h-6 stroke-slate-500"
-						>
-							<path
-								d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12"
-							>
-							</path>
-						</svg>
-					</div>
-				{/if}
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+					<path fill="#fff" d="M9 3.25A5.75 5.75 0 0 0 3.25 9v7.107a.75.75 0 0 0 1.5 0V9A4.25 4.25 0 0 1 9 4.75h7.013a.75.75 0 0 0 0-1.5H9Z"/><path fill="#fff" fill-rule="evenodd" d="M18.403 6.793a44.372 44.372 0 0 0-9.806 0 2.011 2.011 0 0 0-1.774 1.76 42.581 42.581 0 0 0 0 9.893 2.01 2.01 0 0 0 1.774 1.76c3.241.363 6.565.363 9.806 0a2.01 2.01 0 0 0 1.774-1.76 42.579 42.579 0 0 0 0-9.893 2.011 2.011 0 0 0-1.774-1.76ZM8.764 8.284c3.13-.35 6.342-.35 9.472 0a.51.51 0 0 1 .45.444c.372 3.17.372 6.374 0 9.544a.51.51 0 0 1-.45.444c-3.13.35-6.342.35-9.472 0a.511.511 0 0 1-.45-.444c-.372-3.17-.372-6.374 0-9.544a.511.511 0 0 1 .45-.444Z" clip-rule="evenodd"/>
+				</svg>
 			</button>
-		</div>
 
-		<button class="float-right m-5" on:click={copyContentsOfTheFields}>
-			<img src={copyIconWhite} alt="copyIcon" />
-		</button>
+		</div>
+	{/if}
+
+	<div class="text-center">
+		<h1>Whale</h1>
+
+		<div class="border-gold-main border-2 rounded-[24px] w-fit h-fit pl-5 pr-5 pt-5">
+			<div class="flex items-center justify-between">
+				<div class="flex-grow h-px left-to-right"></div>
+
+				<div class="logo-container mx-3">
+					<img class="w-6 h-auto" src={roulette_icon} alt="Roulette icon" />
+				</div>
+
+				<div class="flex-grow h-px right-to-left"></div>
+			</div>
+
+			<h2 class="mb-4 mt-1">Summary</h2>
+
+				<div class="container mx-auto pt-5 w-[300px]">
+					<InputField name="Telegram ID" />
+					<PasswordField name="Password" />
+					<PasswordField name="Confirm password" />
+					<InputField name="Created at" />
+
+					<p>{$paramsStore.telegramId}</p>
+					<p>{$paramsStore.password}</p>
+					<p>{$paramsStore.token}</p>
+					<p>{$paramsStore.createdAt}</p>
+				</div>
+
+				<div class="mt-12" />
+
+			<BigButton label="Continue" on:click={() => goto('/menu')} />
+
+			<div class="mb-10" />
+
+		</div>
 	</div>
 </div>
 
 <style>
+    .left-to-right {
+        background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+    }
+    .right-to-left {
+        background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+    }
 </style>

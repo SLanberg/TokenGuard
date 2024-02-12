@@ -28,6 +28,8 @@
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
+		"flowbite": "^2.2.1",
+		"flowbite-svelte": "^0.44.23",
 		"postcss": "^8.4.33",
 		"prettier": "^3.2.5",
 		"prettier-plugin-svelte": "^3.1.2",
@@ -43,12 +45,14 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@splidejs/svelte-splide": "^0.2.9",
 		"axios": "^1.6.7",
 		"cookie-parser": "^1.4.6",
 		"dotenv": "^16.4.1",
 		"routes": "^2.1.0",
 		"svelte-french-toast": "^1.2.0",
 		"svelte-spa-router": "^4.0.1",
+		"swiper": "^11.0.6",
 		"tw-elements": "^1.1.0"
 	}
 }

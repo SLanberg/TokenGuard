@@ -1,110 +1,272 @@
 <script lang="ts">
-	import roulette_icon from '$lib/images/roulette_icon.svg';
 
-	import PasswordField from '../../components/primitives/inputs/PasswordField.component.svelte';
-	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
-	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import { popUpStateLogin } from '../../stores/loginStore';
-	import { copyContentsOfTheFields } from '../profile-summary/profile-summary';
+	import ton from '$lib/images/ton.svg';
+	import info from '$lib/images/info.svg'
+	import chest from '$lib/images/chest.svg'
+	import community from '$lib/images/community.svg'
+	import cards from '$lib/images/cards.svg'
+	import avatar from '$lib/images/avatar-gif.gif';
+	import logo from '$lib/images/logo.svg';
+	import arrow_down from '$lib/images/union-1.svg'
+	import vault from '$lib/images/vault.svg'
+	import game2 from '$lib/images/product/Boss Bear.jpg'
+	import game3 from '$lib/images/product/money-train-4.webp'
+	import video from '$lib/images/genie.mp4'
+	import title from '$lib/images/product/genie x pixies.png'
+	import '@splidejs/svelte-splide/css';
+
+	import { onMount } from 'svelte';
+
+	import { initFlowbite } from 'flowbite'
+
+	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+	import '@splidejs/svelte-splide/css/core';
+
+	let isOpen = false;
+	function toggleDropdown() {
+		isOpen = !isOpen;
+	}
+
+	$: isProfileDropdown = isOpen ? 'bg-[#0d1316]' : '';
+
+	function handleOutsideClick(event: MouseEvent) {
+		if (!(event.target instanceof HTMLElement && event.target.closest('.profile-dropdown'))) {
+			isOpen = false;
+		}
+	}
+
+	// Add event listener for clicks on document
+	// to close dropdown when clicking outside
+	onMount(() => {
+		initFlowbite();
+
+		document.addEventListener('click', handleOutsideClick);
+		return () => {
+			document.removeEventListener('click', handleOutsideClick);
+		};
+	});
 </script>
 
 <svelte:head>
-	<title>Summary | Whale</title>
+	<title>Play Ground | Whale</title>
 </svelte:head>
 
-<div class="min-h-screen flex items-center justify-center">
-	{#if !$popUpStateLogin.showPopUp}
-		<div class="z-10
-                absolute
-                border-2
-                border-gold-third
-                transform
-                inset-1/2
-                -translate-x-1/2
-                -translate-y-1/2
-                bg-background-color
-                w-[200px]
-                h-[150px]
-                rounded-[24px]
-                flex
-                flex-col
-                justify-center
-                items-center">
+<nav class="bg-black">
+	<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+		<div class="relative flex h-12 items-center justify-between">
 
-			<p class="text-center p-5 text-gold-main -mt-4">Copy the data by clicking on the icon and save it to your notes.</p>
+			<div class="absolute inset-y-0 left-3 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 h-full">
+				<div class="flex flex-shrink-0 items-start">
+					<img class="h-8 w-auto" src="{logo}" alt="Your Company">
+				</div>
+			</div>
 
-			<button
-				on:click="{copyContentsOfTheFields}" class="text-center
-			bg-gradient-to-r
-			from-gold-dark
-			to-gold-lighter-dark
-			w-[80px]
-			p-2
-			rounded-[8px]
-            flex
-            justify-center
-            items-center"
-			>
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-					<path fill="#fff" d="M9 3.25A5.75 5.75 0 0 0 3.25 9v7.107a.75.75 0 0 0 1.5 0V9A4.25 4.25 0 0 1 9 4.75h7.013a.75.75 0 0 0 0-1.5H9Z"/><path fill="#fff" fill-rule="evenodd" d="M18.403 6.793a44.372 44.372 0 0 0-9.806 0 2.011 2.011 0 0 0-1.774 1.76 42.581 42.581 0 0 0 0 9.893 2.01 2.01 0 0 0 1.774 1.76c3.241.363 6.565.363 9.806 0a2.01 2.01 0 0 0 1.774-1.76 42.579 42.579 0 0 0 0-9.893 2.011 2.011 0 0 0-1.774-1.76ZM8.764 8.284c3.13-.35 6.342-.35 9.472 0a.51.51 0 0 1 .45.444c.372 3.17.372 6.374 0 9.544a.51.51 0 0 1-.45.444c-3.13.35-6.342.35-9.472 0a.511.511 0 0 1-.45-.444c-.372-3.17-.372-6.374 0-9.544a.511.511 0 0 1 .45-.444Z" clip-rule="evenodd"/>
-				</svg>
+			<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 h-full">
+
+				<div class="flex items-center">
+					<img alt="currency symbol" src={ton} class="mr-1" />
+					<p class="text-gold-main">10,000.00 TON</p>
+				</div>
+
+				<!-- Profile dropdown -->
+				<button on:click|preventDefault={toggleDropdown}>
+					<div class="p-2 ml-1 flex items-center hover:bg-[#0d1316] h-full profile-dropdown {isProfileDropdown}">
+						<img class="h-8 w-8 rounded-full" src="{avatar}" alt="Profile avatar">
+						<img class="h-1 w-1 rounded-full ml-1" src="{arrow_down}" alt="">
+					</div>
+				</button>
+
+				<div class="relative ml-3">
+					{#if isOpen}
+						<div class="absolute right-3 z-10 mt-4 w-48 origin-top-right bg-[#0d1316] rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+							<a href="/" class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d] rounded-t-[8px]" role="menuitem">Your Profile</a>
+							<a href="/" class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]" role="menuitem">Settings</a>
+							<a href="/" class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d] rounded-b-[8px]" role="menuitem">Sign out</a>
+						</div>
+					{/if}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<br />
+
+<div class="flex flex-col items-center justify-center">
+	<div class="bg-[#0C1216] h-[300px] rounded-[8px] mb-5 relative sm:w-full md:w-[500px]">
+		<Splide options={ { rewind: true,
+		autoplay: true,
+		gap: 4,
+		interval: 7500,
+		pagination: true,
+		arrows: false,
+		} }
+			aria-label="Svelte Splide Products">
+			<SplideSlide>
+				<div class="bg-[#0C1216] h-[300px] rounded-[8px] mb-5 relative sm:w-full md:w-[500px]">
+					<div class="mx-auto flex justify-between cursor-pointer h-full">
+						<!-- svelte-ignore a11y-media-has-caption -->
+						<video class="object-cover rounded-[8px] w-full" height="100%" autoplay loop>
+							<source src="{video}" type="video/mp4">
+						</video>
+						<img src="{title}" class="absolute inset-0 mx-auto my-auto" alt="Product names">
+					</div>
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#0C1216] h-[300px] rounded-[8px] mb-5 relative sm:w-full md:w-[500px]">
+					<div class="mx-auto flex justify-between cursor-pointer h-full">
+						<img class="object-cover rounded-[8px] w-full" src="{game2}" alt="Game">
+					</div>
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#0C1216] h-[300px] rounded-[8px] mb-5 relative sm:w-full md:w-[500px]">
+					<div class="mx-auto flex justify-between cursor-pointer h-full">
+						<img class="object-cover rounded-[8px] w-full" src="{game3}" alt="Game">
+					</div>
+				</div>
+			</SplideSlide>
+		</Splide>
+	</div>
+
+	<div class="bg-[#0C1216] h-fit rounded-[8px] w-full sm:w-full md:w-[500px]">
+		<div class="mx-auto flex justify-between h-full">
+
+			<div class="flex-1 p-4">
+
+				<div class="flex items-center">
+
+						<p>Treasure Hunter's Haul</p>
+						<img data-tooltip-target="tooltip"
+								 data-tooltip-trigger="click"
+								 data-tooltip-placement="top"
+								 alt="info"
+								 src={info}
+								 class="ml-1 cursor-pointer" />
+
+					<div id="tooltip" role="tooltip" class="w-[300px] absolute z-10 invisible inline-block px-3 py-2
+					text-sm font-medium text-white bg-[#1f292d] rounded-lg shadow-sm opacity-0 tooltip duration-200">
+						Players contribute cashback (0.5% to 1.5% of their bets) to the Treasure Hunter's Haul.
+						As the pool grows, players get a chance to roll the loot box for a shot at winning
+						the "Total cash back" sum from all contributors.
+						<div class="tooltip-arrow" data-popper-arrow></div>
+					</div>
+				</div>
+
+				<br />
+				<p>Collective Ante</p>
+				<div class="flex items-center">
+					<img alt="currency symbol" src={ton} class="mr-1" />
+					<p class="text-gold-main">9,666.00 TON</p>
+				</div>
+			</div>
+
+			<div class="h-px bg-white/10 w-1/2 self-center"></div>
+
+			<button class="flex-1 hover:bg-[#fff]/10 duration-500 hover:rounded-r-[8px] p-4 flex items-center justify-center">
+				<img alt="chest" src={chest} class="mr-1" />
 			</button>
 
 		</div>
-	{/if}
-
-	<div class="text-center">
-		<h1>Whale</h1>
-
-		<div class="border-gold-main border-2 rounded-[24px] w-fit h-fit pl-5 pr-5 pt-5">
-			<div class="flex items-center justify-between">
-				<div class="flex-grow h-px left-to-right"></div>
-
-				<div class="logo-container mx-3">
-					<img class="w-6 h-auto" src={roulette_icon} alt="Roulette icon" />
-				</div>
-
-				<div class="flex-grow h-px right-to-left"></div>
-			</div>
-
-			<h2 class="mb-4 mt-1">Summary</h2>
-
-				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" />
-					<PasswordField name="Password" />
-					<PasswordField name="Confirm password" />
-					<InputField name="Created at" />
-				</div>
-
-				<div class="mt-12" />
-
-				<BigButton label="Continue" />
-
-			<div class="mb-10" />
+	</div>
 
 
+	<div class="grid mt-5 grid-cols-4 gap-2 w-full sm:w-full md:w-[500px] mb-5">
+		<div class="bg-[#292e31] h-[140px] rounded-[8px] flex flex-col justify-center items-center">
+			<img class="h-12 mb-2" alt="vault" src={vault} />
+			<p>Vault</p>
+		</div>
+
+		<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+			<img class="h-12 mb-2" alt="vault" src={cards} />
+			<p>Tournaments</p>
+		</div>
+		<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+			<img class="h-12 mb-2" alt="vault" src={cards} />
+			<p>Withdrawal</p>
+		</div>
+		<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+			<img class="h-12 mb-2" alt="vault" src={community} />
+			<p>Community</p>
 		</div>
 	</div>
+
+
+	<div class="h-fit rounded-[8px] w-full sm:w-full md:w-[500px]">
+
+		<Splide options="{ { perPage: 4, gap: 8, arrows: false, pagination: false, } }" >
+
+
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+			<SplideSlide>
+				<div class="bg-[#13181c] h-[140px] rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<img class="h-12 mb-2" alt="vault" src={cards} />
+				</div>
+			</SplideSlide>
+		</Splide>
+
+	</div>
+
 </div>
 
-<style>
-    .left-to-right {
-        background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
-    .right-to-left {
-        background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
 
-    .logo-container img {
-        animation-duration: 0.6s;
-        animation-fill-mode: forwards;
-    }
-    .logo-container img:hover {
-        animation-name: spin;
-    }
-    @keyframes spin {
-        100% {
-            transform: rotate(720deg);
-        }
-    }
+
+<style>
+	.h-px {
+			width: 2px;
+			height: 75px;
+			content: " ";
+	}
+
+  :global(.splide__pagination__page) {
+      transform: none !important;
+      background-color: grey !important;
+  }
+
+  :global(.splide__pagination__page.is-active) {
+      background-color: white !important;
+			opacity: 1 !important;
+  }
+
+	:global(.splide__pagination) {
+			bottom: 3px;
+	}
+
+
 </style>
