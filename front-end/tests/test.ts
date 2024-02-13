@@ -20,12 +20,6 @@ test('Profile summary page as expected for unauthorized', async ({ page }) => {
 	await page.waitForURL('**/');
 });
 
-test('Menu page as expected for unauthorized', async ({ page }) => {
-	await page.goto('/menu');
-
-	await page.waitForURL('**/');
-});
-
 test('Secure access page as expected for unauthorized', async ({ page }) => {
 	await page.goto('/secure-access');
 

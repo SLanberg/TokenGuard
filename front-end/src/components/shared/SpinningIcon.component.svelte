@@ -1,5 +1,5 @@
 <script lang="ts">
-	import roulette_icon from '$lib/images/roulette_icon.svg';
+	import roulette_icon from '$lib/images/icons/roulette_icon.svg';
 
 	let spinning = false;
 

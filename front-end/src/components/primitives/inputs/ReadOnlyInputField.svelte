@@ -2,7 +2,9 @@
 	import { fieldsValidationSignIn } from '../../../stores/loginStore';
 	import attention_sign from '$lib/images/Info_triangle.png';
 
-	export let name: string = 'not-set'
+	export let name: string = 'not-set';
+	export let value: string = ''
+	export let id: string = ''
 </script>
 
 <div
@@ -18,9 +20,10 @@
 	focus-within:hover:border-gold-main"
 >
 	<input
-		required
+		readonly
+		value={value}
 		{name}
-		id={name}
+		id={id}
 		placeholder={name}
 		class="block
 		rounded-[8px]

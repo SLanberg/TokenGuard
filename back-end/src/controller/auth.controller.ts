@@ -92,6 +92,8 @@ export const Login = async (req: Request, res: Response) => {
         where: {telegram_id: telegramID},
     });
 
+    console.log(req.body)
+
     if (!user) {
         return res.status(400).send({
             type: "error",

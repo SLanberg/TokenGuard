@@ -1,11 +1,10 @@
 <script lang="ts">
-	import roulette_icon from '$lib/images/roulette_icon.svg';
-	import PasswordField from '../../components/primitives/inputs/PasswordField.component.svelte';
-	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import { copyContentsOfTheFields } from './profile-summary';
+	import { copyContentsOfTheFields, formatDateTime } from './profile-summary';
 	import { paramsStore } from '../../stores/profileSummaryStore';
 	import { goto } from '$app/navigation';
+	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
+	import ReadOnlyInputField from '../../components/primitives/inputs/ReadOnlyInputField.svelte';
 
 	let showPopUp = true;
 	const handleCopyButton = () => {
@@ -78,7 +77,7 @@
 				<div class="flex-grow h-px left-to-right"></div>
 
 				<div class="logo-container mx-3">
-					<img class="w-6 h-auto" src={roulette_icon} alt="Roulette icon" />
+					<SpinningIcon />
 				</div>
 
 				<div class="flex-grow h-px right-to-left"></div>
@@ -87,20 +86,15 @@
 			<h2 class="mb-4 mt-1">Summary</h2>
 
 			<div class="container mx-auto pt-5 w-[300px]">
-				<InputField name="Telegram ID" />
-				<PasswordField name="Password" />
-				<PasswordField name="Confirm password" />
-				<InputField name="Created at" />
-
-				<p>{$paramsStore.telegramId}</p>
-				<p>{$paramsStore.password}</p>
-				<p>{$paramsStore.token}</p>
-				<p>{$paramsStore.createdAt}</p>
+				<ReadOnlyInputField value="{$paramsStore.telegramId}" name="Telegram ID" id="telegramID" />
+				<ReadOnlyInputField value="{$paramsStore.password}" name="Password" id="password" />
+				<ReadOnlyInputField value="{$paramsStore.token}" name="Token" id="token" />
+				<ReadOnlyInputField value="{formatDateTime($paramsStore.createdAt)}" name="Created at" id="createdAt" />
 			</div>
 
 			<div class="mt-12" />
 
-			<BigButton label="Continue" on:click={() => goto('/menu')} />
+			<BigButton label="Continue" on:click={() => goto('/profile')} />
 
 			<div class="mb-10" />
 		</div>

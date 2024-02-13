@@ -5,7 +5,7 @@
 	import { popUpStateLogin } from '../../stores/loginStore';
 	import { userRegistrationRequest } from './sign-up';
 	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
-	import attention_sign from '$lib/images/Info-triangle.png';
+	import attention_sign from '$lib/images/Info_triangle.png';
 	import { fieldsValidationSignUp } from '../../stores/signUpStore';
 </script>
 

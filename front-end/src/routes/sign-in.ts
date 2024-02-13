@@ -15,8 +15,8 @@ export const signInUserRequest = async (event: Event) => {
 	const formEl = event.target as HTMLFormElement;
 
 	const formData = new FormData(formEl);
-	const telegramID = formData.get('telegramID');
-	const password = formData.get('password');
+	const telegramID = formData.get('Telegram ID');
+	const password = formData.get('Password');
 
 	try {
 		const { data } = await axios.post(
@@ -42,7 +42,7 @@ export const signInUserRequest = async (event: Event) => {
 				password: { error: false, message: '' } // No error for password
 			}));
 
-			return await goto('/menu', {});
+			return await goto('/profile', {});
 		}
 	} catch (err: unknown | AxiosError) {
 		if (axios.isAxiosError(err)) {

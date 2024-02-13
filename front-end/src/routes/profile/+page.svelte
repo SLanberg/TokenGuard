@@ -1,13 +1,13 @@
 <script lang="ts">
-	import ton from '$lib/images/ton.svg';
-	import info from '$lib/images/info.svg';
-	import chest from '$lib/images/chest.svg';
-	import community from '$lib/images/community.svg';
-	import cards from '$lib/images/cards.svg';
-	import avatar from '$lib/images/avatar-gif.gif';
-	import logo from '$lib/images/logo.svg';
-	import arrow_down from '$lib/images/union-1.svg';
-	import vault from '$lib/images/vault.svg';
+	import ton from '$lib/images/icons/ton.svg';
+	import info from '$lib/images/icons/info.svg';
+	import chest from '$lib/images/icons/chest.svg';
+	import community from '$lib/images/icons/community.svg';
+	import cards from '$lib/images/icons/cards.svg';
+	import avatar from '$lib/images/avatar_picture.gif';
+	import logo from '$lib/images/icons/logo.svg';
+	import arrow_down from '$lib/images/icons/arrow_down.svg';
+	import vault from '$lib/images/icons/vault.svg';
 	import game2 from '$lib/images/hero/Boss Bear.jpg';
 	import game3 from '$lib/images/hero/money-train-4.webp';
 	import video from '$lib/images/genie.mp4';

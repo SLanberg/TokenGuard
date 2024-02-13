@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { signInUserRequest } from '../sign-in';
 	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
-	import keyFrame from '$lib/images/keyFrame.svg';
+	import keyFrame from '$lib/images/icons/key_frame.svg';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
 </script>
 

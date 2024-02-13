@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 
 export const paramsStore = writable({
-	telegramId: null,
+	telegramId: '',
 	password: '',
-	token: null,
+	token: '',
 	createdAt: ''
 });
 

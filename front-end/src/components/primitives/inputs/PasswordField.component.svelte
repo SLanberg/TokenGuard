@@ -9,13 +9,34 @@
 </script>
 
 <div
-	class="flex items-center mb-3 bg-background-color rounded-[8px] border border-transparent hover:border-gold-third focus-within:border-gold-main focus-within:hover:border-gold-main"
+	class="flex
+	items-center
+	mb-3
+	bg-background-color
+	rounded-[8px]
+	border
+	border-transparent
+	hover:border-gold-third
+	focus-within:border-gold-main
+	focus-within:hover:border-gold-main"
 >
 	<input
+		required
 		id={name}
 		{name}
 		placeholder={name}
-		class="placeholder-input-color rounded-[8px] block w-[260px] p-2.5 text-sm text-white outline-none"
+		class="rounded-[8px]
+		block
+		w-[260px]
+		p-2.5
+		text-sm
+		text-white
+		outline-none
+		border-none
+		bg-transparent
+		focus:ring-0
+		focus:border-none
+"
 		type={revealPassword ? 'text' : 'password'}
 	/>
 	<button on:click|preventDefault={toggleRevealPassword}>
