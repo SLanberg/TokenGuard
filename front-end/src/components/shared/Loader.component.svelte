@@ -1,8 +1,8 @@
 <script>
-	import { loading } from '../../routes/new-design/spinner/loading';
+	import { loadingStore } from '../../stores/loadingStore';
 </script>
 
-{#if $loading}
+{#if $loadingStore}
 	<div class="items-center justify-center">
 		<div class="spinner-section ready-to-play">
 			<div class="spinner">

@@ -17,9 +17,7 @@
 <div class="flex h-screen">
 	<div
 		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-	>
-
-	</div>
+	></div>
 	{#if $handleLoadEventsProfilePage.loadProfilePage}
 		<div
 			class="absolute inset-1/2 mx-auto mb-10 mr-3 mt-32 -translate-x-1/2 -translate-y-1/2 transform rounded-full"

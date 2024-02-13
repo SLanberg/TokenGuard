@@ -3,10 +3,10 @@
 	import '../app.css';
 
 	import { navigating } from '$app/stores';
-	import { loading } from './new-design/spinner/loading';
+	import { loadingStore } from '../stores/loadingStore';
 	import Loader from '../components/shared/Loader.component.svelte';
 
-	$: $loading = !!$navigating;
+	$: $loadingStore = !!$navigating;
 
 	import '../interceptors/axios';
 </script>
@@ -38,7 +38,7 @@
 	}
 
 	:global(*) {
-      font-family: 'Prompt', serif;
+		font-family: 'Prompt', serif;
 	}
 	:global(h1) {
 		font-size: 32px;

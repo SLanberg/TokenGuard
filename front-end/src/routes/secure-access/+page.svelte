@@ -1,65 +1,48 @@
 <script lang="ts">
-	import { tokenSubmitRequest } from './secure-access';
-	import { handleLoadEventsSecureAccess } from '../../stores/secureAccessStore';
-	import Loader from '../../components/shared/Loader.component.svelte';
+	import { signInUserRequest } from '../sign-in';
+	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
+	import keyFrame from '$lib/images/keyFrame.svg';
+	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
 </script>
 
-<div class="flex h-screen">
-	<div
-		class="m-auto h-[500px] w-[500px] rounded-[10px] bg-[#2e2e3e] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-	>
-		<form on:submit|preventDefault={tokenSubmitRequest}>
-			<div class="m-auto w-fit">
-				<label class="text-left text-sm font-medium text-[#B8B8B8]" for="accessToken"
-					>Access Token</label
-				>
-				<br />
-				<input
-					class="mb-5
-					block
-					w-[300px]
-					rounded-[10px]
-					border
-					border-gray-600
-					bg-[#13161E]
-					p-2.5
-					text-sm
-					text-white
-					placeholder-gray-400
-					outline-none
-					focus:border-[#5a70ec]
-					focus:ring-[#5a70ec]"
-					type="text"
-					name="accessToken"
-					id="accessToken"
-					required
-				/>
-				<button
-					class="mb-10
-							w-[300px]
-							rounded-[10px]
-							bg-[#43444A]
-							px-4
-							py-2
-							font-bold
-							text-white
-							transition
-							duration-500
-							ease-in-out
-							hover:bg-[#55565b]
-							flex
-							justify-center
-							align-middle"
-				>
-					Submit
-					{#if $handleLoadEventsSecureAccess.secretKeyLoad}
-						<Loader />
-					{/if}
-				</button>
+<svelte:head>
+	<title>Security Check | Whale</title>
+</svelte:head>
+
+<div class="min-h-screen flex items-center justify-center">
+	<div class="text-center">
+		<h1>Whale</h1>
+
+		<div class="border-gold-main border-2 rounded-[24px] w-fit h-fit pl-5 pr-5 pt-5">
+			<div class="flex items-center justify-between">
+				<div class="flex-grow h-px left-to-right"></div>
+
+				<div class="logo-container mx-3">
+					<img src={keyFrame} alt="key frame icon" />
+				</div>
+
+				<div class="flex-grow h-px right-to-left"></div>
 			</div>
-		</form>
+
+			<h2 class="mb-4 mt-1">Vault</h2>
+
+			<form method="POST" on:submit|preventDefault={signInUserRequest}>
+				<div class="container mx-auto pt-5 w-[300px]">
+					<InputField name="Security Key" />
+				</div>
+				<BigButton label="Submit" />
+			</form>
+
+			<div class="mb-20"></div>
+		</div>
 	</div>
 </div>
 
 <style>
+	.left-to-right {
+		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
+	.right-to-left {
+		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
 </style>

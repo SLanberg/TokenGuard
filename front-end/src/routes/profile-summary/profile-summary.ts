@@ -8,17 +8,17 @@ export const copyContentsOfTheFields = () => {
 	// const tokenInput = document.querySelector('#token') as HTMLInputElement;
 	// const createdAtInput = document.querySelector('#createdAt') as HTMLInputElement;
 
-// 	const inputData = {
-// 		telegramId: telegramIdInput.value,
-// 		password: passwordInput.value,
-// 		token: tokenInput.value,
-// 		createdAt: createdAtInput.value
-// 	};
-//
-// 	navigator.clipboard.writeText(`Telegram id: ${inputData.telegramId}
-// Password: ${inputData.password}
-// Token: ${inputData.token}
-// Created at: ${inputData.createdAt}`);
+	// 	const inputData = {
+	// 		telegramId: telegramIdInput.value,
+	// 		password: passwordInput.value,
+	// 		token: tokenInput.value,
+	// 		createdAt: createdAtInput.value
+	// 	};
+	//
+	// 	navigator.clipboard.writeText(`Telegram id: ${inputData.telegramId}
+	// Password: ${inputData.password}
+	// Token: ${inputData.token}
+	// Created at: ${inputData.createdAt}`);
 
 	toast.success('Copied', {
 		position: 'bottom-center',

@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
 	import BigButton from '../components/primitives/buttons/BigButton.svelte';
 	import { signInUserRequest } from './sign-in';
@@ -14,7 +13,8 @@
 
 <div class="min-h-screen flex items-center justify-center">
 	{#if $popUpStateLogin.showPopUp}
-		<div class="z-10
+		<div
+			class="z-10
                 absolute
                 border-2
                 border-gold-third
@@ -29,19 +29,21 @@
                 flex
                 flex-col
                 justify-center
-                items-center">
+                items-center"
+		>
+			<p class="text-center p-5 text-gold-main -mt-4">
+				You entered incorrect security token. You were forcefully logged out.
+			</p>
 
-			<p class="text-center p-5 text-gold-main -mt-4">You entered incorrect security token. You were forcefully logged out.</p>
-
-			<button class="text-center
+			<button
+				class="text-center
             bg-gradient-to-r
             from-gold-dark
             to-gold-lighter-dark
             w-[80px]
             p-2
-            rounded-[8px]"
-			><p>Dismiss</p></button>
-
+            rounded-[8px]"><p>Dismiss</p></button
+			>
 		</div>
 	{/if}
 
@@ -76,23 +78,23 @@
 
 			<p class="m-10">
 				New member? <span
-				class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
-			>
-                    <a href="/sign-up"><b>Sign up</b></a>
-                </span>
+					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
+				>
+					<a href="/sign-up"><b>Sign up</b></a>
+				</span>
 			</p>
 		</div>
 	</div>
 </div>
 
 <style>
-    .text-shadow-custom {
-        text-shadow: 0 4px 50px hsl(35, 100%, 80%);
-    }
-    .left-to-right {
-        background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
-    .right-to-left {
-        background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
+	.text-shadow-custom {
+		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
+	}
+	.left-to-right {
+		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
+	.right-to-left {
+		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
 </style>

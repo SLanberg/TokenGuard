@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import { handleLoadEventsLogOut } from '../../stores/profileState';
+import { handleLoadEventsLogOut } from '../../stores/profileStore';
 import axios from 'axios';
 
 export const logOutRequest = async (): Promise<void> => {

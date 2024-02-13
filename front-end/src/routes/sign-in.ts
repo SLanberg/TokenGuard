@@ -14,7 +14,6 @@ export const signInUserRequest = async (event: Event) => {
 	// Send API request to the BackEnd
 	const formEl = event.target as HTMLFormElement;
 
-
 	const formData = new FormData(formEl);
 	const telegramID = formData.get('telegramID');
 	const password = formData.get('password');

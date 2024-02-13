@@ -14,17 +14,17 @@
 </script>
 
 <div role="complementary" on:mouseenter={toggleRotation}>
-	<img class="{spinning ? 'spin-animation' : ''}" src={roulette_icon} alt='Roulette wheel' />
+	<img class={spinning ? 'spin-animation' : ''} src={roulette_icon} alt="Roulette wheel" />
 </div>
 
 <style>
-    .spin-animation {
-        animation-duration: 1s;
-        animation-name: spin;
-    }
-    @keyframes spin {
-        100% {
-            transform: rotate(1080deg);
-        }
-    }
+	.spin-animation {
+		animation-duration: 1s;
+		animation-name: spin;
+	}
+	@keyframes spin {
+		100% {
+			transform: rotate(1080deg);
+		}
+	}
 </style>

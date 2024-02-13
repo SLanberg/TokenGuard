@@ -15,7 +15,8 @@
 
 <div class="min-h-screen flex items-center justify-center">
 	{#if $popUpStateLogin.showPopUp}
-		<div class="z-10
+		<div
+			class="z-10
                 absolute
                 border
                 border-gold-third
@@ -30,19 +31,21 @@
                 flex
                 flex-col
                 justify-center
-                items-center">
+                items-center"
+		>
+			<p class="text-center p-5 text-gold-main -mt-4">
+				You entered incorrect security token. You were forcefully logged out.
+			</p>
 
-			<p class="text-center p-5 text-gold-main -mt-4">You entered incorrect security token. You were forcefully logged out.</p>
-
-			<button class="text-center
+			<button
+				class="text-center
 			bg-gradient-to-r
 			from-gold-dark
 			to-gold-lighter-dark
 			w-[80px]
 			p-2
-			rounded-[8px]"
-			><p>Dismiss</p></button>
-
+			rounded-[8px]"><p>Dismiss</p></button
+			>
 		</div>
 	{/if}
 
@@ -67,11 +70,13 @@
 					<InputField name="Telegram ID" />
 
 					{#if $fieldsValidationSignUp.telegramId.error}
-						<div class="flex
+						<div
+							class="flex
 									items-center
 									w-fit
 									-mt-2.5
-									mb-2.5">
+									mb-2.5"
+						>
 							<img class="h-3 mr-0.5" src={attention_sign} alt="error-sign" />
 							<span class="text-red-600 text-xs">{$fieldsValidationSignUp.telegramId.message}</span>
 						</div>
@@ -85,17 +90,15 @@
 
 				<BigButton label="Sign Up" />
 			</form>
-
-
 		</div>
 	</div>
 </div>
 
 <style>
-    .left-to-right {
-        background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
-    .right-to-left {
-        background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
+	.left-to-right {
+		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
+	.right-to-left {
+		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+	}
 </style>

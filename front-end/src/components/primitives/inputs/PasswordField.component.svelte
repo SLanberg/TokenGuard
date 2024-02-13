@@ -1,7 +1,7 @@
 <script lang="ts">
 	let revealPassword = false;
 
-	export let name: string = "not-set";
+	export let name: string = 'not-set';
 
 	function toggleRevealPassword() {
 		revealPassword = !revealPassword;
@@ -13,7 +13,7 @@
 >
 	<input
 		id={name}
-		name={name}
+		{name}
 		placeholder={name}
 		class="placeholder-input-color rounded-[8px] block w-[260px] p-2.5 text-sm text-white outline-none"
 		type={revealPassword ? 'text' : 'password'}
@@ -38,5 +38,3 @@
 		{/if}
 	</button>
 </div>
-
-
