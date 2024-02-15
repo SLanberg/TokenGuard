@@ -3,6 +3,7 @@
 	import attention_sign from '$lib/images/Info_triangle.png';
 
 	export let name: string = 'not-set'
+	export let id: string = 'not-set'
 </script>
 
 <div
@@ -20,7 +21,7 @@
 	<input
 		required
 		{name}
-		id={name}
+		id={id}
 		placeholder={name}
 		class="block
 		rounded-[8px]

@@ -2,6 +2,7 @@
 	let revealPassword = false;
 
 	export let name: string = 'not-set';
+	export let id: string = 'not-set'
 
 	function toggleRevealPassword() {
 		revealPassword = !revealPassword;
@@ -22,7 +23,7 @@
 >
 	<input
 		required
-		id={name}
+		id={id}
 		{name}
 		placeholder={name}
 		class="rounded-[8px]

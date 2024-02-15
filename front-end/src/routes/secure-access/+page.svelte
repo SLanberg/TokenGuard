@@ -28,7 +28,7 @@
 
 			<form method="POST" on:submit|preventDefault={tokenSubmitRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Access Token" />
+					<InputField name="Access Token" id="accessToken" />
 				</div>
 				<BigButton label="Submit" />
 			</form>

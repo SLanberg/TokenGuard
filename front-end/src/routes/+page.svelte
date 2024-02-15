@@ -16,20 +16,20 @@
 		<div
 			class="z-10
 						h-fit
-                absolute
-                border-2
-                border-gold-third
-                transform
-                inset-1/2
-                -translate-x-1/2
-                -translate-y-1/2
-                bg-background-color
-                w-[200px]
-                rounded-[24px]
-                flex
-                flex-col
-                justify-center
-                items-center"
+						absolute
+						border-2
+						border-gold-third
+						transform
+						inset-1/2
+						-translate-x-1/2
+						-translate-y-1/2
+						bg-background-color
+						w-[200px]
+						rounded-[24px]
+						flex
+						flex-col
+						justify-center
+						items-center"
 		>
 			<p class="text-center p-5 text-gold-main">
 				You entered incorrect security token or your session is expired.
@@ -73,8 +73,8 @@
 
 			<form method="POST" on:submit|preventDefault={signInUserRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" />
-					<PasswordField name="Password" />
+					<InputField name="Telegram ID" id="telegramID" />
+					<PasswordField name="Password" id="password" />
 
 					<div class="text-left mb-10 duration-500 text-white/50 hover:text-white cursor-pointer">
 						<p>Forgot password?</p>

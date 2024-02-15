@@ -68,7 +68,7 @@
 
 			<form class="mb-10" method="POST" on:submit|preventDefault={userRegistrationRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" />
+					<InputField name="Telegram ID" id="telegramID" />
 
 					{#if $fieldsValidationSignUp.telegramId.error}
 						<div
@@ -83,8 +83,8 @@
 						</div>
 					{/if}
 
-					<PasswordField name="Password" />
-					<PasswordField name="Confirm password" />
+					<PasswordField name="Password" id="password" />
+					<PasswordField name="Confirm password" id="confirmPassword" />
 				</div>
 
 				<div class="mt-12" />

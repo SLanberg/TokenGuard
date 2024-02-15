@@ -22,22 +22,21 @@
 	{#if showPopUp}
 		<div
 			class="z-10
-                absolute
-                border-2
-                border-gold-third
-                transform
-                inset-1/2
-                -translate-x-1/2
-                -translate-y-1/2
-                bg-background-color
-                w-[200px]
-                h-[150px]
-                rounded-[24px]
-                flex
-                flex-col
-                justify-center
-                items-center"
-		>
+						absolute
+						border-2
+						border-gold-third
+						transform
+						inset-1/2
+						-translate-x-1/2
+						-translate-y-1/2
+						bg-background-color
+						w-[200px]
+						h-[150px]
+						rounded-[24px]
+						flex
+						flex-col
+						justify-center
+						items-center">
 			<p class="text-center p-5 text-gold-main -mt-4">
 				Copy the data by clicking on the icon and save it to your notes.
 			</p>
@@ -51,9 +50,9 @@
 			w-[80px]
 			p-2
 			rounded-[8px]
-            flex
-            justify-center
-            items-center"
+			flex
+			justify-center
+			items-center"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
 					<path

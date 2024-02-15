@@ -7,10 +7,8 @@
 	import video from '$lib/images/hero/genie.mp4';
 	import title from '$lib/images/hero/genie x pixies.png';
 
-	import '@splidejs/svelte-splide/css';
-
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-	import '@splidejs/svelte-splide/css/core';
+	import '@splidejs/svelte-splide/css';
 
 	import Navbar from '../../components/shared/Navbar.component.svelte';
 	import Slider from '../../components/shared/Slider.component.svelte';
