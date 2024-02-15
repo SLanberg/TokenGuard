@@ -1,6 +1,6 @@
-import {Router} from "express"
-import {AuthenticatedUser, Login, Logout, Refresh, Register} from "./controller/auth.controller";
-import {SecretKey} from "./controller/secret.controller";
+import { Router } from "express"
+import { AuthenticatedUser, Login, Logout, Refresh, Register } from "./controller/auth.controller";
+import { SecretKey } from "./controller/secret.controller";
 
 export const routes = (router: Router) => {
     router.get('/api/user', AuthenticatedUser);

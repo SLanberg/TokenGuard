@@ -1,8 +1,8 @@
 require('dotenv').config()
 
 import express from 'express';
-import {DataSource} from "typeorm";
-import {routes} from "./routes";
+import { DataSource } from "typeorm";
+import { routes } from "./routes";
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 

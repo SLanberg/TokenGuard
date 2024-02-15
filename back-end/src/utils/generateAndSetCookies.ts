@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import { sign } from 'jsonwebtoken';
 
-
 export const generateAndSetCookies = (
 	user_id: number,
 	accessTokenSecret: string,

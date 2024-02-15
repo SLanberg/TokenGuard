@@ -1,8 +1,8 @@
-import {Request, Response} from "express";
-import {verify} from "jsonwebtoken";
-import {dataSource} from "../index";
-import {User} from "../entity/user.entity";
-import {SecurityToken} from "../entity/securityToken.entity";
+import { Request, Response } from "express";
+import { verify } from "jsonwebtoken";
+import { dataSource } from "../index";
+import { User } from "../entity/user.entity";
+import { SecurityToken } from "../entity/securityToken.entity";
 
 export const SecretKey = async (req: Request, res: Response) => {
     const cookie = req.cookies['access_token'];

@@ -1,11 +1,11 @@
-import {Request, Response} from "express";
-import {dataSource} from "../index";
-import {User} from "../entity/user.entity";
+import { Request, Response } from "express";
+import { dataSource } from "../index";
+import { User } from "../entity/user.entity";
 import bcryptjs from "bcryptjs";
-import {sign, verify} from "jsonwebtoken";
-import {generateToken} from "../utils/tokenGeneration";
-import {SecurityToken} from "../entity/securityToken.entity";
-import {SecretCode} from "../entity/secretCode.entity";
+import { sign, verify } from "jsonwebtoken";
+import { generateToken } from "../utils/tokenGeneration";
+import { SecurityToken } from "../entity/securityToken.entity";
+import { SecretCode } from "../entity/secretCode.entity";
 
 import { generateAndSetCookies } from '../utils/generateAndSetCookies';
 
@@ -78,8 +78,6 @@ export const Login = async (req: Request, res: Response) => {
         where: {telegram_id: telegramID},
     });
 
-    console.log(req.body)
-
     if (!user) {
         return res.status(400).send({
             type: "error",
@@ -108,6 +106,12 @@ export const Login = async (req: Request, res: Response) => {
 export const AuthenticatedUser = async (req: Request, res: Response) => {
     try {
         const cookie = req.cookies['access_token'];
+
+        if (!cookie) {
+            return res.status(401).send({
+                message: 'unauthenticated'
+            });
+        }
 
         const payload: any =
             verify(cookie, process.env.ACCESS_SECRET || '');
@@ -143,6 +147,12 @@ export const AuthenticatedUser = async (req: Request, res: Response) => {
 export const Refresh = async (req: Request, res: Response) => {
     try {
         const cookie = req.cookies['refresh_token'];
+
+        if (!cookie) {
+            return res.status(401).send({
+                message: 'unauthenticated'
+            });
+        }
 
         const payload: any = verify(cookie, process.env.REFRESH_SECRET || '');
 
