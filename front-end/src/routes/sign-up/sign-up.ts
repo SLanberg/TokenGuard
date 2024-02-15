@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import { fieldsValidationSignUp, handleLoadEventsSignUp } from '../../stores/signUpStore';
+import { fieldsValidationSignUp } from '../../stores/signUpStore';
 import { paramsStore } from '../../stores/accountSummaryStore';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,10 +26,6 @@ export const userRegistrationRequest = async (event: Event) => {
 		telegramId: { error: false, message: '' },
 		password: { error: false, message: '' },
 		confirmPassword: { error: false, message: '' }
-	}));
-
-	handleLoadEventsSignUp.update(() => ({
-		loadingSingUpPage: true
 	}));
 
 	// Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
@@ -64,7 +60,7 @@ export const userRegistrationRequest = async (event: Event) => {
 				return store;
 			});
 
-			await goto('/profile-summary', {});
+			await goto('/account-summary', {});
 		}
 	} catch (err: unknown | AxiosError) {
 		if (axios.isAxiosError(err)) {
@@ -80,9 +76,5 @@ export const userRegistrationRequest = async (event: Event) => {
 		} else {
 			// Stock error
 		}
-
-		handleLoadEventsSignUp.update(() => ({
-			loadingSingUpPage: false
-		}));
 	}
 };

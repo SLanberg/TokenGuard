@@ -95,7 +95,7 @@
 
 			<div class="mt-12" />
 
-			<BigButton label="Continue" on:click={() => goto('/profile')} />
+			<BigButton label="Continue" on:click={() => goto('/casino')} />
 
 			<div class="mb-10" />
 		</div>
@@ -103,10 +103,4 @@
 </div>
 
 <style>
-	.left-to-right {
-		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
-	.right-to-left {
-		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
 </style>

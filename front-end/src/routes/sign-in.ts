@@ -42,7 +42,7 @@ export const signInUserRequest = async (event: Event) => {
 				password: { error: false, message: '' } // No error for password
 			}));
 
-			return await goto('/profile', {});
+			return await goto('/casino', {});
 		}
 	} catch (err: unknown | AxiosError) {
 		if (axios.isAxiosError(err)) {

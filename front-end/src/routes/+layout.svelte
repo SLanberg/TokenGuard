@@ -64,4 +64,12 @@
 		padding-left: 15px;
 		background: none;
 	}
+
+  :global(.left-to-right) {
+      background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+  }
+
+  :global(.right-to-left) {
+      background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
+  }
 </style>

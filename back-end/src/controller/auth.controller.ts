@@ -10,6 +10,7 @@ import { SecretCode } from "../entity/secretCode.entity";
 import { generateAndSetCookies } from '../utils/generateAndSetCookies';
 
 export const Register = async (req: Request, res: Response) => {
+    // This should be done of course at the back-end and be hashed.
     const secretKey: bigint = BigInt("94592942990");
 
     const {password, telegramID} = req.body;

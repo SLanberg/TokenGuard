@@ -5,7 +5,3 @@ export const fieldsValidationSignUp = writable({
 	password: { error: false, message: '' },
 	confirmPassword: { error: false, message: '' }
 });
-
-export const handleLoadEventsSignUp = writable({
-	loadingSingUpPage: false
-});

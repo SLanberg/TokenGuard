@@ -5,10 +5,6 @@ export const fieldsValidationSignIn = writable({
 	password: { error: false, message: '' }
 });
 
-export const handleLoadEventsSignIn = writable({
-	loadingSingInPage: false
-});
-
 export const popUpStateLogin = writable({
 	showPopUp: false
 });

@@ -14,7 +14,14 @@ export const SecretKey = async (req: Request, res: Response) => {
         });
     }
 
-    const payload: any = verify(cookie, process.env.ACCESS_SECRET || '');
+    let payload: any;
+    try {
+        payload = verify(cookie, process.env.ACCESS_SECRET || '');
+    } catch (error) {
+        return res.status(401).send({
+            message: 'unauthenticated'
+        });
+    }
 
     if (!payload) {
         return res.status(401).send({

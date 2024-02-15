@@ -34,7 +34,8 @@
                 items-center"
 		>
 			<p class="text-center p-5 text-gold-main -mt-4">
-				You entered incorrect security token. You were forcefully logged out.
+				You entered incorrect security token or your session is expired.
+				You were forcefully logged out.
 			</p>
 
 			<button
@@ -95,10 +96,5 @@
 </div>
 
 <style>
-	.left-to-right {
-		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
-	.right-to-left {
-		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
+
 </style>

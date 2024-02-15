@@ -15,6 +15,7 @@
 	{#if $popUpStateLogin.showPopUp}
 		<div
 			class="z-10
+						h-fit
                 absolute
                 border-2
                 border-gold-third
@@ -24,15 +25,15 @@
                 -translate-y-1/2
                 bg-background-color
                 w-[200px]
-                h-[150px]
                 rounded-[24px]
                 flex
                 flex-col
                 justify-center
                 items-center"
 		>
-			<p class="text-center p-5 text-gold-main -mt-4">
-				You entered incorrect security token. You were forcefully logged out.
+			<p class="text-center p-5 text-gold-main">
+				You entered incorrect security token or your session is expired.
+				You were forcefully logged out.
 			</p>
 
 			<button
@@ -47,7 +48,8 @@
             to-gold-lighter-dark
             w-[80px]
             p-2
-            rounded-[8px]">
+            rounded-[8px]
+						mb-4">
 				<p>Dismiss</p>
 			</button>
 		</div>
@@ -96,11 +98,5 @@
 <style>
 	.text-shadow-custom {
 		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
-	}
-	.left-to-right {
-		background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-	}
-	.right-to-left {
-		background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
 	}
 </style>

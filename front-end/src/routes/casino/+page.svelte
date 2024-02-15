@@ -30,12 +30,11 @@
 
 	onMount(() => {
 		initFlowbite();
-
 	});
 </script>
 
 <svelte:head>
-	<title>Play Ground | Whale</title>
+	<title>Casino | Whale</title>
 </svelte:head>
 
 <Navbar />
@@ -60,6 +59,7 @@
 							{#if type === 'video'}
 								<video class="object-cover md:rounded-[8px] w-full" height="100%" autoplay loop>
 									<source src={source} type="video/mp4" />
+									<track kind="captions" src="path/to/captions.vtt" srclang="en" label="English captions" />
 								</video>
 								<img src={title} class="absolute inset-0 mx-auto my-auto" alt="Hero" />
 

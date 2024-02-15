@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { signInUserRequest } from '../sign-in';
-	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import keyFrame from '$lib/images/icons/key_frame.svg';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import { paramsStore } from '../../stores/accountSummaryStore';
 	import ReadOnlyInputField from '../../components/primitives/inputs/ReadOnlyInputField.svelte';
 	import { secretKeyParam } from '../../stores/secureAccessStore';
 	import { goto } from '$app/navigation';
@@ -33,7 +30,7 @@
 			<div class="container mx-auto pt-5 w-[300px]">
 				<ReadOnlyInputField value="{$secretKeyParam.secretKey}" name="Security Key" id="securityKey" />
 			</div>
-			<BigButton on:click={() => goto('/profile')} label="Go back to Casino" />
+			<BigButton on:click={() => goto('/casino')} label="Go back to Casino" />
 
 			<div class="mb-20"></div>
 		</div>
@@ -41,10 +38,4 @@
 </div>
 
 <style>
-    .left-to-right {
-        background: linear-gradient(to right, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
-    .right-to-left {
-        background: linear-gradient(to left, hsl(200, 6%, 17%), hsl(35, 100%, 80%));
-    }
 </style>

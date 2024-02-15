@@ -15,7 +15,7 @@ test('Sign-up page as expected for unauthorized', async ({ page }) => {
 });
 
 test('Profile summary page as expected for unauthorized', async ({ page }) => {
-	await page.goto('/profile-summary');
+	await page.goto('/account-summary');
 
 	await page.waitForURL('**/');
 });
@@ -27,7 +27,7 @@ test('Secure access page as expected for unauthorized', async ({ page }) => {
 });
 
 test('Profile page as expected for unauthorized', async ({ page }) => {
-	await page.goto('/profile');
+	await page.goto('/casino');
 
 	await page.waitForURL('**/');
 });

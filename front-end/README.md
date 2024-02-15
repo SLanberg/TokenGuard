@@ -27,7 +27,7 @@ and a profile page with login authentication.
 
 ### 3. Profile Page and Login:
 
-- Accessing the /profile page requires users to log in.
+- Accessing the /casino page requires users to log in.
 - Users must enter their Telegram ID and password to log in.
 - Validation of the fields.
 

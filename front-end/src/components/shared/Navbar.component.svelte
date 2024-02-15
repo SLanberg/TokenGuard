@@ -3,7 +3,7 @@
 	import ton from '$lib/images/icons/ton.svg';
 	import avatar from '$lib/images/avatar_picture.gif';
 	import arrow_down from '$lib/images/icons/arrow_down.svg';
-	import { logOutRequest } from '../../routes/profile/profile.js';
+	import { logOutRequest } from '../../routes/casino/casino.js';
 	import { onMount } from 'svelte';
 
 	let isOpen = false;
