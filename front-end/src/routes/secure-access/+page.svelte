@@ -3,6 +3,15 @@
 	import keyFrame from '$lib/images/icons/key_frame.svg';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
 	import { tokenSubmitRequest } from './secure-access';
+
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
+
+	onMount(async () => {
+		await checkUserAuthentication({
+			expectedToBeAuthenticated: true
+		});
+	});
 </script>
 
 <svelte:head>

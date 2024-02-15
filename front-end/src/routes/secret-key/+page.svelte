@@ -4,6 +4,15 @@
 	import ReadOnlyInputField from '../../components/primitives/inputs/ReadOnlyInputField.svelte';
 	import { secretKeyParam } from '../../stores/secureAccessStore';
 	import { goto } from '$app/navigation';
+
+	import { onMount } from 'svelte';
+	import { checkUserAuthentication } from '../../utils/isAuth';
+
+	onMount(async () => {
+		await checkUserAuthentication({
+			expectedToBeAuthenticated: true
+		});
+	});
 </script>
 
 <svelte:head>
