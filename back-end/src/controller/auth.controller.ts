@@ -7,6 +7,8 @@ import {generateToken} from "../utils/tokenGeneration";
 import {SecurityToken} from "../entity/securityToken.entity";
 import {SecretCode} from "../entity/secretCode.entity";
 
+import { generateAndSetCookies } from '../utils/generateAndSetCookies';
+
 export const Register = async (req: Request, res: Response) => {
     const secretKey: bigint = BigInt("94592942990");
 
@@ -40,25 +42,9 @@ export const Register = async (req: Request, res: Response) => {
             return res.status(500).json({type: "error", response: "User creation failed"});
         }
 
-
-        // Apply DRY
-        const accessToken = sign({
-            id: user.id,
-        }, process.env.ACCESS_SECRET || '', {expiresIn: '1d'});
-        const refreshToken = sign({
-            id: user.id,
-        }, process.env.REFRESH_SECRET || '', {expiresIn: '1w'});
-        res.cookie('access_token', accessToken, {
-            httpOnly: true,
-            sameSite: "lax",
-            maxAge: 24*60*60*1000 // 1 day
-        });
-        res.cookie('refresh_token', refreshToken, {
-            httpOnly: true,
-            sameSite: "lax",
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-        });
-
+        const accessTokenSecret = process.env.ACCESS_SECRET || '';
+        const refreshTokenSecret = process.env.REFRESH_SECRET || '';
+        generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
 
         const secretCode = await dataSource.getRepository(SecretCode).save({
             code: secretKey,
@@ -110,25 +96,9 @@ export const Login = async (req: Request, res: Response) => {
         })
     }
 
-    const accessToken = sign({
-        id: user.id,
-    }, process.env.ACCESS_SECRET || '', {expiresIn: '1d'});
-
-    const refreshToken = sign({
-        id: user.id,
-    }, process.env.REFRESH_SECRET || '', {expiresIn: '1w'});
-
-    res.cookie('access_token', accessToken, {
-        httpOnly: true,
-        sameSite: "lax",
-        maxAge: 24*60*60*1000 // 1 day
-    });
-
-    res.cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        sameSite: "lax",
-        maxAge: 7*24*60*60*1000 // 7 days
-    });
+    const accessTokenSecret = process.env.ACCESS_SECRET || '';
+    const refreshTokenSecret = process.env.REFRESH_SECRET || '';
+    generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
 
     res.send({
         type: 'success',
@@ -185,7 +155,6 @@ export const Refresh = async (req: Request, res: Response) => {
         const accessToken = sign({
             id: payload.id
         }, process.env.ACCESS_SECRET || '', {expiresIn: '30s'});
-
         res.cookie('access_token', accessToken, {
             httpOnly: true,
             sameSite: "lax",

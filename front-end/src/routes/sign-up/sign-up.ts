@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
 import { fieldsValidationSignUp, handleLoadEventsSignUp } from '../../stores/signUpStore';
-import { paramsStore } from '../../stores/profileSummaryStore';
+import { paramsStore } from '../../stores/accountSummaryStore';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios, { type AxiosError } from 'axios';

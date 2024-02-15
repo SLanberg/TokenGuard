@@ -74,7 +74,7 @@
 								role="menuitem">Account</a
 							>
 							<a
-									href="/"
+									href="/secure-access"
 									class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
 									role="menuitem">Secret Key</a
 							>

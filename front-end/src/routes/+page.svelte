@@ -36,14 +36,20 @@
 			</p>
 
 			<button
+				on:click={() => {
+						popUpStateLogin.update(() => ({
+								showPopUp: false
+							}));
+				}}
 				class="text-center
             bg-gradient-to-r
             from-gold-dark
             to-gold-lighter-dark
             w-[80px]
             p-2
-            rounded-[8px]"><p>Dismiss</p></button
-			>
+            rounded-[8px]">
+				<p>Dismiss</p>
+			</button>
 		</div>
 	{/if}
 

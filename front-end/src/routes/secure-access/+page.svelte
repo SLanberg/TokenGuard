@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { signInUserRequest } from '../sign-in';
 	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import keyFrame from '$lib/images/icons/key_frame.svg';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
+	import { tokenSubmitRequest } from './secure-access';
 </script>
 
 <svelte:head>
@@ -26,9 +26,9 @@
 
 			<h2 class="mb-4 mt-1">Vault</h2>
 
-			<form method="POST" on:submit|preventDefault={signInUserRequest}>
+			<form method="POST" on:submit|preventDefault={tokenSubmitRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Security Key" />
+					<InputField name="Access Token" />
 				</div>
 				<BigButton label="Submit" />
 			</form>

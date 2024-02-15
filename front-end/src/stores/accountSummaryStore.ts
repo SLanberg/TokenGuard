@@ -6,7 +6,3 @@ export const paramsStore = writable({
 	token: '',
 	createdAt: ''
 });
-
-export const handleLoadEventsContinue = writable({
-	continueLoad: false
-});

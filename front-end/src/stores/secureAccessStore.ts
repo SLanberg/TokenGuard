@@ -7,7 +7,3 @@ export const handleLoadEventsSecureAccess = writable({
 export const secretKeyParam = writable({
 	secretKey: ''
 });
-
-export const fieldsValidationSecureAccess = writable({
-	invalidToken: { error: false, message: '' }
-});

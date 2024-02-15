@@ -15,6 +15,9 @@
 	import Navbar from '../../components/shared/Navbar.component.svelte';
 	import Slider from '../../components/shared/Slider.component.svelte';
 
+	import { onMount } from 'svelte';
+	import { initFlowbite } from 'flowbite';
+
 
 	const numberOfSlides = 8;
 	const slides = Array.from({ length: numberOfSlides }, (_, index) => index);
@@ -24,6 +27,11 @@
 		{ type: 'image', source: game2, alt: 'Game' },
 		{ type: 'image', source: game3, alt: 'Game' }
 	];
+
+	onMount(() => {
+		initFlowbite();
+
+	});
 </script>
 
 <svelte:head>

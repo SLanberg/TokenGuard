@@ -25,9 +25,7 @@
 	shadow-2xl
 	before:duration-500
 	hover:before:translate-x-80
-	hover:shadow-gold-secondary/10
-
-"
+	hover:shadow-gold-secondary/10"
 >
 	<span class="relative">{label}</span>
 </button>

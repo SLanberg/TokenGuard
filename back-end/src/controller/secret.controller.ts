@@ -8,6 +8,12 @@ export const SecretKey = async (req: Request, res: Response) => {
     const cookie = req.cookies['access_token'];
     const securityToken = req.body.token;
 
+    if (!cookie) {
+        return res.status(401).send({
+            message: 'unauthenticated'
+        });
+    }
+
     const payload: any = verify(cookie, process.env.ACCESS_SECRET || '');
 
     if (!payload) {
@@ -43,9 +49,13 @@ export const SecretKey = async (req: Request, res: Response) => {
             } else {
                 // User account can be warned about possibility of the token leak
                 // message notifying that there was an attempt with the timestamp to access token from another account
-                return res.status(401).json({type: "error", issueWith: "TelegramID", response: "Incorrect Token"});
+                return res.status(401).json({type: "error",
+                    issueWith: "TelegramID",
+                    response: "Incorrect Token"});
             }
     } catch (e) {
-        return res.status(401).json({type: "error", issueWith: "TelegramID", response: "Incorrect Token"});
+        return res.status(401).json({type: "error",
+            issueWith: "TelegramID",
+            response: "Incorrect Token"});
     }
 }

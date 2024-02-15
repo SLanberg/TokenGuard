@@ -6,12 +6,12 @@ export const copyContentsOfTheFields = () => {
 	const tokenInput = document.querySelector('#token') as HTMLInputElement;
 	const createdAtInput = document.querySelector('#createdAt') as HTMLInputElement;
 
-		const inputData = {
-			telegramId: telegramIdInput.value,
-			password: passwordInput.value,
-			token: tokenInput.value,
-			createdAt: createdAtInput.value
-		};
+	const inputData = {
+		telegramId: telegramIdInput.value,
+		password: passwordInput.value,
+		token: tokenInput.value,
+		createdAt: createdAtInput.value
+	};
 
 	navigator.clipboard.writeText(`Telegram id: ${inputData.telegramId}
 	Password: ${inputData.password}
