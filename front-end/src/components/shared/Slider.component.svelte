@@ -24,12 +24,11 @@
   }}>
 		<div class="w-full flex justify-between items-center text-left">
 			<span class="font-bold text-gold-secondary">{label}</span>
-			<div class="splide__arrows -mb-1">
-				<button class="splide__arrow--prev disabled:opacity-35 duration-75"> <img class="h-6" alt="vault" src={arrow_left} /> </button>
-				<button class="splide__arrow--next disabled:opacity-35 duration-75"> <img class="h-6" alt="vault" src={arrow_right} /> </button>
+			<div class="splide__arrows">
+				<button class="splide__arrow--prev disabled:opacity-35 duration-75"><img class="h-6" alt="vault" src={arrow_left} /></button>
+				<button class="splide__arrow--next disabled:opacity-35 duration-75"><img class="h-6" alt="vault" src={arrow_right} /></button>
 			</div>
 		</div>
-
 		<SplideTrack>
 			{#each slides as slide}
 				<SplideSlide>
@@ -39,6 +38,5 @@
 				</SplideSlide>
 			{/each}
 		</SplideTrack>
-
 	</Splide>
 </div>

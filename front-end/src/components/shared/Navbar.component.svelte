@@ -5,7 +5,6 @@
 	import arrow_down from '$lib/images/icons/arrow_down.svg';
 	import { logOutRequest } from '../../routes/profile/profile.js';
 	import { onMount } from 'svelte';
-	import { initFlowbite } from 'flowbite';
 
 	let isOpen = false;
 	function toggleDropdown() {
@@ -23,8 +22,6 @@
 	// Add event listener for clicks on document
 	// to close dropdown when clicking outside
 	onMount(() => {
-		initFlowbite();
-
 		document.addEventListener('click', handleOutsideClick);
 		return () => {
 			document.removeEventListener('click', handleOutsideClick);
@@ -77,10 +74,15 @@
 								role="menuitem">Account</a
 							>
 							<a
+									href="/"
+									class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
+									role="menuitem">Secret Key</a
+							>
+							<a
 								on:click={logOutRequest}
 								href="/"
 								class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d] rounded-b-[8px]"
-								role="menuitem">Sign out</a
+								role="menuitem">Sign Out</a
 							>
 						</div>
 					{/if}

@@ -100,7 +100,7 @@
 				</div>
 			</div>
 
-			<div class="h-px w-[2px] h-[75px] bg-white/10 self-center"></div>
+			<div class="h-px bg-white/10 self-center"></div>
 
 			<button
 				class="flex-1 hover:bg-[#fff]/10 duration-500 hover:rounded-r-[8px] p-4 flex items-center justify-center"
@@ -118,6 +118,8 @@
 <style>
 	.h-px {
 		content: ' ';
+		height: 60px;
+		width: 1px;
 	}
 
 	:global(.splide__pagination__page) {
