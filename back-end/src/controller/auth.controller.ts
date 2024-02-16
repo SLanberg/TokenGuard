@@ -6,82 +6,84 @@ import { sign, verify } from "jsonwebtoken";
 import { generateToken } from "../utils/tokenGeneration";
 import { SecurityToken } from "../entity/securityToken.entity";
 import { SecretCode } from "../entity/secretCode.entity";
-
 import { generateAndSetCookies } from '../utils/generateAndSetCookies';
 import { isPasswordValid } from '../utils/isPasswordValid';
+
 
 export const Register = async (req: Request, res: Response) => {
     // This should be done of course at the back-end and be hashed.
     const secretKey: bigint = BigInt("94592942990");
 
-    const {password, telegramID} = req.body;
+    const {password, confirmPassword, telegramID} = req.body;
 
     try {
-        if (!isPasswordValid(password)) {
-            return res.status(400).json({
-                type: "error",
-                issueWith: "Password",
-                message: "Password does not meet complexity requirements"
+        await dataSource.transaction(async transactionalEntityManager => {
+            const isUserInDb = await transactionalEntityManager.getRepository(User).count({
+                where: { telegram_id: telegramID, },
             });
-        }
+            
+            if (isUserInDb !== 0) {
+                return res.status(409).json({
+                    type: "error",
+                    issueWith: "TelegramID",
+                    message: "Telegram ID already used"});
+            }
 
-        const isUserInDb = await dataSource.getRepository(User).count({
-            where: {
+            if (!isPasswordValid(password)) {
+                return res.status(400).json({
+                    type: "error",
+                    issueWith: "Password",
+                    message: "Password does not meet complexity requirements"
+                });
+            }
+
+            if (password !== confirmPassword) {
+                return res.status(400).json({
+                    type: "error",
+                    issueWith: "Confirm password",
+                    message: "Passwords don't match"
+                });
+            }
+
+            const user = await transactionalEntityManager.getRepository(User).save({
                 telegram_id: telegramID,
-            },
-        });
+                password: await bcryptjs.hash(password, 12),
+            });
 
-        if (isUserInDb !== 0) {
-            return res.status(409).json({
-                type: "error",
-                issueWith: "TelegramID",
-                message: "Telegram ID already used"});
-        }
-    } catch (e) {
-        return res.status(500).json({type: "error",
-            issueWith: "TelegramID",
-            message: "Server Internal Error"});
-    }
+            if (!user) {
+                throw new Error("User creation failed");
+            }
 
-    try {
-        const [user] = await Promise.all([dataSource.getRepository(User).save({
-            telegram_id: telegramID,
-            password: await bcryptjs.hash(password, 12),
-        })]);
+            const accessTokenSecret = process.env.ACCESS_SECRET || '';
+            const refreshTokenSecret = process.env.REFRESH_SECRET || '';
+            generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
 
-        // There is very useful createQueryRunner() function for now skip it but implement after
-        if (!user) {
-            return res.status(500).json({type: "error", response: "User creation failed"});
-        }
+            const secretCode = await transactionalEntityManager.getRepository(SecretCode).save({
+                code: secretKey,
+            });
 
-        const accessTokenSecret = process.env.ACCESS_SECRET || '';
-        const refreshTokenSecret = process.env.REFRESH_SECRET || '';
-        generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
+            const userAddedToDB = await transactionalEntityManager.getRepository(User).findOne({
+                where: {telegram_id: (telegramID)}
+            });
 
-        const secretCode = await dataSource.getRepository(SecretCode).save({
-            code: secretKey,
-        });
+            const securityToken = await transactionalEntityManager.getRepository(SecurityToken).save({
+                user_id: user.id,
+                secret_code_id: secretCode.id,
+                security_token: generateToken(user.id),
+            });
 
-        const userInDb = await dataSource.getRepository(User).findOne({
-            where: {telegram_id: (telegramID)}
-        });
-
-        const securityToken = await dataSource.getRepository(SecurityToken).save({
-            user_id: user.id,
-            secret_code_id: secretCode.id,
-            security_token: generateToken(user.id),
-        });
-
-        return res.send({
-            status: 200,
-            type: 'success',
-            securityToken: securityToken,
-            user: userInDb
+            return res.send({
+                status: 200,
+                type: 'success',
+                securityToken: securityToken,
+                user: userAddedToDB
+            });
         });
     } catch (e) {
-        return res.status(500).json({type: "error", response: "Server Internal Error"});
+        return res.status(500).json({type: "error", response: e});
     }
 }
+
 
 export const Login = async (req: Request, res: Response) => {
     const {password, telegramID} = req.body;

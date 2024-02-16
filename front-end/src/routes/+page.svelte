@@ -96,7 +96,7 @@
 </div>
 
 <style>
-	.text-shadow-custom {
-		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
-	}
+    .text-shadow-custom {
+        text-shadow: 0 4px 50px hsl(35, 100%, 80%);
+    }
 </style>

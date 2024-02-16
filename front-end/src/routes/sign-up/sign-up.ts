@@ -11,21 +11,6 @@ export const userRegistrationRequest = async (event: Event) => {
 	const password: string = formData.get('Password')!.toString();
 	const confirmPassword = formData.get('Confirm password');
 
-	if (password !== confirmPassword) {
-		fieldsValidationSignUp.update((currentValue) => ({
-			...currentValue,
-			confirmPassword: { error: true, message: "Passwords don't match" }
-		}));
-
-		return;
-	}
-
-	fieldsValidationSignUp.update(() => ({
-		telegramId: { error: false, message: '' },
-		password: { error: false, message: '' },
-		confirmPassword: { error: false, message: '' }
-	}));
-
 	// Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
 	// 1. API call to the Telegram API (Probability it is not presented)
 	// 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
@@ -34,7 +19,8 @@ export const userRegistrationRequest = async (event: Event) => {
 			`register`,
 			{
 				telegramID: telegramID,
-				password: password
+				password: password,
+				confirmPassword: confirmPassword
 			},
 			{
 				headers: {
@@ -44,6 +30,12 @@ export const userRegistrationRequest = async (event: Event) => {
 				withCredentials: true
 			}
 		);
+
+		fieldsValidationSignUp.update(() => ({
+			telegramId: { error: false, message: '' },
+			password: { error: false, message: '' },
+			confirmPassword: { error: false, message: '' }
+		}));
 
 		if (data.type === 'success') {
 			// Log the 'user' property
@@ -78,9 +70,19 @@ export const userRegistrationRequest = async (event: Event) => {
 						message: responseData.message || 'An error occurred',
 					}
 				}));
+			} else if (responseData.issueWith === 'Confirm password') {
+				fieldsValidationSignUp.update((currentValue) => ({
+					...currentValue,
+					confirmPassword: {
+						error: true,
+						message: responseData.message || 'An error occurred',
+					}
+				}));
 			}
 		} else {
 			// Stock error
+			// TODO: Here I want to see error to be stored and sent to me for the further investigation.
+			// Something with email would be good to have.
 		}
 	}
 };

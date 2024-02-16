@@ -15,7 +15,6 @@
 
 	import { onMount } from 'svelte';
 	import { initFlowbite } from 'flowbite';
-	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	const numberOfSlides = 8;
 	const slides = Array.from({ length: numberOfSlides }, (_, index) => index);
@@ -28,10 +27,6 @@
 
 	onMount(() => {
 		initFlowbite();
-
-		checkUserAuthentication({
-			expectedToBeAuthenticated: true
-		});
 	});
 </script>
 

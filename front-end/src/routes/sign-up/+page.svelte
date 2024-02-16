@@ -45,8 +45,9 @@
 			to-gold-lighter-dark
 			w-[80px]
 			p-2
-			rounded-[8px]"><p>Dismiss</p></button
-			>
+			rounded-[8px]">
+				<p>Dismiss</p>
+			</button>
 		</div>
 	{/if}
 
@@ -88,8 +89,6 @@
 						</div>
 					{/if}
 
-
-
 					<PasswordField name="Confirm password" id="confirmPassword" />
 
 					{#if $fieldsValidationSignUp.confirmPassword.error}
@@ -99,7 +98,6 @@
 							</span>
 						</div>
 					{/if}
-
 				</div>
 
 				<div class="mt-12" />

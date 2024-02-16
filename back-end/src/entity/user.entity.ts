@@ -21,6 +21,7 @@ export class User {
     TODO:
      Separating IP address history into its own entity enhances user tracking by ensuring precise
      data management, improved integrity, efficient analysis, scalability, and flexible maintenance.
+     And allows blacklist specific ip addresses.
     */
     // @OneToMany(() => IpAddressHistory, ipAddressHistory => ipAddressHistory.user)
     // ipAddressHistory: IpAddressHistory[];
@@ -28,21 +29,21 @@ export class User {
     /*
     TODO:
        Here I want to see all his requests to the tech support to see in the case of account
-       investigation
+       investigation.
     */
     // @OneToMany(() => TechSupportContact, techSupportContact => techSupportContact.user)
     // techSupportHistory: TechSupportContact[];
 
     /*
      TODO:
-        Indicates the user's loyalty or activity level
+        Indicates the user's loyalty or activity level.
     */
     // @Column("varchar", { nullable: true })
     // vipLevel?: string;
 
     /*
      TODO:
-        Separate balance for bonus funds, subject to specific wagering requirements
+        Separate balance for bonus funds, subject to specific wagering requirements.
     */
     // @Column("numeric", { precision: 15, scale: 2, default: '0.00' })
     // bonusBalance!: string;
@@ -63,22 +64,34 @@ export class User {
 
     /*
      TODO:
+        Documents required for Know Your Customer (KYC) verification
+        (This could be implemented as a separate entity or stored in a database table)
+        KYC and AML departments will rely on this so it's a good thing to follow their requests
+        on what would they want to see here as well.
+    */
+    // KYCDocuments: KYCDocument[];
+
+    /*
+     TODO:
         Options for setting deposit limits, self-exclusion, or other responsible gaming features
         (These settings could be stored as JSON or in a related entity)
     */
     // ResponsibleGamingSettings: ResponsibleGamingSettings;
 
-    /*
-     TODO:
-        Documents required for Know Your Customer (KYC) verification
-        (This could be implemented as a separate entity or stored in a database table)
-    */
-    // KYCDocuments: KYCDocument[];
+    // TODO: Indicates whether the player is banned from the accessing games
+    // It's a good thing to have here a reasons
+    // Indicates whether the player is banned (true/false)
+    // @Column("boolean", { default: false })
+    // isBanned!: boolean;
 
-    // Indicates whether the player is under investigation (true/false)
+    // TODO: Reason for the ban (if the player is banned)
+    // @Column("varchar", { nullable: true })
+    // banReason?: string;
+
+    // TODO: Indicates whether the player is under investigation (true/false)
     // To not allow withdrawals
-    @Column("boolean", { default: false })
-    underInvestigation!: boolean;
+    // @Column("boolean", { default: false })
+    // underInvestigation!: boolean;
 
 
 constructor() {
