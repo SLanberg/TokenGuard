@@ -8,6 +8,7 @@ import { SecurityToken } from "../entity/securityToken.entity";
 import { SecretCode } from "../entity/secretCode.entity";
 
 import { generateAndSetCookies } from '../utils/generateAndSetCookies';
+import { isPasswordValid } from '../utils/isPasswordValid';
 
 export const Register = async (req: Request, res: Response) => {
     // This should be done of course at the back-end and be hashed.
@@ -16,6 +17,14 @@ export const Register = async (req: Request, res: Response) => {
     const {password, telegramID} = req.body;
 
     try {
+        if (!isPasswordValid(password)) {
+            return res.status(400).json({
+                type: "error",
+                issueWith: "Password",
+                message: "Password does not meet complexity requirements"
+            });
+        }
+
         const isUserInDb = await dataSource.getRepository(User).count({
             where: {
                 telegram_id: telegramID,
@@ -26,10 +35,12 @@ export const Register = async (req: Request, res: Response) => {
             return res.status(409).json({
                 type: "error",
                 issueWith: "TelegramID",
-                response: "Telegram ID already used"});
+                message: "Telegram ID already used"});
         }
     } catch (e) {
-        return res.status(500).json({type: "error", issueWith: "TelegramID", response: "Server Internal Error"});
+        return res.status(500).json({type: "error",
+            issueWith: "TelegramID",
+            message: "Server Internal Error"});
     }
 
     try {
@@ -68,7 +79,6 @@ export const Register = async (req: Request, res: Response) => {
             user: userInDb
         });
     } catch (e) {
-        console.log(e)
         return res.status(500).json({type: "error", response: "Server Internal Error"});
     }
 }
@@ -137,8 +147,6 @@ export const AuthenticatedUser = async (req: Request, res: Response) => {
 
         res.send(data);
     } catch (e) {
-        console.log(e)
-
         return res.status(401).send({
             message: 'unauthenticated'
         });
@@ -182,7 +190,7 @@ export const Refresh = async (req: Request, res: Response) => {
     }
 }
 
-export const Logout = async (req: Request, res: Response) => {
+export const Logout = async (res: Response) => {
     res.cookie('access_token', '', { maxAge: 0, httpOnly: true, sameSite: 'lax' });
     res.cookie('refresh_token', '', { maxAge: 0, httpOnly: true, sameSite: 'lax' });
 

@@ -19,10 +19,10 @@ export class SecurityToken {
     @JoinColumn({name: "secretId"})
     secret_code_id!: number;
 
-    @Column("varchar")
+    @Column("varchar", { nullable: false })
     security_token!: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ nullable: false })
     created_at!: Date;
 
     constructor() {this.id = 0;}

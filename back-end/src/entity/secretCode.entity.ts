@@ -5,7 +5,7 @@ export class SecretCode {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column("bigint")
+    @Column("bigint", { nullable: false })
     code!: bigint;
 
     @CreateDateColumn()

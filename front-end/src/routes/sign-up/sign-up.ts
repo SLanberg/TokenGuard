@@ -1,8 +1,6 @@
 import { goto } from '$app/navigation';
 import { fieldsValidationSignUp } from '../../stores/signUpStore';
 import { paramsStore } from '../../stores/accountSummaryStore';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios, { type AxiosError } from 'axios';
 
 export const userRegistrationRequest = async (event: Event) => {
@@ -49,8 +47,6 @@ export const userRegistrationRequest = async (event: Event) => {
 
 		if (data.type === 'success') {
 			// Log the 'user' property
-			console.log(data.user);
-
 			paramsStore.update((store) => {
 				store.telegramId = data.user['telegram_id'];
 				store.password = password;
@@ -62,14 +58,24 @@ export const userRegistrationRequest = async (event: Event) => {
 
 			await goto('/account-summary', {});
 		}
-	} catch (err: unknown | AxiosError) {
+	} catch (err: unknown) {
 		if (axios.isAxiosError(err)) {
-			if (err.response?.data['issueWith'] === 'TelegramID') {
+			const axiosError = err as AxiosError;
+			const responseData = axiosError.response?.data as { issueWith?: string, message?: string };
+			if (responseData.issueWith === 'TelegramID') {
 				fieldsValidationSignUp.update((currentValue) => ({
 					...currentValue,
 					telegramId: {
 						error: true,
-						message: 'TelegramID already in use'
+						message: responseData.message || 'An error occurred'
+					}
+				}));
+			} else if (responseData.issueWith === 'Password') {
+				fieldsValidationSignUp.update((currentValue) => ({
+					...currentValue,
+					password: {
+						error: true,
+						message: responseData.message || 'An error occurred',
 					}
 				}));
 			}
