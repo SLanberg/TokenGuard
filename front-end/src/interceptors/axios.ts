@@ -6,6 +6,8 @@ let refresh = false;
 
 axios.interceptors.response.use(resp => resp, async error => {
     if (error.response.status === 401 && !refresh) {
+        console.log('Response status 401 is triggered')
+
         refresh = true;
 
         const {data, status} = await axios.post('refresh', {}, {withCredentials: true})

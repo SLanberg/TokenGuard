@@ -28,6 +28,5 @@ Created at: ${inputData.createdAt}`)
 				position: 'bottom-center',
 				style: 'background-color: black; ' + 'color: white;'
 			});
-
 		});
 };
