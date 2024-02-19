@@ -1,6 +1,10 @@
 import { Router } from "express"
-import { AuthenticatedUser, Login, Logout, Refresh, Register } from "./controller/auth.controller";
 import { SecretKey } from "./controller/secret.controller";
+import { AuthenticatedUser } from './controller/authentication/isAuthenticated.controller';
+import { Register } from './controller/authentication/register.controller';
+import { Login } from './controller/authentication/login.controller';
+import { Refresh } from './controller/authentication/refresh.controller';
+import { Logout } from './controller/authentication/logout.controller';
 
 export const routes = (router: Router) => {
     router.get('/api/user', AuthenticatedUser);

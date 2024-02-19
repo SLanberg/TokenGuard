@@ -6,20 +6,12 @@
 	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
 	import ReadOnlyInputField from '../../components/primitives/inputs/ReadOnlyInputField.svelte';
 	import { formatDateTime } from '../../utils/formatDate';
-	import { onMount } from 'svelte';
-	import { checkUserAuthentication } from '../../utils/isAuth';
 
 	let showPopUp = true;
 	const handleCopyButton = () => {
 		copyContentsOfTheFields();
 		showPopUp = !showPopUp;
 	};
-
-	onMount(async () => {
-		await checkUserAuthentication({
-			expectedToBeAuthenticated: true
-		});
-	});
 </script>
 
 <svelte:head>

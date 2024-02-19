@@ -25,6 +25,12 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 			}));
 			return await goto('/secret-key', {});
 		} else {
+			popUpStateLogin.update(() => ({
+				showPopUp: true
+			}));
+
+			await logOutRequest();
+
 			return await goto('/', {});
 		}
 	} catch (e) {

@@ -2,9 +2,10 @@
 	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
 	import BigButton from '../components/primitives/buttons/BigButton.svelte';
 	import { signInUserRequest } from './sign-in';
-	import { popUpStateLogin } from '../stores/loginStore';
+	import { fieldsValidationSignIn, popUpStateLogin } from '../stores/loginStore';
 	import InputField from '../components/primitives/inputs/InputField.component.svelte';
 	import SpinningIcon from '../components/shared/SpinningIcon.component.svelte';
+	import attention_sign from '$lib/images/Info_triangle.png';
 </script>
 
 <svelte:head>
@@ -73,12 +74,18 @@
 
 			<form method="POST" on:submit|preventDefault={signInUserRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" id="telegramID" />
-					<PasswordField name="Password" id="password" />
+					<InputField name="Telegram ID" id="telegramID"/>
 
-					<div class="text-left mb-10 duration-500 text-white/50 hover:text-white cursor-pointer">
-						<p>Forgot password?</p>
-					</div>
+					{#if $fieldsValidationSignIn.telegramId.error}
+						<div class="w-fit -mt-2.5 mb-2.5">
+							<span class="text-red-600 text-xs inline-block">
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignIn.telegramId.message}
+							</span>
+						</div>
+					{/if}
+
+					<PasswordField name="Password" id="password" />
+					<div class="mb-10"></div>
 				</div>
 
 				<BigButton label="Sign In" />
@@ -86,8 +93,7 @@
 
 			<p class="m-10">
 				New member? <span
-					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
-				>
+					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer">
 					<a href="/sign-up"><b>Sign up</b></a>
 				</span>
 			</p>
@@ -96,7 +102,7 @@
 </div>
 
 <style>
-	.text-shadow-custom {
-		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
-	}
+    .text-shadow-custom {
+        text-shadow: 0 4px 50px hsl(35, 100%, 80%);
+    }
 </style>

@@ -45,13 +45,14 @@
 			to-gold-lighter-dark
 			w-[80px]
 			p-2
-			rounded-[8px]"><p>Dismiss</p></button
-			>
+			rounded-[8px]">
+				<p>Dismiss</p>
+			</button>
 		</div>
 	{/if}
 
-	<div class="text-center">
-		<h1>Whale</h1>
+	<div>
+		<h1 class="text-center">Whale</h1>
 
 		<div class="border-gold-main border-2 rounded-[24px] w-fit h-fit pl-5 pr-5 pt-5">
 			<div class="flex items-center justify-between">
@@ -64,27 +65,39 @@
 				<div class="flex-grow h-px right-to-left"></div>
 			</div>
 
-			<h2 class="mb-4 mt-1">Registration</h2>
+			<h2 class="mb-4 mt-1 text-center">Registration</h2>
 
 			<form class="mb-10" method="POST" on:submit|preventDefault={userRegistrationRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
 					<InputField name="Telegram ID" id="telegramID" />
 
 					{#if $fieldsValidationSignUp.telegramId.error}
-						<div
-							class="flex
-									items-center
-									w-fit
-									-mt-2.5
-									mb-2.5"
-						>
-							<img class="h-3 mr-0.5" src={attention_sign} alt="error-sign" />
-							<span class="text-red-600 text-xs">{$fieldsValidationSignUp.telegramId.message}</span>
+						<div class="w-fit -mt-2.5 mb-2.5">
+							<span class="text-red-600 text-xs inline-block">
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignUp.telegramId.message}
+							</span>
 						</div>
 					{/if}
 
 					<PasswordField name="Password" id="password" />
+
+					{#if $fieldsValidationSignUp.password.error}
+						<div class="w-fit -mt-2.5 mb-2.5">
+							<span class="text-red-600 text-xs inline-block">
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignUp.password.message}
+							</span>
+						</div>
+					{/if}
+
 					<PasswordField name="Confirm password" id="confirmPassword" />
+
+					{#if $fieldsValidationSignUp.confirmPassword.error}
+						<div class="w-fit -mt-2.5 mb-2.5">
+							<span class="text-red-600 text-xs inline-block">
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignUp.confirmPassword.message}
+							</span>
+						</div>
+					{/if}
 				</div>
 
 				<div class="mt-12" />

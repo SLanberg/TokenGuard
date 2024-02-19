@@ -1,14 +1,6 @@
 import { goto } from '$app/navigation';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import axios, { type AxiosError } from 'axios';
-import { fieldsValidationSignIn, popUpStateLogin } from '../stores/loginStore';
-import { fieldsValidationSignUp } from '../stores/signUpStore';
-
-export const dismissPopUp = async () => {
-	popUpStateLogin.update(() => ({
-		showPopUp: false
-	}));
-};
+import axios from 'axios';
+import { fieldsValidationSignIn } from '../stores/loginStore';
 
 export const signInUserRequest = async (event: Event) => {
 	// Send API request to the BackEnd
@@ -44,10 +36,10 @@ export const signInUserRequest = async (event: Event) => {
 
 			return await goto('/casino', {});
 		}
-	} catch (err: unknown | AxiosError) {
+	} catch (err: unknown) {
 		if (axios.isAxiosError(err)) {
 			if (err.response?.data['issueWith'] === 'TelegramID') {
-				fieldsValidationSignUp.update((currentValue) => ({
+				fieldsValidationSignIn.update((currentValue) => ({
 					...currentValue,
 					telegramId: { error: true, message: 'Invalid Telegram ID' }
 				}));

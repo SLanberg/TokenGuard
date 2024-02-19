@@ -14,9 +14,9 @@ export const copyContentsOfTheFields = () => {
 	};
 
 	navigator.clipboard.writeText(`Telegram id: ${inputData.telegramId}
-	Password: ${inputData.password}
-	Token: ${inputData.token}
-	Created at: ${inputData.createdAt}`)
+Password: ${inputData.password}
+Token: ${inputData.token}
+Created at: ${inputData.createdAt}`)
 		.then(() => {
 			toast.success('Copied', {
 				position: 'bottom-center',
@@ -28,6 +28,5 @@ export const copyContentsOfTheFields = () => {
 				position: 'bottom-center',
 				style: 'background-color: black; ' + 'color: white;'
 			});
-
 		});
 };

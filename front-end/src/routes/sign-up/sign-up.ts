@@ -1,8 +1,6 @@
 import { goto } from '$app/navigation';
 import { fieldsValidationSignUp } from '../../stores/signUpStore';
 import { paramsStore } from '../../stores/accountSummaryStore';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios, { type AxiosError } from 'axios';
 
 export const userRegistrationRequest = async (event: Event) => {
@@ -13,20 +11,12 @@ export const userRegistrationRequest = async (event: Event) => {
 	const password: string = formData.get('Password')!.toString();
 	const confirmPassword = formData.get('Confirm password');
 
-	if (password !== confirmPassword) {
-		fieldsValidationSignUp.update((currentValue) => ({
-			...currentValue,
-			confirmPassword: { error: true, message: "Passwords don't match" }
-		}));
-
-		return;
-	}
-
 	fieldsValidationSignUp.update(() => ({
 		telegramId: { error: false, message: '' },
 		password: { error: false, message: '' },
 		confirmPassword: { error: false, message: '' }
 	}));
+
 
 	// Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
 	// 1. API call to the Telegram API (Probability it is not presented)
@@ -36,7 +26,8 @@ export const userRegistrationRequest = async (event: Event) => {
 			`register`,
 			{
 				telegramID: telegramID,
-				password: password
+				password: password,
+				confirmPassword: confirmPassword
 			},
 			{
 				headers: {
@@ -49,8 +40,6 @@ export const userRegistrationRequest = async (event: Event) => {
 
 		if (data.type === 'success') {
 			// Log the 'user' property
-			console.log(data.user);
-
 			paramsStore.update((store) => {
 				store.telegramId = data.user['telegram_id'];
 				store.password = password;
@@ -62,19 +51,41 @@ export const userRegistrationRequest = async (event: Event) => {
 
 			await goto('/account-summary', {});
 		}
-	} catch (err: unknown | AxiosError) {
+	} catch (err: unknown) {
+		console.log(err)
+
 		if (axios.isAxiosError(err)) {
-			if (err.response?.data['issueWith'] === 'TelegramID') {
+			const axiosError = err as AxiosError;
+			const responseData = axiosError.response?.data as { issueWith?: string, message?: string };
+			if (responseData.issueWith === 'TelegramID') {
 				fieldsValidationSignUp.update((currentValue) => ({
 					...currentValue,
 					telegramId: {
 						error: true,
-						message: 'TelegramID already in use'
+						message: responseData.message || 'An error occurred'
+					}
+				}));
+			} else if (responseData.issueWith === 'Password') {
+				fieldsValidationSignUp.update((currentValue) => ({
+					...currentValue,
+					password: {
+						error: true,
+						message: responseData.message || 'An error occurred',
+					}
+				}));
+			} else if (responseData.issueWith === 'Confirm password') {
+				fieldsValidationSignUp.update((currentValue) => ({
+					...currentValue,
+					confirmPassword: {
+						error: true,
+						message: responseData.message || 'An error occurred',
 					}
 				}));
 			}
 		} else {
 			// Stock error
+			// TODO: Here I want to see error to be stored and sent to me for the further investigation.
+			// Something with email would be good to have.
 		}
 	}
 };
