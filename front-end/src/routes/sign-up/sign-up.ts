@@ -11,6 +11,13 @@ export const userRegistrationRequest = async (event: Event) => {
 	const password: string = formData.get('Password')!.toString();
 	const confirmPassword = formData.get('Confirm password');
 
+	fieldsValidationSignUp.update(() => ({
+		telegramId: { error: false, message: '' },
+		password: { error: false, message: '' },
+		confirmPassword: { error: false, message: '' }
+	}));
+
+
 	// Currently telegramID can be anything but what can be used to ensure it is legit telegramID?
 	// 1. API call to the Telegram API (Probability it is not presented)
 	// 2. Creation of the Telegram bot that writes to the TelegramID unique code that user should enter
@@ -31,12 +38,6 @@ export const userRegistrationRequest = async (event: Event) => {
 			}
 		);
 
-		fieldsValidationSignUp.update(() => ({
-			telegramId: { error: false, message: '' },
-			password: { error: false, message: '' },
-			confirmPassword: { error: false, message: '' }
-		}));
-
 		if (data.type === 'success') {
 			// Log the 'user' property
 			paramsStore.update((store) => {
@@ -51,6 +52,8 @@ export const userRegistrationRequest = async (event: Event) => {
 			await goto('/account-summary', {});
 		}
 	} catch (err: unknown) {
+		console.log(err)
+
 		if (axios.isAxiosError(err)) {
 			const axiosError = err as AxiosError;
 			const responseData = axiosError.response?.data as { issueWith?: string, message?: string };

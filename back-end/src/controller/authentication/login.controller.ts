@@ -6,6 +6,15 @@ import { generateAndSetCookies } from '../../utils/generateAndSetCookies';
 
 export const Login = async (req: Request, res: Response) => {
 	const {password, telegramID} = req.body;
+
+	if (isNaN(Number(telegramID))) {
+		return res.status(400).send({
+			type: "error",
+			issueWith: "TelegramID",
+			message: 'Invalid credentials'
+		});
+	}
+
 	const user = await dataSource.getRepository(User).findOne({
 		where: {telegram_id: telegramID},
 	});

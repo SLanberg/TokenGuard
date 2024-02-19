@@ -9,17 +9,14 @@ const protectedUrls = [
 	'/casino',
 ];
 
-// const registrationUrls = [
-// 	'/',
-// 	'/sign-up',
-// ];
+const registrationUrls = [
+	'/',
+	'/sign-up',
+];
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
-	console.log('handle triggered')
 	if (protectedUrls.some(url => event.url.pathname.startsWith(url))) {
-		console.log('This is where it supposed to be checked if the user authenticated')
-
 		try {
 			await axios.get(`user`, { withCredentials: true });
 		} catch (e) {

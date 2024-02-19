@@ -12,13 +12,17 @@ axios.interceptors.response.use(resp => resp, async error => {
 
         const {data, status} = await axios.post('refresh', {}, {withCredentials: true})
 
+        console.log(data, status)
+
         if (status === 200) {
+
             axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 
-            return axios(error.config);
+						return axios(error.config);
         }
     }
 
     refresh = false;
-    return error;
+
+    throw error;
 });
