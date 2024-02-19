@@ -7,6 +7,10 @@
 	export let id: string = ''
 </script>
 
+<label for={id} class="w-fit mt-2.5 flex text-sm text-gray-600">
+		{name}
+</label>
+
 <div
 	class="flex
 	items-center
@@ -32,7 +36,6 @@
 		text-sm
 		text-white
 		outline-none"
-
 	/>
 </div>
 
