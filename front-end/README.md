@@ -12,14 +12,14 @@ and a profile page with login authentication.
 
 - The application provides a Sign-Up form where users can input their Telegram ID which is arbitrary
   in this version of the app and Password.
-- Upon submitting the form, an automatically generated token is displayed in a box.
-- Users are prompted to copy and paste this token to a secure location.
+- Upon submitting the form, an automatically generated token hashed by sha256 is displayed in a box.
+- Users are prompted to copy and paste this token to a secure location inside their notes.
 - Validation of the fields.
 
 ### 2. Copy Icon Functionality:
 
 - Implemented an icon functionality that allows users to copy the following data:
-  - Telegram ID (string)
+  - Telegram ID (number)
   - Password (string)
   - Token (string) - automatically generated
   - Creation Timestamp (Date)
@@ -33,7 +33,6 @@ and a profile page with login authentication.
 
 ### 4. Token Validation:
 
-- On the /profile page, users are prompted to input the token.
-- Implement token validation:
-  - If the token is incorrect, users are redirected to the Sign-In page. Pop-up message shown to the user indicating the token is incorrect with the offer to sign in again and try again.
-  - If the token is correct, the application displays the number ”94592942990.”
+- On the /secure-access page, users are prompted to input the token.
+- If the token is incorrect, users are redirected to the Sign-In page. Pop-up message shown to the user indicating the token is incorrect with the offer to sign in again and try again.
+- If the token is correct, the application displays the number ”94592942990.”
