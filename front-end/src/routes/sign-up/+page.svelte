@@ -3,10 +3,15 @@
 	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
 	import { popUpStateLogin } from '../../stores/loginStore';
-	import { userRegistrationRequest } from './sign-up';
 	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
 	import attention_sign from '$lib/images/Info_triangle.png';
 	import { fieldsValidationSignUp } from '../../stores/signUpStore';
+
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import { paramsStore } from '../../stores/accountSummaryStore';
+
+	export let form;
 </script>
 
 <svelte:head>
@@ -67,34 +72,64 @@
 
 			<h2 class="mb-4 mt-1 text-center">Registration</h2>
 
-			<form class="mb-10" method="POST" on:submit|preventDefault={userRegistrationRequest}>
+			<form class="mb-10" method="POST" action="?/register" use:enhance={() => {
+			return async ({ result }) => {
+				if (result.type === 'success') {
+					paramsStore.update((store) => {
+							if (result && result.data) {
+								if (typeof result.data.telegramID === 'string'
+								&& typeof result.data.password === 'string'
+								&& typeof result.data.token === 'string'
+								&& typeof result.data.createdAt === 'string' ) {
+									store.telegramId = result.data.telegramID;
+									store.password = result.data.password;
+									store.token = result.data.token;
+									store.createdAt = result.data.createdAt;
+								}
+							}
+							return store;
+					});
+
+				await goto('/account-summary', {});
+				}
+			};
+		}}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" id="telegramID" />
+					<InputField name="Telegram ID" id="telegramID" value={null} />
+
+
+
+
+					{#if form?.missing}<p class="error">The email field is required</p>{/if}
+					{#if form?.incorrect}<p class="error">Invalid credentials!</p>{/if}
 
 					{#if $fieldsValidationSignUp.telegramId.error}
 						<div class="w-fit -mt-2.5 mb-2.5">
 							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignUp.telegramId.message}
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
+								{$fieldsValidationSignUp.telegramId.message}
 							</span>
 						</div>
 					{/if}
 
-					<PasswordField name="Password" id="password" />
+					<PasswordField name="Password" id="password" value={null} />
 
 					{#if $fieldsValidationSignUp.password.error}
 						<div class="w-fit -mt-2.5 mb-2.5">
 							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignUp.password.message}
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
+								{$fieldsValidationSignUp.password.message}
 							</span>
 						</div>
 					{/if}
 
-					<PasswordField name="Confirm password" id="confirmPassword" />
+					<PasswordField name="Confirm password" id="confirmPassword" value={null} />
 
 					{#if $fieldsValidationSignUp.confirmPassword.error}
 						<div class="w-fit -mt-2.5 mb-2.5">
 							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignUp.confirmPassword.message}
+									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
+								{$fieldsValidationSignUp.confirmPassword.message}
 							</span>
 						</div>
 					{/if}

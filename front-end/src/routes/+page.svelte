@@ -74,7 +74,7 @@
 
 			<form method="POST" on:submit|preventDefault={signInUserRequest}>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" id="telegramID"/>
+					<InputField name="Telegram ID" id="telegramID" value="" />
 
 					{#if $fieldsValidationSignIn.telegramId.error}
 						<div class="w-fit -mt-2.5 mb-2.5">
@@ -84,7 +84,7 @@
 						</div>
 					{/if}
 
-					<PasswordField name="Password" id="password" />
+					<PasswordField name="Password" id="password" value="" />
 					<div class="mb-10"></div>
 				</div>
 

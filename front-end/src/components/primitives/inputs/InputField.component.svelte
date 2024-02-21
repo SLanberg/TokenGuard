@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { fieldsValidationSignIn } from '../../../stores/loginStore';
-	import attention_sign from '$lib/images/Info_triangle.png';
-
 	export let name: string = 'not-set'
 	export let id: string = 'not-set'
+	export let value: string | null;
 </script>
 
 
@@ -24,6 +22,7 @@
 		{name}
 		id={id}
 		placeholder={name}
+		value={value}
 		class="block
 		rounded-[8px]
 		w-[300px]

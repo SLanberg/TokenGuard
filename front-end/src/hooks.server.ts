@@ -9,11 +9,6 @@ const protectedUrls = [
 	'/casino',
 ];
 
-const registrationUrls = [
-	'/',
-	'/sign-up',
-];
-
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
 	if (protectedUrls.some(url => event.url.pathname.startsWith(url))) {

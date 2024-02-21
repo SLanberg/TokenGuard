@@ -1,11 +1,13 @@
 <script lang="ts">
 	import ton from '$lib/images/icons/ton.svg';
 	import info from '$lib/images/icons/info.svg';
+
 	import chest from '$lib/images/icons/chest.svg';
-	import game2 from '$lib/images/hero/Boss Bear.jpg';
-	import game3 from '$lib/images/hero/money-train-4.webp';
+
 	import video from '$lib/images/hero/genie.mp4';
 	import title from '$lib/images/hero/genie x pixies.png';
+	import game2 from '$lib/images/hero/casino-promo.jpg';
+	import game3 from '$lib/images/hero/Boss Bear.jpg';
 
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/svelte-splide/css';

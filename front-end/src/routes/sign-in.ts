@@ -41,7 +41,7 @@ export const signInUserRequest = async (event: Event) => {
 			if (err.response?.data['issueWith'] === 'TelegramID') {
 				fieldsValidationSignIn.update((currentValue) => ({
 					...currentValue,
-					telegramId: { error: true, message: 'Invalid Telegram ID' }
+					telegramId: { error: true, message: 'Invalid Telegram ID or password' }
 				}));
 			}
 		} else {
