@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let name: string = 'not-set';
-	export let value: string = ''
+	export let value: string | null = null
 	export let id: string = ''
 </script>
 

@@ -11,6 +11,8 @@
 
 	import InputFieldError from "../../components/primitives/inputs/InputFieldError.component.svelte";
 
+	import { loadingStore } from '../../stores/loadingStore';
+
 	interface Form {
 		issueWith?: string,
 		message?: string;
@@ -80,6 +82,7 @@
 			<h2 class="mb-4 mt-1 text-center">Registration</h2>
 
 			<form class="mb-10" method="POST" action="?/register" use:enhance={() => {
+			$loadingStore = true;
 			return async ({ result }) => {
 				if (result.type === 'success') {
 					paramsStore.update((store) => {
@@ -97,8 +100,12 @@
 							return store;
 					});
 
+				$loadingStore = false;
 				await goto('/account-summary', {});
+
 				} else {
+
+				$loadingStore = false;
 				await applyAction(result);
 			}};
 		}}>

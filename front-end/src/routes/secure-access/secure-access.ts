@@ -2,7 +2,7 @@ import { secretKeyParam } from '../../stores/secureAccessStore';
 import axios from 'axios';
 import { goto } from '$app/navigation';
 import { popUpStateLogin } from '../../stores/loginStore';
-import { logOutRequest } from '../casino/casino';
+import { logOutRequest } from '../casino/casino-script';
 
 export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 	const formEl = event.target as HTMLFormElement;
@@ -30,7 +30,6 @@ export const tokenSubmitRequest = async (event: Event): Promise<void> => {
 			}));
 
 			await logOutRequest();
-
 			return await goto('/', {});
 		}
 	} catch (e) {

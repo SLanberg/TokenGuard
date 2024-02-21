@@ -36,7 +36,7 @@
 	<title>Casino | Whale</title>
 </svelte:head>
 
-<Navbar />
+<Navbar balance={0} />
 
 <div class="md:w-[600px] w-full flex flex-col items-center justify-center mx-auto">
 	<div class="bg-[#0C1216] h-[300px] mb-5 relative sm:w-full md:mt-2.5 md:rounded-[8px]">
@@ -117,7 +117,17 @@
 		</div>
 	</div>
 
-	<Slider label="Popular Games 🏆" slides={slides} />
+	<Slider label="House Exclusives" slides={slides} />
+
+	<div class="mb-7" />
+
+	<Slider label="Popular Games" slides={slides} />
+
+	<div class="mb-7" />
+
+	<Slider label="House Top Picks" slides={slides} />
+
+	<div class="mb-7" />
 </div>
 
 

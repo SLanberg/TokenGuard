@@ -3,8 +3,10 @@
 	import ton from '$lib/images/icons/ton.svg';
 	import avatar from '$lib/images/avatar_picture.gif';
 	import arrow_down from '$lib/images/icons/arrow_down.svg';
-	import { logOutRequest } from '../../routes/casino/casino.js';
+	import { logOutRequest } from '../../routes/casino/casino-script.js';
 	import { onMount } from 'svelte';
+
+	export let balance: number = -1;
 
 	let isOpen = false;
 	function toggleDropdown() {
@@ -45,7 +47,7 @@
 			>
 				<div class="flex items-center">
 					<img alt="currency symbol" src={ton} class="mr-1" />
-					<p class="text-gold-main">10,000.00 TON</p>
+					<p class="text-gold-main">{balance} TON</p>
 				</div>
 
 				<!-- Profile dropdown -->
