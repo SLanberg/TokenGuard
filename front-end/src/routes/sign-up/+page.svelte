@@ -4,19 +4,26 @@
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
 	import { popUpStateLogin } from '../../stores/loginStore';
 	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
-	import attention_sign from '$lib/images/Info_triangle.png';
-	import { fieldsValidationSignUp } from '../../stores/signUpStore';
 
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { paramsStore } from '../../stores/accountSummaryStore';
 
-	export let form;
+	import InputFieldError from "../../components/primitives/inputs/InputFieldError.component.svelte";
+
+	interface Form {
+		issueWith?: string,
+		message?: string;
+	}
+
+	export let form: Form;
 </script>
 
 <svelte:head>
 	<title>Foyer | Whale</title>
 </svelte:head>
+
+
 
 <div class="min-h-screen flex items-center justify-center">
 	{#if $popUpStateLogin.showPopUp}
@@ -91,47 +98,25 @@
 					});
 
 				await goto('/account-summary', {});
-				}
-			};
+				} else {
+				await applyAction(result);
+			}};
 		}}>
+
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" id="telegramID" value={null} />
-
-
-
-
-					{#if form?.missing}<p class="error">The email field is required</p>{/if}
-					{#if form?.incorrect}<p class="error">Invalid credentials!</p>{/if}
-
-					{#if $fieldsValidationSignUp.telegramId.error}
-						<div class="w-fit -mt-2.5 mb-2.5">
-							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
-								{$fieldsValidationSignUp.telegramId.message}
-							</span>
-						</div>
+					<InputField name="Telegram ID" id="telegramID" />
+					{#if form?.issueWith === "TelegramID" }
+						<InputFieldError message="{form?.message}" />
 					{/if}
 
-					<PasswordField name="Password" id="password" value={null} />
-
-					{#if $fieldsValidationSignUp.password.error}
-						<div class="w-fit -mt-2.5 mb-2.5">
-							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
-								{$fieldsValidationSignUp.password.message}
-							</span>
-						</div>
+					<PasswordField name="Password" id="password" />
+					{#if form?.issueWith === "Password" }
+						<InputFieldError message="{form?.message}" />
 					{/if}
 
-					<PasswordField name="Confirm password" id="confirmPassword" value={null} />
-
-					{#if $fieldsValidationSignUp.confirmPassword.error}
-						<div class="w-fit -mt-2.5 mb-2.5">
-							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
-								{$fieldsValidationSignUp.confirmPassword.message}
-							</span>
-						</div>
+					<PasswordField name="Confirm password" id="confirmPassword" />
+					{#if form?.issueWith === "Confirm password" }
+						<InputFieldError message="{form?.message}" />
 					{/if}
 				</div>
 

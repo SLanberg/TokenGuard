@@ -51,7 +51,7 @@
   }}
 			aria-label="Svelte Splide Hero"
 		>
-			{#each slidesData as { type, source, alt }, i}
+			{#each slidesData as { type, source, alt }}
 				<SplideSlide>
 					<div class="bg-[#0C1216] h-[300px] md:rounded-[8px] mb-5 relative sm:w-full">
 						<div class="mx-auto flex justify-between cursor-pointer h-full">

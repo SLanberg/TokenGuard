@@ -42,22 +42,22 @@ export const actions: import('./$types').Actions = {
 				const responseData =
 					axiosError.response?.data as { issueWith?: string, message?: string };
 
+				// Here you can add errors to the list or a dictionary and then show to the user
+				// them together. For now I will leave as it is right now because I want to make redesign
+				// of the website.
 				if (responseData.issueWith === 'TelegramID') {
 					return fail(400, {
-						missing: true,
-						incorrect: true,
+						issueWith: 'TelegramID',
 						message: responseData.message,
 					});
 				} else if (responseData.issueWith === 'Password') {
 					return fail(400, {
-						missing: true,
-						incorrect: true,
+						issueWith: 'Password',
 						message: responseData.message,
 					});
 				} else if (responseData.issueWith === 'Confirm password') {
 					return fail(400, {
-						missing: true,
-						incorrect: true,
+						issueWith: "Confirm password",
 						message: responseData.message,
 					});
 				}

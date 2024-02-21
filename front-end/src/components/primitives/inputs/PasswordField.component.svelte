@@ -3,7 +3,6 @@
 
 	export let name: string = 'not-set';
 	export let id: string = 'not-set'
-	export let value: string | null;
 
 	function toggleRevealPassword() {
 		revealPassword = !revealPassword;
@@ -27,7 +26,6 @@
 		id={id}
 		{name}
 		placeholder={name}
-		value={value}
 		class="rounded-[8px]
 		block
 		w-[260px]
