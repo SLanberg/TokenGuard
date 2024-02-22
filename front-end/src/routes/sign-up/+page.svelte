@@ -99,12 +99,9 @@
 							}
 							return store;
 					});
-
 				$loadingStore = false;
 				await goto('/account-summary', {});
-
 				} else {
-
 				$loadingStore = false;
 				await applyAction(result);
 			}};

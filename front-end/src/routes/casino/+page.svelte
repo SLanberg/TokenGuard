@@ -38,8 +38,8 @@
 
 <Navbar balance={0} />
 
-<div class="md:w-[600px] w-full flex flex-col items-center justify-center mx-auto">
-	<div class="bg-[#0C1216] h-[300px] mb-5 relative sm:w-full md:mt-2.5 md:rounded-[8px]">
+<div class="lg:w-[1000px]  w-full flex flex-col items-center justify-center mx-auto">
+	<div class="bg-[#0C1216] h-[300px] md:h-[400px] mb-5 relative sm:w-full lg:mt-2.5 md:rounded-[8px]">
 		<Splide
 			options={{
     rewind: true,
@@ -53,7 +53,7 @@
 		>
 			{#each slidesData as { type, source, alt }}
 				<SplideSlide>
-					<div class="bg-[#0C1216] h-[300px] md:rounded-[8px] mb-5 relative sm:w-full">
+					<div class="bg-[#0C1216] h-[300px] md:h-[400px] md:rounded-[8px] mb-5 relative sm:w-full">
 						<div class="mx-auto flex justify-between cursor-pointer h-full">
 							{#if type === 'video'}
 								<video class="object-cover md:rounded-[8px] w-full" height="100%" autoplay loop>
