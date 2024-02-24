@@ -5,7 +5,7 @@ export const actions: import('./$types').Actions = {
 	getSecretKey: async ({ request, cookies }) => {
 		const formData = await request.formData();
 		const token = formData.get('Access Token');
-		const session = cookies.get('access_token');
+		const session = cookies.get('session');
 
 		try {
 			const response = await axios.post(
@@ -17,7 +17,6 @@ export const actions: import('./$types').Actions = {
 				{
 					headers: { 'Content-Type': 'application/json',
 						'Access-Control-Allow-Origin': 'true' },
-					// withCredentials: true
 				}
 			);
 

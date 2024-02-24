@@ -13,14 +13,13 @@ export const actions: import('./$types').Actions = {
 				{ telegramID: telegramID, password: password },
 				{
 					headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'true' },
-					withCredentials: true
 				}
 			);
 
 			if (data.type === 'success') {
 
-				cookies.set('access_token', data.accessToken, {
-					maxAge: 24 * 60 * 60 * 1000,
+				cookies.set('session', data.accessToken, {
+					maxAge: 24 * 60 * 60 * 1000, // 1 day
 					sameSite: 'strict',
 					path: '/'
 				});

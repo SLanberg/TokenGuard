@@ -24,7 +24,6 @@ export const actions: import('./$types').Actions = {
 						'Content-Type': 'application/json',
 						'Access-Control-Allow-Origin': 'true'
 					},
-					withCredentials: true
 				}
 			);
 
