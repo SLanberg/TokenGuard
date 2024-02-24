@@ -2,7 +2,13 @@
 	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import keyFrame from '$lib/images/icons/key_frame.svg';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import { tokenSubmitRequest } from './secure-access';
+
+	import { enhance } from '$app/forms';
+	import { loadingStore } from '../../stores/loadingStore';
+	import { goto } from '$app/navigation';
+	import { secretKeyParam } from '../../stores/secureAccessStore';
+	import { popUpStateLogin } from '../../stores/loginStore';
+	import { logOutRequest } from '../casino/script';
 </script>
 
 <svelte:head>
@@ -26,7 +32,37 @@
 
 			<h2 class="mb-4 mt-1">Vault</h2>
 
-			<form method="POST" on:submit|preventDefault={tokenSubmitRequest}>
+			<form
+				method="POST"
+				action="?/getSecretKey"
+				use:enhance={() => {
+					$loadingStore = true;
+					return async ({ result }) => {
+						if (result.type === 'success') {
+							if (result && result.data) {
+								secretKeyParam.update((store) => {
+									if (result && result.data) {
+										if (typeof result.data.secretKey === 'number') {
+											store.secretKey = result.data.secretKey.toString();
+										}
+									}
+
+									return store;
+								});
+
+								$loadingStore = false;
+								return await goto('/secret-key', {});
+							}
+						} else {
+							$loadingStore = false;
+							popUpStateLogin.update(() => ({ showPopUp: true }));
+
+							await logOutRequest();
+							return await goto('/', {});
+						}
+					};
+				}}
+			>
 				<div class="container mx-auto pt-5 w-[300px]">
 					<InputField name="Access Token" id="accessToken" />
 				</div>

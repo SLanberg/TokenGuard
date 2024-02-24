@@ -11,28 +11,39 @@
 </script>
 
 <div class="h-fit rounded-[8px] w-full sm:w-full">
-	<Splide hasTrack={false} options={{
-    perPage: 4,
-    perMove: 1,
-    gap: 8,
-    arrows: true,
-    pagination: false,
-    breakpoints: {
-      400: { perPage: 3 },
-      330: { perPage: 2 }
-    }
-  }}>
+	<Splide
+		hasTrack={false}
+		options={{
+			perPage: 6,
+			perMove: 1,
+			gap: 8,
+			arrows: true,
+			pagination: false,
+			breakpoints: {
+				1000: { perPage: 5 },
+				800: { perPage: 4 },
+				400: { perPage: 3 },
+				330: { perPage: 2 }
+			}
+		}}
+	>
 		<div class="w-full flex justify-between items-center text-left">
 			<span class="font-bold text-gold-secondary">{label}</span>
 			<div class="splide__arrows">
-				<button class="splide__arrow--prev disabled:opacity-35 duration-75"><img class="h-6" alt="vault" src={arrow_left} /></button>
-				<button class="splide__arrow--next disabled:opacity-35 duration-75"><img class="h-6" alt="vault" src={arrow_right} /></button>
+				<button class="splide__arrow--prev disabled:opacity-35 duration-75"
+					><img class="h-6" alt="vault" src={arrow_left} /></button
+				>
+				<button class="splide__arrow--next disabled:opacity-35 duration-75"
+					><img class="h-6" alt="vault" src={arrow_right} /></button
+				>
 			</div>
 		</div>
 		<SplideTrack>
 			{#each slides as slide}
 				<SplideSlide>
-					<div class="bg-[#13181c] w-full sm:w-full aspect-[1/1] overflow-auto rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center">
+					<div
+						class="bg-[#13181c] w-full sm:w-full aspect-[1/1] overflow-auto rounded-[8px] border border-[#292d30] flex flex-col justify-center items-center"
+					>
 						<img class="h-12 mb-2" alt="card" src={cards} />
 					</div>
 				</SplideSlide>

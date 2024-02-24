@@ -1,11 +1,11 @@
 <script lang="ts">
 	export let name: string = 'not-set';
-	export let value: string | null = null
-	export let id: string = ''
+	export let value: string | null = null;
+	export let id: string = '';
 </script>
 
 <label for={id} class="w-fit mt-2.5 flex text-sm text-gray-600">
-		{name}
+	{name}
 </label>
 
 <div
@@ -22,9 +22,9 @@
 >
 	<input
 		readonly
-		value={value}
+		{value}
 		{name}
-		id={id}
+		{id}
 		placeholder={name}
 		class="block
 		rounded-[8px]

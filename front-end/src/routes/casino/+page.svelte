@@ -38,17 +38,19 @@
 
 <Navbar balance={0} />
 
-<div class="lg:w-[1000px]  w-full flex flex-col items-center justify-center mx-auto">
-	<div class="bg-[#0C1216] h-[300px] md:h-[400px] mb-5 relative sm:w-full lg:mt-2.5 md:rounded-[8px]">
+<div class="lg:w-[1000px] w-full flex flex-col items-center justify-center mx-auto">
+	<div
+		class="bg-[#0C1216] h-[300px] md:h-[400px] mb-5 relative sm:w-full lg:mt-2.5 md:rounded-[8px]"
+	>
 		<Splide
 			options={{
-    rewind: true,
-    autoplay: true,
-    gap: 4,
-    interval: 7500,
-    pagination: true,
-    arrows: false
-  }}
+				rewind: true,
+				autoplay: true,
+				gap: 4,
+				interval: 7500,
+				pagination: true,
+				arrows: false
+			}}
 			aria-label="Svelte Splide Hero"
 		>
 			{#each slidesData as { type, source, alt }}
@@ -58,12 +60,16 @@
 							{#if type === 'video'}
 								<video class="object-cover md:rounded-[8px] w-full" height="100%" autoplay loop>
 									<source src={source} type="video/mp4" />
-									<track kind="captions" src="path/to/captions.vtt" srclang="en" label="English captions" />
+									<track
+										kind="captions"
+										src="path/to/captions.vtt"
+										srclang="en"
+										label="English captions"
+									/>
 								</video>
 								<img src={title} class="absolute inset-0 mx-auto my-auto" alt="Hero" />
-
 							{:else if type === 'image'}
-								<img class="object-cover md:rounded-[8px] w-full" src={source} alt={alt} />
+								<img class="object-cover md:rounded-[8px] w-full" src={source} {alt} />
 							{/if}
 						</div>
 					</div>
@@ -117,20 +123,18 @@
 		</div>
 	</div>
 
-	<Slider label="House Exclusives" slides={slides} />
+	<Slider label="House Exclusives" {slides} />
 
 	<div class="mb-7" />
 
-	<Slider label="Popular Games" slides={slides} />
+	<Slider label="Popular Games" {slides} />
 
 	<div class="mb-7" />
 
-	<Slider label="House Top Picks" slides={slides} />
+	<Slider label="House Top Picks" {slides} />
 
 	<div class="mb-7" />
 </div>
-
-
 
 <style>
 	.h-px {

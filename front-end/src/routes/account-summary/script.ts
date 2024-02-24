@@ -13,10 +13,13 @@ export const copyContentsOfTheFields = () => {
 		createdAt: createdAtInput.value
 	};
 
-	navigator.clipboard.writeText(`Telegram id: ${inputData.telegramId}
+	navigator.clipboard
+		.writeText(
+			`Telegram id: ${inputData.telegramId}
 Password: ${inputData.password}
 Token: ${inputData.token}
-Created at: ${inputData.createdAt}`)
+Created at: ${inputData.createdAt}`
+		)
 		.then(() => {
 			toast.success('Copied', {
 				position: 'bottom-center',
@@ -24,7 +27,7 @@ Created at: ${inputData.createdAt}`)
 			});
 		})
 		.catch((error) => {
-			toast.error(error + " Manually save values to the notepad.", {
+			toast.error(error + ' Manually save values to the notepad.', {
 				position: 'bottom-center',
 				style: 'background-color: black; ' + 'color: white;'
 			});

@@ -1,8 +1,7 @@
 <script lang="ts">
-	export let name: string = 'not-set'
-	export let id: string = 'not-set'
+	export let name: string = 'not-set';
+	export let id: string = 'not-set';
 </script>
-
 
 <div
 	class="flex
@@ -19,7 +18,7 @@
 	<input
 		required
 		{name}
-		id={id}
+		{id}
 		placeholder={name}
 		class="block
 		rounded-[8px]

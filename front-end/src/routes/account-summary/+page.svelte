@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import { copyContentsOfTheFields } from './account-summary';
+	import { copyContentsOfTheFields } from './script';
 	import { paramsStore } from '../../stores/accountSummaryStore';
 	import { goto } from '$app/navigation';
 	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
@@ -36,7 +36,8 @@
 						flex
 						flex-col
 						justify-center
-						items-center">
+						items-center"
+		>
 			<p class="text-center p-5 text-gold-main -mt-4">
 				Copy the data by clicking on the icon and save it to your notes.
 			</p>
@@ -86,10 +87,14 @@
 			<h2 class="mb-4 mt-1">Summary</h2>
 
 			<div class="container mx-auto pt-5 w-[300px]">
-				<ReadOnlyInputField value="{$paramsStore.telegramId}" name="Telegram ID" id="telegramID" />
-				<ReadOnlyInputField value="{$paramsStore.password}" name="Password" id="password" />
-				<ReadOnlyInputField value="{$paramsStore.token}" name="Token" id="token" />
-				<ReadOnlyInputField value="{formatDateTime($paramsStore.createdAt)}" name="Created at" id="createdAt" />
+				<ReadOnlyInputField value={$paramsStore.telegramId} name="Telegram ID" id="telegramID" />
+				<ReadOnlyInputField value={$paramsStore.password} name="Password" id="password" />
+				<ReadOnlyInputField value={$paramsStore.token} name="Token" id="token" />
+				<ReadOnlyInputField
+					value={formatDateTime($paramsStore.createdAt)}
+					name="Created at"
+					id="createdAt"
+				/>
 			</div>
 
 			<div class="mt-12" />

@@ -28,7 +28,11 @@
 			<h2 class="mb-4 mt-1">Secret Key</h2>
 
 			<div class="container mx-auto pt-5 w-[300px]">
-				<ReadOnlyInputField value="{$secretKeyParam.secretKey}" name="Security key" id="securityKey" />
+				<ReadOnlyInputField
+					value={$secretKeyParam.secretKey}
+					name="Security key"
+					id="securityKey"
+				/>
 			</div>
 			<BigButton on:click={() => goto('/casino')} label="Go back to Casino" />
 

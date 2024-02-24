@@ -9,12 +9,12 @@
 	import { goto } from '$app/navigation';
 	import { paramsStore } from '../../stores/accountSummaryStore';
 
-	import InputFieldError from "../../components/primitives/inputs/InputFieldError.component.svelte";
+	import InputFieldError from '../../components/primitives/inputs/InputFieldError.component.svelte';
 
 	import { loadingStore } from '../../stores/loadingStore';
 
 	interface Form {
-		issueWith?: string,
+		issueWith?: string;
 		message?: string;
 	}
 
@@ -24,8 +24,6 @@
 <svelte:head>
 	<title>Foyer | Whale</title>
 </svelte:head>
-
-
 
 <div class="min-h-screen flex items-center justify-center">
 	{#if $popUpStateLogin.showPopUp}
@@ -48,8 +46,8 @@
                 items-center"
 		>
 			<p class="text-center p-5 text-gold-main -mt-4">
-				You entered incorrect security token or your session is expired.
-				You were forcefully logged out.
+				You entered incorrect security token or your session is expired. You were forcefully logged
+				out.
 			</p>
 
 			<button
@@ -59,7 +57,8 @@
 			to-gold-lighter-dark
 			w-[80px]
 			p-2
-			rounded-[8px]">
+			rounded-[8px]"
+			>
 				<p>Dismiss</p>
 			</button>
 		</div>
@@ -81,46 +80,53 @@
 
 			<h2 class="mb-4 mt-1 text-center">Registration</h2>
 
-			<form class="mb-10" method="POST" action="?/register" use:enhance={() => {
-			$loadingStore = true;
-			return async ({ result }) => {
-				if (result.type === 'success') {
-					paramsStore.update((store) => {
-							if (result && result.data) {
-								if (typeof result.data.telegramID === 'string'
-								&& typeof result.data.password === 'string'
-								&& typeof result.data.token === 'string'
-								&& typeof result.data.createdAt === 'string' ) {
-									store.telegramId = result.data.telegramID;
-									store.password = result.data.password;
-									store.token = result.data.token;
-									store.createdAt = result.data.createdAt;
+			<form
+				class="mb-10"
+				method="POST"
+				action="?/register"
+				use:enhance={() => {
+					$loadingStore = true;
+					return async ({ result }) => {
+						if (result.type === 'success') {
+							paramsStore.update((store) => {
+								if (result && result.data) {
+									if (
+										typeof result.data.telegramID === 'string' &&
+										typeof result.data.password === 'string' &&
+										typeof result.data.token === 'string' &&
+										typeof result.data.createdAt === 'string'
+									) {
+										store.telegramId = result.data.telegramID;
+										store.password = result.data.password;
+										store.token = result.data.token;
+										store.createdAt = result.data.createdAt;
+									}
 								}
-							}
-							return store;
-					});
-				$loadingStore = false;
-				await goto('/account-summary', {});
-				} else {
-				$loadingStore = false;
-				await applyAction(result);
-			}};
-		}}>
-
+								return store;
+							});
+							$loadingStore = false;
+							await goto('/account-summary', {});
+						} else {
+							$loadingStore = false;
+							await applyAction(result);
+						}
+					};
+				}}
+			>
 				<div class="container mx-auto pt-5 w-[300px]">
 					<InputField name="Telegram ID" id="telegramID" />
-					{#if form?.issueWith === "TelegramID" }
-						<InputFieldError message="{form?.message}" />
+					{#if form?.issueWith === 'TelegramID'}
+						<InputFieldError message={form?.message} />
 					{/if}
 
 					<PasswordField name="Password" id="password" />
-					{#if form?.issueWith === "Password" }
-						<InputFieldError message="{form?.message}" />
+					{#if form?.issueWith === 'Password'}
+						<InputFieldError message={form?.message} />
 					{/if}
 
 					<PasswordField name="Confirm password" id="confirmPassword" />
-					{#if form?.issueWith === "Confirm password" }
-						<InputFieldError message="{form?.message}" />
+					{#if form?.issueWith === 'Confirm password'}
+						<InputFieldError message={form?.message} />
 					{/if}
 				</div>
 
@@ -133,5 +139,4 @@
 </div>
 
 <style>
-
 </style>

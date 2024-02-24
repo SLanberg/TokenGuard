@@ -5,12 +5,12 @@ import { User } from "../entity/user.entity";
 import { SecurityToken } from "../entity/securityToken.entity";
 
 export const SecretKey = async (req: Request, res: Response) => {
-    const cookie = req.cookies['access_token'];
+    const cookie = req.body.session;
     const securityToken = req.body.token;
 
     if (!cookie) {
         return res.status(401).send({
-            message: 'unauthenticated'
+            message: 'Unauthenticated no cookies provided'
         });
     }
 
@@ -19,7 +19,7 @@ export const SecretKey = async (req: Request, res: Response) => {
         payload = verify(cookie, process.env.ACCESS_SECRET || '');
     } catch (error) {
         return res.status(401).send({
-            message: 'unauthenticated'
+            message: 'Unauthenticated incorrect cookies'
         });
     }
 
@@ -34,7 +34,7 @@ export const SecretKey = async (req: Request, res: Response) => {
     });
     if (!user) {
         return res.status(401).send({
-            message: 'unauthenticated'
+            message: 'User does not exist'
         });
     }
 

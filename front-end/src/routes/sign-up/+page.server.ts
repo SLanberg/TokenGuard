@@ -17,7 +17,7 @@ export const actions: import('./$types').Actions = {
 				{
 					telegramID: telegramID,
 					password: password,
-					confirmPassword: confirmPassword,
+					confirmPassword: confirmPassword
 				},
 				{
 					headers: {
@@ -33,14 +33,12 @@ export const actions: import('./$types').Actions = {
 				password: password,
 				token: data.securityToken['security_token'],
 				createdAt: data.user['created_at'],
-				success: true,
-			}
-
+				success: true
+			};
 		} catch (err) {
 			if (axios.isAxiosError(err)) {
 				const axiosError = err as AxiosError;
-				const responseData =
-					axiosError.response?.data as { issueWith?: string, message?: string };
+				const responseData = axiosError.response?.data as { issueWith?: string; message?: string };
 
 				// Here you can add errors to the list or a dictionary and then show to the user
 				// them together. For now I will leave as it is right now because I want to make redesign
@@ -48,17 +46,17 @@ export const actions: import('./$types').Actions = {
 				if (responseData.issueWith === 'TelegramID') {
 					return fail(400, {
 						issueWith: 'TelegramID',
-						message: responseData.message,
+						message: responseData.message
 					});
 				} else if (responseData.issueWith === 'Password') {
 					return fail(400, {
 						issueWith: 'Password',
-						message: responseData.message,
+						message: responseData.message
 					});
 				} else if (responseData.issueWith === 'Confirm password') {
 					return fail(400, {
-						issueWith: "Confirm password",
-						message: responseData.message,
+						issueWith: 'Confirm password',
+						message: responseData.message
 					});
 				}
 			} else {

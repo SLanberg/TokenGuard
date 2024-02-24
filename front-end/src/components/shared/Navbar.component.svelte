@@ -3,7 +3,7 @@
 	import ton from '$lib/images/icons/ton.svg';
 	import avatar from '$lib/images/avatar_picture.gif';
 	import arrow_down from '$lib/images/icons/arrow_down.svg';
-	import { logOutRequest } from '../../routes/casino/casino-script.js';
+	import { logOutRequest } from '../../routes/casino/script.js';
 	import { onMount } from 'svelte';
 
 	export let balance: number = -1;
@@ -76,9 +76,9 @@
 								role="menuitem">Account</a
 							>
 							<a
-									href="/secure-access"
-									class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
-									role="menuitem">Secret Key</a
+								href="/secure-access"
+								class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
+								role="menuitem">Secret Key</a
 							>
 							<a
 								on:click={logOutRequest}
