@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 /** @type {import('./$types').LayoutServerLoad} */
-export async function load({ request }) {
-	const session = request.headers.get('cookie')?.split('session=')[1];
+export async function load({ cookies }) {
+	const session = cookies.get('session')
 
-	if (session) {
 		const user = await axios.get(
 			`http://localhost:8000/api/user`, {
 				headers: { 'Content-Type': 'application/json',
@@ -18,5 +17,5 @@ export async function load({ request }) {
 		return {
 			user: user.data
 		};
-	}
+
 }

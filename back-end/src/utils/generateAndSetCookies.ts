@@ -11,8 +11,7 @@ export const generateAndSetCookies = (
 	const accessToken = sign({ id: user_id },
 																					accessTokenSecret,
 																		{ expiresIn: '1d' });
-
-
+	
 	return { accessToken }
 };
 
