@@ -53,7 +53,7 @@ export const Register = async (req: Request, res: Response) => {
 					type: "error",
 					issueWith: "TelegramID",
 					message: "Telegram ID already used"});
-			}
+			};
 
 			const user = await transactionalEntityManager.getRepository(User).save({
 				telegram_id: telegramID,
@@ -62,7 +62,7 @@ export const Register = async (req: Request, res: Response) => {
 
 			const accessTokenSecret = process.env.ACCESS_SECRET || '';
 			const refreshTokenSecret = process.env.REFRESH_SECRET || '';
-			generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
+			const { accessToken } = generateAndSetCookies(user.id, accessTokenSecret, res);
 
 			const secretCode = await transactionalEntityManager.getRepository(SecretCode).save({
 				code: secretKey,
@@ -78,7 +78,7 @@ export const Register = async (req: Request, res: Response) => {
 					issueWith: "TelegramID",
 					message: "User creation failed"
 				});
-			}
+			};
 
 			const securityToken = await transactionalEntityManager.getRepository(SecurityToken).save({
 				user_id: user.id,
@@ -90,12 +90,11 @@ export const Register = async (req: Request, res: Response) => {
 				status: 200,
 				type: 'success',
 				securityToken: securityToken,
-				user: userAddedToDB
+				user: userAddedToDB,
+				accessToken: accessToken,
 			});
 		});
 	} catch (e) {
-		console.log(e)
-
 		return res.status(500).json({type: "error", response: e});
 	}
 }

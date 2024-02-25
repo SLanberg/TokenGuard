@@ -33,15 +33,11 @@ export const Login = async (req: Request, res: Response) => {
 	}
 
 	const accessTokenSecret = process.env.ACCESS_SECRET || '';
-	const refreshTokenSecret = process.env.REFRESH_SECRET || '';
-	const {accessToken, refreshToken} =
-		generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
-
-
+	const { accessToken } =
+		generateAndSetCookies(user.id, accessTokenSecret, res);
 
 	res.send({
 		type: 'success',
 		accessToken: accessToken,
-		refreshToken: refreshToken,
 	});
 }

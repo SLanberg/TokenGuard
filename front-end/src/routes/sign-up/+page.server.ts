@@ -2,7 +2,7 @@ import axios, { type AxiosError } from 'axios';
 import { fail } from '@sveltejs/kit';
 
 export const actions: import('./$types').Actions = {
-	register: async ({ request }) => {
+	register: async ({ cookies, request }) => {
 		const formData = await request.formData();
 		const telegramID = formData.get('Telegram ID') as string;
 		const password = formData.get('Password') as string;
@@ -26,6 +26,14 @@ export const actions: import('./$types').Actions = {
 					},
 				}
 			);
+
+			if (data.type === 'success') {
+				cookies.set('session', data.accessToken, {
+					maxAge: 24 * 60 * 60 * 1000, // 1 day
+					sameSite: 'strict',
+					path: '/'
+				});
+			}
 
 			return {
 				telegramID: telegramID,
