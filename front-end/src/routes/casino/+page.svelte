@@ -18,7 +18,9 @@
 	import { onMount } from 'svelte';
 	import { initFlowbite } from 'flowbite';
 
-	const numberOfSlides = 8;
+	import { page } from '$app/stores';
+
+	const numberOfSlides = 16;
 	const slides = Array.from({ length: numberOfSlides }, (_, index) => index);
 
 	const slidesData = [
@@ -30,13 +32,17 @@
 	onMount(() => {
 		initFlowbite();
 	});
+
 </script>
 
 <svelte:head>
 	<title>Casino | Whale</title>
 </svelte:head>
 
-<Navbar balance={0} />
+
+{#if $page.data && $page.data.user && $page.data.user.balance}
+	<Navbar balance={$page.data.user.balance} />
+{/if}
 
 <div class="lg:w-[1000px] w-full flex flex-col items-center justify-center mx-auto">
 	<div

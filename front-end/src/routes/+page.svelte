@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
 	import BigButton from '../components/primitives/buttons/BigButton.svelte';
-	import { fieldsValidationSignIn, popUpStateLogin } from '../stores/loginStore';
+	import { popUpStateLogin } from '../stores/loginStore';
 	import InputField from '../components/primitives/inputs/InputField.component.svelte';
 	import SpinningIcon from '../components/shared/SpinningIcon.component.svelte';
 	import attention_sign from '$lib/images/Info_triangle.png';
@@ -9,6 +9,13 @@
 	import { applyAction, enhance } from '$app/forms';
 	import { loadingStore } from '../stores/loadingStore';
 	import { goto } from '$app/navigation';
+
+	interface Form {
+		issueWith?: string;
+		message?: string;
+	}
+
+	export let form: Form;
 </script>
 
 <svelte:head>
@@ -95,11 +102,11 @@
 				<div class="container mx-auto pt-5 w-[300px]">
 					<InputField name="Telegram ID" id="telegramID" />
 
-					{#if $fieldsValidationSignIn.telegramId.error}
+					{#if form?.issueWith === 'TelegramID'}
 						<div class="w-fit -mt-2.5 mb-2.5">
 							<span class="text-red-600 text-xs inline-block">
 								<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
-								{$fieldsValidationSignIn.telegramId.message}
+								{form?.message}
 							</span>
 						</div>
 					{/if}

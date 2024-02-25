@@ -17,7 +17,6 @@ export const actions: import('./$types').Actions = {
 			);
 
 			if (data.type === 'success') {
-
 				cookies.set('session', data.accessToken, {
 					maxAge: 24 * 60 * 60 * 1000, // 1 day
 					sameSite: 'strict',
