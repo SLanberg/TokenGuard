@@ -34,11 +34,13 @@ export const actions: import('./$types').Actions = {
 					issueWith?: string; message?: string
 				};
 
-				if (responseData.issueWith === 'TelegramID') {
-					return fail(400, {
-						issueWith: 'TelegramID',
-						message: 'Invalid Telegram ID or password'
-					});
+				if (responseData.issueWith) {
+					if (responseData.issueWith === 'TelegramID') {
+						return fail(400, {
+							issueWith: 'TelegramID',
+							message: 'Invalid Telegram ID or password'
+						});
+					}
 				} else {
 					return err;
 				}

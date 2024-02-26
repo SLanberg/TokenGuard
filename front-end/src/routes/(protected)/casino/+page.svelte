@@ -12,8 +12,8 @@
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/svelte-splide/css';
 
-	import Navbar from '../../components/shared/Navbar.component.svelte';
-	import Slider from '../../components/shared/Slider.component.svelte';
+	import Navbar from '../../../components/shared/Navbar.component.svelte';
+	import Slider from '../../../components/shared/Slider.component.svelte';
 
 	import { onMount } from 'svelte';
 	import { initFlowbite } from 'flowbite';
@@ -23,12 +23,22 @@
 	const numberOfSlides = 16;
 	const slides = Array.from({ length: numberOfSlides }, (_, index) => index);
 
+
+	/*
+	TODO: This in a big project should be stored in the cloud
+
+
+	 */
+
 	const slidesData = [
 		{ type: 'video', source: video, alt: 'Hero' },
 		{ type: 'image', source: game2, alt: 'Game' },
 		{ type: 'image', source: game3, alt: 'Game' }
 	];
 
+	// There is easier and better alternatives than Flowbite
+	// For example can be used https://atomiks.github.io/tippyjs/v6/getting-started/
+	// https://learn.svelte.dev/tutorial/adding-parameters-to-actions
 	onMount(() => {
 		initFlowbite();
 	});

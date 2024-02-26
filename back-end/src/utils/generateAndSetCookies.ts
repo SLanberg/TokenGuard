@@ -8,9 +8,8 @@ export const generateAndSetCookies = (
 ): {
 	accessToken: string
 } => {
-	const accessToken = sign({ id: user_id },
-																					accessTokenSecret,
-																		{ expiresIn: '1d' });
+	const accessToken = sign({ id: user_id }, accessTokenSecret,
+		{ expiresIn: '1d' });
 	
 	return { accessToken }
 };

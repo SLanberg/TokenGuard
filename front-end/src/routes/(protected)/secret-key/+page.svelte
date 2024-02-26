@@ -1,14 +1,15 @@
 <script lang="ts">
 	import keyFrame from '$lib/images/icons/key_frame.svg';
-	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import ReadOnlyInputField from '../../components/primitives/inputs/ReadOnlyInputField.svelte';
-	import { secretKeyParam } from '../../stores/secureAccessStore';
+	import BigButton from '../../../components/primitives/buttons/BigButton.svelte';
+	import ReadOnlyInputField from '../../../components/primitives/inputs/ReadOnlyInputField.svelte';
+	import { secretKeyStore } from '../../../stores/secureAccessStore';
 	import { goto } from '$app/navigation';
 </script>
 
 <svelte:head>
 	<title>Secret Key | Whale</title>
 </svelte:head>
+
 
 <div class="min-h-screen flex items-center justify-center">
 	<div class="text-center">
@@ -27,12 +28,19 @@
 
 			<h2 class="mb-4 mt-1">Secret Key</h2>
 
-			<div class="container mx-auto pt-5 w-[300px]">
+			<div class="container mx-auto pt-5 w-[300px] mb-7">
 				<ReadOnlyInputField
-					value={$secretKeyParam.secretKey}
+					value={$secretKeyStore.secretKey}
 					name="Security key"
 					id="securityKey"
 				/>
+
+				<ReadOnlyInputField
+					value={$secretKeyStore.createdAt}
+					name="Created at"
+					id="createdAt"
+				/>
+
 			</div>
 			<BigButton on:click={() => goto('/casino')} label="Go back to Casino" />
 

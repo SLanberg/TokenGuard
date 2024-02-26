@@ -61,7 +61,6 @@ export const Register = async (req: Request, res: Response) => {
 			});
 
 			const accessTokenSecret = process.env.ACCESS_SECRET || '';
-			const refreshTokenSecret = process.env.REFRESH_SECRET || '';
 			const { accessToken } = generateAndSetCookies(user.id, accessTokenSecret, res);
 
 			const secretCode = await transactionalEntityManager.getRepository(SecretCode).save({

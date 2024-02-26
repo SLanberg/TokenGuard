@@ -47,12 +47,19 @@ export const SecretKey = async (req: Request, res: Response) => {
                 .getOneOrFail()
                 const tokenObj = await (token);
 
-            const data = JSON.stringify(tokenObj);
-            const parsedData = JSON.parse(data);
-            const userId = parsedData.user_id.id;
+          const data = JSON.stringify(tokenObj);
+          const parsedData = JSON.parse(data);
+          const user_id = parsedData.user_id.id;
+          const secret_key = parsedData.secret_code_id.code;
+          const created_at = parsedData.secret_code_id.created_at
 
-            if (payload.id === userId) {
-                res.send(parsedData.secret_code_id.code);
+
+            if (payload.id === user_id) {
+                res.status(200).json({
+                    secret_key: secret_key,
+                    created_at: created_at
+                });
+
             } else {
                 // User account can be warned about possibility of the token leak
                 // message notifying that there was an attempt with the timestamp to access token from another account

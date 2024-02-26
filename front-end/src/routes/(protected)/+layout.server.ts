@@ -15,7 +15,6 @@ export async function load({ cookies }) {
 		)
 
 		return {
-			user: user.data
+			user: await user.data
 		};
-
 }

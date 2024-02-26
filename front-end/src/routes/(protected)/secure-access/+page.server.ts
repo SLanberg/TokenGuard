@@ -22,8 +22,11 @@ export const actions: import('./$types').Actions = {
 
 			if (response.status === 200) {
 				const { data } = response;
+				const { secret_key, created_at } = data
+
 				return {
-					secretKey: data,
+					secret_key: secret_key,
+					created_at: created_at,
 					success: true
 				};
 			} else {

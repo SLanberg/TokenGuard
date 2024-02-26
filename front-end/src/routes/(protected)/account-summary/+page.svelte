@@ -1,11 +1,11 @@
 <script lang="ts">
-	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
+	import BigButton from '../../../components/primitives/buttons/BigButton.svelte';
 	import { copyContentsOfTheFields } from './script';
-	import { paramsStore } from '../../stores/accountSummaryStore';
+	import { paramsStore } from '../../../stores/accountSummaryStore';
 	import { goto } from '$app/navigation';
-	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
-	import ReadOnlyInputField from '../../components/primitives/inputs/ReadOnlyInputField.svelte';
-	import { formatDateTime } from '../../utils/formatDate';
+	import SpinningIcon from '../../../components/shared/SpinningIcon.component.svelte';
+	import ReadOnlyInputField from '../../../components/primitives/inputs/ReadOnlyInputField.svelte';
+	import { formatDateTime } from '../../../utils/formatDate';
 
 	let showPopUp = true;
 	const handleCopyButton = () => {

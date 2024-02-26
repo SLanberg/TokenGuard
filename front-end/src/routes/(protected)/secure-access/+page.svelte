@@ -1,14 +1,15 @@
 <script lang="ts">
-	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
+	import InputField from '../../../components/primitives/inputs/InputField.component.svelte';
 	import keyFrame from '$lib/images/icons/key_frame.svg';
-	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
+	import BigButton from '../../../components/primitives/buttons/BigButton.svelte';
 
 	import { enhance } from '$app/forms';
-	import { loadingStore } from '../../stores/loadingStore';
+	import { loadingStore } from '../../../stores/loadingStore';
 	import { goto } from '$app/navigation';
-	import { secretKeyParam } from '../../stores/secureAccessStore';
-	import { popUpStateLogin } from '../../stores/loginStore';
+	import { secretKeyStore } from '../../../stores/secureAccessStore';
+	import { loginPopUpStore } from '../../../stores/loginStore';
 	import { logOutRequest } from '../casino/script';
+	import { formatDateTime } from '../../../utils/formatDate.js';
 </script>
 
 <svelte:head>
@@ -37,13 +38,16 @@
 				action="?/getSecretKey"
 				use:enhance={() => {
 					$loadingStore = true;
-					return async ({ result }) => {
+
+							return async ({ result }) => {
 						if (result.type === 'success') {
 							if (result && result.data) {
-								secretKeyParam.update((store) => {
+								secretKeyStore.update((store) => {
 									if (result && result.data) {
-										if (typeof result.data.secretKey === 'number') {
-											store.secretKey = result.data.secretKey.toString();
+										if (typeof result.data.secret_key === 'string' &&
+										typeof result.data.created_at === 'string') {
+											store.secretKey = result.data.secret_key
+											store.createdAt = formatDateTime(result.data.created_at)
 										}
 									}
 
@@ -55,7 +59,7 @@
 							}
 						} else {
 							$loadingStore = false;
-							popUpStateLogin.update(() => ({ showPopUp: true }));
+							loginPopUpStore.update(() => ({ showPopUp: true }));
 
 							await logOutRequest();
 							return await goto('/', {});

@@ -2,7 +2,7 @@
 	import PasswordField from '../../components/primitives/inputs/PasswordField.component.svelte';
 	import InputField from '../../components/primitives/inputs/InputField.component.svelte';
 	import BigButton from '../../components/primitives/buttons/BigButton.svelte';
-	import { popUpStateLogin } from '../../stores/loginStore';
+	import { loginPopUpStore } from '../../stores/loginStore';
 	import SpinningIcon from '../../components/shared/SpinningIcon.component.svelte';
 
 	import { applyAction, enhance } from '$app/forms';
@@ -26,7 +26,7 @@
 </svelte:head>
 
 <div class="min-h-screen flex items-center justify-center">
-	{#if $popUpStateLogin.showPopUp}
+	{#if $loginPopUpStore.showPopUp}
 		<div
 			class="z-10
                 absolute

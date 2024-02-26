@@ -3,7 +3,7 @@
 	import ton from '$lib/images/icons/ton.svg';
 	import avatar from '$lib/images/avatar_picture.gif';
 	import arrow_down from '$lib/images/icons/arrow_down.svg';
-	import { logOutRequest } from '../../routes/casino/script.js';
+	import { logOutRequest } from '../../routes/(protected)/casino/script.js';
 	import { onMount } from 'svelte';
 
 	export let balance: number = -1;

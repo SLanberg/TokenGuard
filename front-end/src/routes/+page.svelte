@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
 	import BigButton from '../components/primitives/buttons/BigButton.svelte';
-	import { popUpStateLogin } from '../stores/loginStore';
+	import { loginPopUpStore } from '../stores/loginStore';
 	import InputField from '../components/primitives/inputs/InputField.component.svelte';
 	import SpinningIcon from '../components/shared/SpinningIcon.component.svelte';
 	import attention_sign from '$lib/images/Info_triangle.png';
@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div class="min-h-screen flex items-center justify-center">
-	{#if $popUpStateLogin.showPopUp}
+	{#if $loginPopUpStore.showPopUp}
 		<div
 			class="z-10
 						h-fit
@@ -49,7 +49,7 @@
 
 			<button
 				on:click={() => {
-					popUpStateLogin.update(() => ({
+					loginPopUpStore.update(() => ({
 						showPopUp: false
 					}));
 				}}
