@@ -9,7 +9,6 @@ export const Login = async (req: Request, res: Response) => {
 
 	if (isNaN(Number(telegramID))) {
 		return res.status(400).send({
-			type: "error",
 			issueWith: "TelegramID",
 			message: 'Invalid credentials'
 		});
@@ -21,7 +20,6 @@ export const Login = async (req: Request, res: Response) => {
 
 	if (!user) {
 		return res.status(400).send({
-			type: "error",
 			issueWith: "TelegramID",
 			message: 'Invalid credentials'
 		})
@@ -29,17 +27,17 @@ export const Login = async (req: Request, res: Response) => {
 
 	if (!await bcryptjs.compare(password, user.password)) {
 		return res.status(400).send({
-			type: "error",
 			issueWith: "TelegramID",
 			message: 'Invalid credentials'
 		})
 	}
 
 	const accessTokenSecret = process.env.ACCESS_SECRET || '';
-	const refreshTokenSecret = process.env.REFRESH_SECRET || '';
-	generateAndSetCookies(user.id, accessTokenSecret, refreshTokenSecret, res);
+	const { accessToken } =
+		generateAndSetCookies(user.id, accessTokenSecret, res);
 
 	res.send({
 		type: 'success',
+		accessToken: accessToken,
 	});
 }

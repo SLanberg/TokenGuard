@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const secretKeyParam = writable({
-	secretKey: ''
+export const secretKeyStore = writable({
+	secretKey: '',
+	createdAt: '',
 });

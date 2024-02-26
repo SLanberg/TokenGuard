@@ -5,12 +5,12 @@ import { User } from "../entity/user.entity";
 import { SecurityToken } from "../entity/securityToken.entity";
 
 export const SecretKey = async (req: Request, res: Response) => {
-    const cookie = req.cookies['access_token'];
+    const cookie = req.body.session;
     const securityToken = req.body.token;
 
     if (!cookie) {
         return res.status(401).send({
-            message: 'unauthenticated'
+            message: 'Unauthenticated no cookies provided'
         });
     }
 
@@ -19,7 +19,7 @@ export const SecretKey = async (req: Request, res: Response) => {
         payload = verify(cookie, process.env.ACCESS_SECRET || '');
     } catch (error) {
         return res.status(401).send({
-            message: 'unauthenticated'
+            message: 'Unauthenticated incorrect cookies'
         });
     }
 
@@ -34,7 +34,7 @@ export const SecretKey = async (req: Request, res: Response) => {
     });
     if (!user) {
         return res.status(401).send({
-            message: 'unauthenticated'
+            message: 'User does not exist'
         });
     }
 
@@ -47,12 +47,19 @@ export const SecretKey = async (req: Request, res: Response) => {
                 .getOneOrFail()
                 const tokenObj = await (token);
 
-            const data = JSON.stringify(tokenObj);
-            const parsedData = JSON.parse(data);
-            const userId = parsedData.user_id.id;
+          const data = JSON.stringify(tokenObj);
+          const parsedData = JSON.parse(data);
+          const user_id = parsedData.user_id.id;
+          const secret_key = parsedData.secret_code_id.code;
+          const created_at = parsedData.secret_code_id.created_at
 
-            if (payload.id === userId) {
-                res.send(parsedData.secret_code_id.code);
+
+            if (payload.id === user_id) {
+                res.status(200).json({
+                    secret_key: secret_key,
+                    created_at: created_at
+                });
+
             } else {
                 // User account can be warned about possibility of the token leak
                 // message notifying that there was an attempt with the timestamp to access token from another account

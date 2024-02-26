@@ -1,11 +1,21 @@
 <script lang="ts">
 	import PasswordField from '../components/primitives/inputs/PasswordField.component.svelte';
 	import BigButton from '../components/primitives/buttons/BigButton.svelte';
-	import { signInUserRequest } from './sign-in';
-	import { fieldsValidationSignIn, popUpStateLogin } from '../stores/loginStore';
+	import { loginPopUpStore } from '../stores/loginStore';
 	import InputField from '../components/primitives/inputs/InputField.component.svelte';
 	import SpinningIcon from '../components/shared/SpinningIcon.component.svelte';
 	import attention_sign from '$lib/images/Info_triangle.png';
+
+	import { applyAction, enhance } from '$app/forms';
+	import { loadingStore } from '../stores/loadingStore';
+	import { goto } from '$app/navigation';
+
+	interface Form {
+		issueWith?: string;
+		message?: string;
+	}
+
+	export let form: Form;
 </script>
 
 <svelte:head>
@@ -13,7 +23,7 @@
 </svelte:head>
 
 <div class="min-h-screen flex items-center justify-center">
-	{#if $popUpStateLogin.showPopUp}
+	{#if $loginPopUpStore.showPopUp}
 		<div
 			class="z-10
 						h-fit
@@ -33,15 +43,15 @@
 						items-center"
 		>
 			<p class="text-center p-5 text-gold-main">
-				You entered incorrect security token or your session is expired.
-				You were forcefully logged out.
+				You entered incorrect security token or your session is expired. You were forcefully logged
+				out.
 			</p>
 
 			<button
 				on:click={() => {
-						popUpStateLogin.update(() => ({
-								showPopUp: false
-							}));
+					loginPopUpStore.update(() => ({
+						showPopUp: false
+					}));
 				}}
 				class="text-center
             bg-gradient-to-r
@@ -50,7 +60,8 @@
             w-[80px]
             p-2
             rounded-[8px]
-						mb-4">
+						mb-4"
+			>
 				<p>Dismiss</p>
 			</button>
 		</div>
@@ -72,14 +83,30 @@
 
 			<h2 class="mb-4 mt-1">Foyer</h2>
 
-			<form method="POST" on:submit|preventDefault={signInUserRequest}>
+			<form
+				method="POST"
+				action="?/login"
+				use:enhance={() => {
+					$loadingStore = true;
+					return async ({ result }) => {
+						if (result.type === 'success') {
+							$loadingStore = false;
+							await goto('/casino', {});
+						} else {
+							$loadingStore = false;
+							await applyAction(result);
+						}
+					};
+				}}
+			>
 				<div class="container mx-auto pt-5 w-[300px]">
-					<InputField name="Telegram ID" id="telegramID"/>
+					<InputField name="Telegram ID" id="telegramID" />
 
-					{#if $fieldsValidationSignIn.telegramId.error}
+					{#if form?.issueWith === 'TelegramID'}
 						<div class="w-fit -mt-2.5 mb-2.5">
 							<span class="text-red-600 text-xs inline-block">
-									<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />{$fieldsValidationSignIn.telegramId.message}
+								<img class="h-3 mr-0.5 inline" src={attention_sign} alt="error-sign" />
+								{form?.message}
 							</span>
 						</div>
 					{/if}
@@ -93,7 +120,8 @@
 
 			<p class="m-10">
 				New member? <span
-					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer">
+					class="text-gold-main hover:text-gold-secondary duration-500 text-shadow-custom cursor-pointer"
+				>
 					<a href="/sign-up"><b>Sign up</b></a>
 				</span>
 			</p>
@@ -102,7 +130,7 @@
 </div>
 
 <style>
-    .text-shadow-custom {
-        text-shadow: 0 4px 50px hsl(35, 100%, 80%);
-    }
+	.text-shadow-custom {
+		text-shadow: 0 4px 50px hsl(35, 100%, 80%);
+	}
 </style>

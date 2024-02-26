@@ -18,6 +18,13 @@ export class User {
     balance: number;
 
     /*
+     TODO:
+        URL string to the user's picture
+    */
+    // @Column("varchar", { nullable: true })
+    // avatarPicture?: string;
+
+    /*
     TODO:
      Separating IP address history into its own entity enhances user tracking by ensuring precise
      data management, improved integrity, efficient analysis, scalability, and flexible maintenance.
@@ -38,7 +45,7 @@ export class User {
      TODO:
         Indicates the user's loyalty or activity level.
     */
-    // @Column("varchar", { nullable: true })
+    // @Column("varchar", { default: 1 })
     // vipLevel?: string;
 
     /*

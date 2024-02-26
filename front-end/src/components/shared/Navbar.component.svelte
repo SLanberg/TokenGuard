@@ -3,8 +3,10 @@
 	import ton from '$lib/images/icons/ton.svg';
 	import avatar from '$lib/images/avatar_picture.gif';
 	import arrow_down from '$lib/images/icons/arrow_down.svg';
-	import { logOutRequest } from '../../routes/casino/casino.js';
+	import { logOutRequest } from '../../routes/(protected)/casino/script.js';
 	import { onMount } from 'svelte';
+
+	export let balance: number = -1;
 
 	let isOpen = false;
 	function toggleDropdown() {
@@ -45,7 +47,7 @@
 			>
 				<div class="flex items-center">
 					<img alt="currency symbol" src={ton} class="mr-1" />
-					<p class="text-gold-main">10,000.00 TON</p>
+					<p class="text-gold-main">{balance} TON</p>
 				</div>
 
 				<!-- Profile dropdown -->
@@ -64,19 +66,19 @@
 							class="absolute right-3 z-10 mt-4 w-48 origin-top-right bg-[#0d1316] rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 						>
 							<a
-								href="/"
-								class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d] rounded-tl-[8px]"
+								href="#"
+								class="block px-4 py-2 text-sm text-gray-600 hover:bg-[#1f292d] rounded-tl-[8px]"
 								role="menuitem">Cashier</a
 							>
 							<a
-								href="/"
-								class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
+								href="#"
+								class="block px-4 py-2 text-sm text-gray-600 hover:bg-[#1f292d]"
 								role="menuitem">Account</a
 							>
 							<a
-									href="/secure-access"
-									class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
-									role="menuitem">Secret Key</a
+								href="/secure-access"
+								class="block px-4 py-2 text-sm text-gold-secondary hover:bg-[#1f292d]"
+								role="menuitem">Secret Key</a
 							>
 							<a
 								on:click={logOutRequest}

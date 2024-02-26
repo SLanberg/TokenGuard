@@ -1,23 +1,34 @@
 <script lang="ts">
 	import ton from '$lib/images/icons/ton.svg';
 	import info from '$lib/images/icons/info.svg';
+
 	import chest from '$lib/images/icons/chest.svg';
-	import game2 from '$lib/images/hero/Boss Bear.jpg';
-	import game3 from '$lib/images/hero/money-train-4.webp';
+
 	import video from '$lib/images/hero/genie.mp4';
 	import title from '$lib/images/hero/genie x pixies.png';
+	import game2 from '$lib/images/hero/casino-promo.jpg';
+	import game3 from '$lib/images/hero/Boss Bear.jpg';
 
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/svelte-splide/css';
 
-	import Navbar from '../../components/shared/Navbar.component.svelte';
-	import Slider from '../../components/shared/Slider.component.svelte';
+	import Navbar from '../../../components/shared/Navbar.component.svelte';
+	import Slider from '../../../components/shared/Slider.component.svelte';
 
 	import { onMount } from 'svelte';
 	import { initFlowbite } from 'flowbite';
 
-	const numberOfSlides = 8;
+	import { page } from '$app/stores';
+
+	const numberOfSlides = 16;
 	const slides = Array.from({ length: numberOfSlides }, (_, index) => index);
+
+
+	/*
+	TODO: This in a big project should be stored in the cloud
+
+
+	 */
 
 	const slidesData = [
 		{ type: 'video', source: video, alt: 'Hero' },
@@ -25,43 +36,56 @@
 		{ type: 'image', source: game3, alt: 'Game' }
 	];
 
+	// There is easier and better alternatives than Flowbite
+	// For example can be used https://atomiks.github.io/tippyjs/v6/getting-started/
+	// https://learn.svelte.dev/tutorial/adding-parameters-to-actions
 	onMount(() => {
 		initFlowbite();
 	});
+
 </script>
 
 <svelte:head>
 	<title>Casino | Whale</title>
 </svelte:head>
 
-<Navbar />
 
-<div class="md:w-[600px] w-full flex flex-col items-center justify-center mx-auto">
-	<div class="bg-[#0C1216] h-[300px] mb-5 relative sm:w-full md:mt-2.5 md:rounded-[8px]">
+{#if $page.data && $page.data.user && $page.data.user.balance}
+	<Navbar balance={$page.data.user.balance} />
+{/if}
+
+<div class="lg:w-[1000px] w-full flex flex-col items-center justify-center mx-auto">
+	<div
+		class="bg-[#0C1216] h-[300px] md:h-[400px] mb-5 relative sm:w-full lg:mt-2.5 md:rounded-[8px]"
+	>
 		<Splide
 			options={{
-    rewind: true,
-    autoplay: true,
-    gap: 4,
-    interval: 7500,
-    pagination: true,
-    arrows: false
-  }}
+				rewind: true,
+				autoplay: true,
+				gap: 4,
+				interval: 7500,
+				pagination: true,
+				arrows: false
+			}}
 			aria-label="Svelte Splide Hero"
 		>
-			{#each slidesData as { type, source, alt }, i}
+			{#each slidesData as { type, source, alt }}
 				<SplideSlide>
-					<div class="bg-[#0C1216] h-[300px] md:rounded-[8px] mb-5 relative sm:w-full">
+					<div class="bg-[#0C1216] h-[300px] md:h-[400px] md:rounded-[8px] mb-5 relative sm:w-full">
 						<div class="mx-auto flex justify-between cursor-pointer h-full">
 							{#if type === 'video'}
 								<video class="object-cover md:rounded-[8px] w-full" height="100%" autoplay loop>
 									<source src={source} type="video/mp4" />
-									<track kind="captions" src="path/to/captions.vtt" srclang="en" label="English captions" />
+									<track
+										kind="captions"
+										src="path/to/captions.vtt"
+										srclang="en"
+										label="English captions"
+									/>
 								</video>
 								<img src={title} class="absolute inset-0 mx-auto my-auto" alt="Hero" />
-
 							{:else if type === 'image'}
-								<img class="object-cover md:rounded-[8px] w-full" src={source} alt={alt} />
+								<img class="object-cover md:rounded-[8px] w-full" src={source} {alt} />
 							{/if}
 						</div>
 					</div>
@@ -115,10 +139,18 @@
 		</div>
 	</div>
 
-	<Slider label="Popular Games 🏆" slides={slides} />
+	<Slider label="House Exclusives" {slides} />
+
+	<div class="mb-7" />
+
+	<Slider label="Popular Games" {slides} />
+
+	<div class="mb-7" />
+
+	<Slider label="House Top Picks" {slides} />
+
+	<div class="mb-7" />
 </div>
-
-
 
 <style>
 	.h-px {

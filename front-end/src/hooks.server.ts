@@ -9,16 +9,19 @@ const protectedUrls = [
 	'/casino',
 ];
 
-const registrationUrls = [
-	'/',
-	'/sign-up',
-];
-
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
 	if (protectedUrls.some(url => event.url.pathname.startsWith(url))) {
 		try {
-			await axios.get(`user`, { withCredentials: true });
+			await axios.get(
+				`user`, {
+					headers: { 'Content-Type': 'application/json',
+						'Access-Control-Allow-Origin': 'true' },
+					data: {
+						session: event.cookies.get('session')
+					}
+				},
+				);
 		} catch (e) {
 			throw redirect(303, "/");
 		}
