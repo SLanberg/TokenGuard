@@ -1,6 +1,8 @@
 import { Response } from 'express';
 import { sign } from 'jsonwebtoken';
 
+
+// TODO: Here of course for the security reasons we need work with the refresh token
 export const generateAndSetCookies = (
 	user_id: number,
 	accessTokenSecret: string,
